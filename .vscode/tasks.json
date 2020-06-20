@@ -10,6 +10,31 @@
 			"problemMatcher": [
 				"$gcc"
 			]
+		},
+		{
+			"label": "build_debug",
+			"type": "shell",
+			"command": "make autojobs=true debug=true"
+		},
+		{
+			"label": "run",
+			"type": "shell",
+			"command": "make run",
+			"dependsOn": "build",
+			"problemMatcher": []
+		},
+		{
+			"label": "run_debug",
+			"type": "shell",
+			"command": "make run debug=true",
+			"dependsOn": "build_debug",
+			"problemMatcher": []
+		},
+		{
+			"label": "clean",
+			"type": "shell",
+			"command": "make clean",
+			"problemMatcher": []
 		}
 	]
 }

@@ -1,6 +1,8 @@
 
 #include <mordavokne/application.hpp>
 
+#include <utki/debug.hpp>
+
 class application : public mordavokne::application{
 public:
 	application() :
@@ -21,6 +23,7 @@ public:
 		auto c = this->gui.context->inflater.inflate(
 				*this->get_res_file("res/main.gui")
 			);
+		ASSERT(c)
 
 		this->gui.set_root(c);
 	}
