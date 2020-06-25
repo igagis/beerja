@@ -14,7 +14,10 @@
 		{
 			"label": "build_debug",
 			"type": "shell",
-			"command": "make autojobs=true debug=true"
+			"command": "make autojobs=true debug=true",
+			"problemMatcher": [
+				"$gcc"
+			]
 		},
 		{
 			"label": "run",

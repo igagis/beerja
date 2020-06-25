@@ -1,5 +1,3 @@
-@pile{
-	@text{
-		text{"Hello stockmon!"}
-	}
+@book{
+	id{main_book}
 }

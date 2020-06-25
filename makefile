@@ -1,6 +1,6 @@
 include prorab.mk
 
-this_name := stocks
+this_name := beerja
 
 this_out_dir := build
 
@@ -18,7 +18,7 @@ ifeq ($(debug),true)
     this_cxxflags += -DDEBUG
 endif
 
-this_ldlibs += -lmordavokne-opengl2 -lmorda -lstdc++
+this_ldlibs += -lmordavokne-opengl2 -lmorda -lpapki -lpuu -ljsondom -leasyhttp -lutki -lstdc++
 this_ldlibs += -rdynamic
 
 $(eval $(prorab-build-app))
