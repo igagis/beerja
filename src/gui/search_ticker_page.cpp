@@ -45,19 +45,23 @@ search_ticker_page::search_ticker_page(std::shared_ptr<morda::context> c, std::s
 	auto button = this->try_get_widget_as<morda::push_button>("query_push_button");
 	ASSERT(button)
 
-	button->click_handler = [button, spinner, line, be](morda::push_button& but){
+	auto query_disable_widgets = std::make_shared<morda::widget_set>();
+	query_disable_widgets->add(line);
+	query_disable_widgets->add(button);
+
+	button->click_handler = [query_disable_widgets, spinner, line, be](morda::push_button& but){
 		spinner->set_active(true);
-		button->set_enabled(false);
-		line->set_enabled(false);
+
+		query_disable_widgets->set_enabled(false);
+
 		TRACE(<< "find ticker" << std::endl)
 		auto asop = be->find_ticker(
 				utki::to_utf8(line->get_text()),
-				[spinner, button, line](beerja::status s, const std::shared_ptr<beerja::async_operation>& asop, std::vector<beerja::ticker>&& ticker_list){
+				[query_disable_widgets, spinner](beerja::status s, const std::shared_ptr<beerja::async_operation>& asop, std::vector<beerja::ticker>&& ticker_list){
 					TRACE(<< ticker_list.size() << " tickers found" << std::endl)
-					spinner->context->run_from_ui_thread([spinner, button, line](){
+					spinner->context->run_from_ui_thread([spinner, query_disable_widgets](){
 						spinner->set_active(false);
-						button->set_enabled(true);
-						line->set_enabled(true);
+						query_disable_widgets->set_enabled(true);
 					});
 				}
 			);

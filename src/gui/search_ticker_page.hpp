@@ -2,6 +2,7 @@
 
 #include <morda/widgets/group/book.hpp>
 #include <morda/widgets/group/pile.hpp>
+#include <morda/util/widget_set.hpp>
 
 #include "../backend/backend.hpp"
 
