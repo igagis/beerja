@@ -1,0 +1,1465 @@
+{
+	"securities":{
+	   "security":[
+		  {
+			 "symbol":"WFC",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Wells Fargo & Co"
+		  
+ },
+		  {
+			 "symbol":"WU",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"The Western Union Co"
+		  
+ },
+		  {
+			 "symbol":"WDC",
+			 "exchange":"Q",
+			 "type":"stock",
+			 "description":"Western Digital Corp"
+		  
+ },
+		  {
+			 "symbol":"WY",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Weyerhaeuser Co"
+		  
+ },
+		  {
+			 "symbol":"WEN",
+			 "exchange":"Q",
+			 "type":"stock",
+			 "description":"The Wendy's Co"
+		  
+ },
+		  {
+			 "symbol":"WRK",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"WestRock Co"
+		  
+ },
+		  {
+			 "symbol":"WELL",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Welltower Inc"
+		  
+ },
+		  {
+			 "symbol":"WB",
+			 "exchange":"Q",
+			 "type":"stock",
+			 "description":"Weibo Corp"
+		  
+ },
+		  {
+			 "symbol":"WES",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Western Midstream Partners LP"
+		  
+ },
+		  {
+			 "symbol":"WEC",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"WEC Energy Group Inc"
+		  
+ },
+		  {
+			 "symbol":"WAB",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Westinghouse Air Brake Technologies Corp"
+		  
+ },
+		  {
+			 "symbol":"WBT",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Welbilt Inc"
+		  
+ },
+		  {
+			 "symbol":"WCC",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"WESCO International Inc"
+		  
+ },
+		  {
+			 "symbol":"WRI",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Weingarten Realty Investors"
+		  
+ },
+		  {
+			 "symbol":"WAIR",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Wesco Aircraft Holdings Inc"
+		  
+ },
+		  {
+			 "symbol":"WAL",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Western Alliance Bancorp"
+		  
+ },
+		  {
+			 "symbol":"WLK",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Westlake Chemical Corp"
+		  
+ },
+		  {
+			 "symbol":"WBS",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Webster Financial Corp"
+		  
+ },
+		  {
+			 "symbol":"WCG",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"WellCare Health Plans Inc"
+		  
+ },
+		  {
+			 "symbol":"WMC",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Western Asset Mortgage Capital Corp"
+		  
+ },
+		  {
+			 "symbol":"WERN",
+			 "exchange":"Q",
+			 "type":"stock",
+			 "description":"Werner Enterprises Inc"
+		  
+ },
+		  {
+			 "symbol":"WST",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"West Pharmaceutical Services Inc"
+		  
+ },
+		  {
+			 "symbol":"WEX",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"WEX Inc"
+		  
+ },
+		  {
+			 "symbol":"WWR",
+			 "exchange":"Q",
+			 "type":"stock",
+			 "description":"Westwater Resources Inc"
+		  
+ },
+		  {
+			 "symbol":"WSBC",
+			 "exchange":"Q",
+			 "type":"stock",
+			 "description":"Wesbanco Inc"
+		  
+ },
+		  {
+			 "symbol":"WABC",
+			 "exchange":"Q",
+			 "type":"stock",
+			 "description":"Westamerica Bancorp"
+		  
+ },
+		  {
+			 "symbol":"WLKP",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Westlake Chemical Partners LP"
+		  
+ },
+		  {
+			 "symbol":"WEI",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Weidai Ltd"
+		  
+ },
+		  {
+			 "symbol":"WMK",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Weis Markets Inc"
+		  
+ },
+		  {
+			 "symbol":"WHG",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Westwood Holdings Group Inc"
+		  
+ },
+		  {
+			 "symbol":"WSTL",
+			 "exchange":"Q",
+			 "type":"stock",
+			 "description":"Westell Technologies Inc"
+		  
+ },
+		  {
+			 "symbol":"WNEB",
+			 "exchange":"Q",
+			 "type":"stock",
+			 "description":"Western New England Bancorp Inc"
+		  
+ },
+		  {
+			 "symbol":"GAMR",
+			 "exchange":"P",
+			 "type":"etf",
+			 "description":"Wedbush ETFMG Video Game Tech ETF"
+		  
+ },
+		  {
+			 "symbol":"WTBA",
+			 "exchange":"Q",
+			 "type":"stock",
+			 "description":"West Bancorp Inc"
+		  
+ },
+		  {
+			 "symbol":"IVES",
+			 "exchange":"P",
+			 "type":"etf",
+			 "description":"Wedbush ETFMG Global Cloud Technology ETF"
+		  
+ },
+		  {
+			 "symbol":"WEBK",
+			 "exchange":"Q",
+			 "type":"stock",
+			 "description":"Wellesley Bancorp Inc"
+		  
+ },
+		  {
+			 "symbol":"WEYS",
+			 "exchange":"Q",
+			 "type":"stock",
+			 "description":"Weyco Group Inc"
+		  
+ },
+		  {
+			 "symbol":"WCUI",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WELLNESS CENTER USA INC by Wellness Center USA Inc"
+		  
+ },
+		  {
+			 "symbol":"WMRSD",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"Westminster Resources Ltd"
+		  
+ },
+		  {
+			 "symbol":"WONEF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEQ HLDGS INC by WEQ Hldgs Inc."
+		  
+ },
+		  {
+			 "symbol":"WMLPQ",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"Westmoreland Resource Partners LP"
+		  
+ },
+		  {
+			 "symbol":"WSSH",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEST SHORE BANK CORP by West Shore Bank Corp."
+		  
+ },
+		  {
+			 "symbol":"MTT",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Western Asset Municipal Defined Opportunity Trust Inc Common Stock"
+		  
+ },
+		  {
+			 "symbol":"WNDLF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WENDEL INVESTISSEMENT ACT by Wendel Investissement"
+		  
+ },
+		  {
+			 "symbol":"WEDG",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEED GROWTH FUND INC by Weed Growth Fund, Inc."
+		  
+ },
+		  {
+			 "symbol":"HHHHW",
+			 "exchange":"Q",
+			 "type":"stock",
+			 "description":"WEALTHBRIDGE ACQUISITION LTD ORD"
+		  
+ },
+		  {
+			 "symbol":"PAI",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Western Asset Investment Grade Income Fund Inc."
+		  
+ },
+		  {
+			 "symbol":"WEJTY",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEBJET LTD UNSP\/ADR by Webjet Ltd."
+		  
+ },
+		  {
+			 "symbol":"WFC'N",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Wells Fargo & Company Dep Shs Repstg 1\/1000th Perp Pfd Cl A Ser N"
+		  
+ },
+		  {
+			 "symbol":"SBI",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Western Asset Intermediate Muni Fund Inc Common Stock"
+		  
+ },
+		  {
+			 "symbol":"WBND",
+			 "exchange":"Q",
+			 "type":"etf",
+			 "description":"Western Asset Total Return ETF"
+		  
+ },
+		  {
+			 "symbol":"WENTF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WENTWORTH RES PLC ORD by Wentworth Resources PLC"
+		  
+ },
+		  {
+			 "symbol":"WTXR",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEST TEXAS RESOURCES INC by West Texas Resources, Inc."
+		  
+ },
+		  {
+			 "symbol":"WCIG",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEE-CIG INTL CORP by Wee-Cig International Corporation"
+		  
+ },
+		  {
+			 "symbol":"WLYYF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WELL HEALTH TECH CORP ORD by Well Health Technologies Corp."
+		  
+ },
+		  {
+			 "symbol":"WPEC",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEI PAI ELECT COMM CO LTD by Wei Pai Electronic Commerce Company Ltd."
+		  
+ },
+		  {
+			 "symbol":"HHHHR",
+			 "exchange":"Q",
+			 "type":"stock",
+			 "description":"WEALTHBRIDGE ACQUISITION LTD ORD"
+		  
+ },
+		  {
+			 "symbol":"WBK",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Westpac Banking Corporation Common Stock"
+		  
+ },
+		  {
+			 "symbol":"WTCRD",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"Western Troy Capital Resources Inc"
+		  
+ },
+		  {
+			 "symbol":"WSTN",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTLIN CORP by Westlin Corp."
+		  
+ },
+		  {
+			 "symbol":"EOD",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Wells Fargo Global Dividend Opportunity Fund"
+		  
+ },
+		  {
+			 "symbol":"WFC'V",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Wells Fargo & Company Depositary Shares, each representing a 1\/1,000th interest in a share of Non-Cumulative Perpetual Class A Preferred Stock, Series V"
+		  
+ },
+		  {
+			 "symbol":"WTWB",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEST TOWN BANCORP INC by West Town Bancorp, Inc."
+		  
+ },
+		  {
+			 "symbol":"WERU",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WE-R-YOU CORP by We R You Corp."
+		  
+ },
+		  {
+			 "symbol":"WECT",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WECONNECT TECH INTL INC by WECONNECT TECH INTERNATIONAL INC."
+		  
+ },
+		  {
+			 "symbol":"EHI",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Western Asset Global High Income Fund Inc Common Stock"
+		  
+ },
+		  {
+			 "symbol":"WJAFF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"Westjet Airlines Ltd"
+		  
+ },
+		  {
+			 "symbol":"WTGRF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTGOLD RESOURCES ORD by WestGold Resources NL"
+		  
+ },
+		  {
+			 "symbol":"WMDS",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WestMountain Distressed Debt Inc"
+		  
+ },
+		  {
+			 "symbol":"WEGRY",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEIR GROUP PLC SPNS\/ADR by Weir Group PLC"
+		  
+ },
+		  {
+			 "symbol":"ERH",
+			 "exchange":"A",
+			 "type":"stock",
+			 "description":"Wells Fargo Utilities and High Income Fund"
+		  
+ },
+		  {
+			 "symbol":"WALA",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Western Alliance Bancorporation 6.25% Subordinated Debentures due 2056"
+		  
+ },
+		  {
+			 "symbol":"WINC",
+			 "exchange":"Q",
+			 "type":"etf",
+			 "description":"Western Asset Short Duration Income ETF"
+		  
+ },
+		  {
+			 "symbol":"WIA",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Western Asset Inflation-Linked Income Fund"
+		  
+ },
+		  {
+			 "symbol":"WBSI",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEBSAFETY INC by WebSafety, Inc."
+		  
+ },
+		  {
+			 "symbol":"WEBNF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTPAC BANKING CP ORD by Westpac Banking Corp. Ltd."
+		  
+ },
+		  {
+			 "symbol":"GDO",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Western Asset Global Corporate Defined Opportunity Fund Inc. Western Asset Global Corporate Defined Opportunity Fund Inc."
+		  
+ },
+		  {
+			 "symbol":"WFC'Q",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Wells Fargo & Company Depositary Shares Representing 1\/1000th Interest Perpetual Preferred Class A Series Q Fixed to Floating"
+		  
+ },
+		  {
+			 "symbol":"WCYN",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEST CANYON ENERGY CORP by West Canyon Energy Corp."
+		  
+ },
+		  {
+			 "symbol":"WDOFF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESDOME GOLD MINES LTD by Wesdome Gold Mines Ltd."
+		  
+ },
+		  {
+			 "symbol":"WCRS",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTERN CAPITAL RES by Western Capital Resources, Inc."
+		  
+ },
+		  {
+			 "symbol":"WFCNP",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WELLS FARGO & CO D\/E PFD by Wells Fargo & Co."
+		  
+ },
+		  {
+			 "symbol":"WFE'A",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Wells Fargo Real Estate Investment Corp Cum Perp Pfd Shs Series -A-"
+		  
+ },
+		  {
+			 "symbol":"WBBW",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTBURY BANCORP INC by Westbury Bancorp, Inc."
+		  
+ },
+		  {
+			 "symbol":"BUDZ",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEED INC by WEED, Inc."
+		  
+ },
+		  {
+			 "symbol":"WRRNF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTCORE ENERGY LTD ORD by Westcore Energy, Ltd."
+		  
+ },
+		  {
+			 "symbol":"WNGRF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTON GEORGE LTD by Weston George Ltd. (Canada)"
+		  
+ },
+		  {
+			 "symbol":"HHHHU",
+			 "exchange":"Q",
+			 "type":"stock",
+			 "description":"WEALTHBRIDGE ACQUISITION LTD ORD"
+		  
+ },
+		  {
+			 "symbol":"WTLC",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTERN METALS CORP by Western Metals Corp."
+		  
+ },
+		  {
+			 "symbol":"ERC",
+			 "exchange":"A",
+			 "type":"stock",
+			 "description":"Wells Fargo Multi-Sector Income Fund Common Stock, no par value"
+		  
+ },
+		  {
+			 "symbol":"WFC'Y",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Wells Fargo & Company Depositary Shares, each representing a 1\/1,000th interest in a share of Non-Cumulative Perpetual Class A Preferred Stock, Series Y"
+		  
+ },
+		  {
+			 "symbol":"MLYF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTERN MAGNESIUM CORP by Western Magnesium Corp."
+		  
+ },
+		  {
+			 "symbol":"WMGR",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WELLNESS MATRIX GRP INC by Wellness Matrix Group, Inc."
+		  
+ },
+		  {
+			 "symbol":"WFC'L",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Wells Fargo & Company Wells Fargo & Company 7.50% Non-Cumulative Perpetual Convertible Class A Preferred Stock, Series L"
+		  
+ },
+		  {
+			 "symbol":"WJRYF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEST JAPAN RWY ORD by West Japan Railway Co."
+		  
+ },
+		  {
+			 "symbol":"WCHNF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEST CHINA CEMENT LTD ORD by West China Cement Ltd."
+		  
+ },
+		  {
+			 "symbol":"WRPSF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTERN PACIFIC RES CP by Western Pacific Resources Corp."
+		  
+ },
+		  {
+			 "symbol":"EAD",
+			 "exchange":"A",
+			 "type":"stock",
+			 "description":"Wells Fargo Income Opportunities Fund Common Shares"
+		  
+ },
+		  {
+			 "symbol":"WDDMF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEEDMD INC ORD by WeedMD Inc"
+		  
+ },
+		  {
+			 "symbol":"WFC'T",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Wells Fargo & Company New Depository Share Representing 1\/1000th Perp. Preferred Class A Series T"
+		  
+ },
+		  {
+			 "symbol":"WEMXF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEIMOB INC by Weimob Inc."
+		  
+ },
+		  {
+			 "symbol":"WACC",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTAMERICA CORP by WestAmerica Corp."
+		  
+ },
+		  {
+			 "symbol":"WKLDF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEST KIRKLAND MINING ORD by West Kirkland Mining Inc."
+		  
+ },
+		  {
+			 "symbol":"WEGOF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESCAN GOLDFIELDS INC NEW by Wescan Goldfields, Inc."
+		  
+ },
+		  {
+			 "symbol":"WFTIF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"Weatherford International PLC"
+		  
+ },
+		  {
+			 "symbol":"IMPJY",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEBUILD SPA UNSP\/ADR by Webuild SpA"
+		  
+ },
+		  {
+			 "symbol":"WMLLF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEALTH MINERALS LTD by Wealth Minerals Ltd."
+		  
+ },
+		  {
+			 "symbol":"MNP",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Western Asset Municipal Partners Fund, Inc. Common Stock"
+		  
+ },
+		  {
+			 "symbol":"WEBB",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEB BLOCKCHAIN MEDIA by Web Blockchain Media, Inc."
+		  
+ },
+		  {
+			 "symbol":"WEICF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEICHAI POWER CO LTD ORD by Weichai Power Company Ltd."
+		  
+ },
+		  {
+			 "symbol":"EMD",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Western Asset Emerging Markets Debt Fund Inc Common Stock"
+		  
+ },
+		  {
+			 "symbol":"PPZRF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTERN ATLAS RES INC CDA by Western Atlas Res Inc Cda"
+		  
+ },
+		  {
+			 "symbol":"WFC'O",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Wells Fargo & Company Depositary Shares Representing 1\/1000th Perpetual Preferred Class A Series O"
+		  
+ },
+		  {
+			 "symbol":"WISKF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEISS KOREA OPPTY FD ORD by Weiss Korea Opportunity Fund Ltd."
+		  
+ },
+		  {
+			 "symbol":"WSRA",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"Western Sierra Resource Corp"
+		  
+ },
+		  {
+			 "symbol":"WCCP",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEALTHCRAFT CAPITAL INC by Wealthcraft Capital, Inc."
+		  
+ },
+		  {
+			 "symbol":"HIO",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Western Asset High Income Opportunity Fund, Inc. Common Stock"
+		  
+ },
+		  {
+			 "symbol":"MMU",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Western Asset Managed Municipals Fund, Inc. Common Stock"
+		  
+ },
+		  {
+			 "symbol":"WCVC",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEST COAST VEN GRP CORP by West Coast Ventures Group Corp."
+		  
+ },
+		  {
+			 "symbol":"WFC'W",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Wells Fargo & Company Depositary Shares, each representing a 1\/1,000th interest in a share of Non-Cumulative Perpetual Class A Preferred Stock, Series W"
+		  
+ },
+		  {
+			 "symbol":"WFTBF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEST FRASER TIMBER LTD by West Fraser Timber Co. Ltd."
+		  
+ },
+		  {
+			 "symbol":"WDHR",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEEDHIRE INTL INC by WeedHire International, Inc."
+		  
+ },
+		  {
+			 "symbol":"WLBAQ",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"Westmoreland Coal Co"
+		  
+ },
+		  {
+			 "symbol":"WACF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEATHERLY AIRCRAFT CO by Weatherly Aircraft Company"
+		  
+ },
+		  {
+			 "symbol":"WPRT",
+			 "exchange":"Q",
+			 "type":"stock",
+			 "description":"Westport Fuel Systems Inc - Common Shares"
+		  
+ },
+		  {
+			 "symbol":"WBS'F",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Webster Financial Corporation Depositary Shares, Each Representing 1\/1,000th Interest in a Share of 5.25% Series F Non-Cumulative Perpetual Preferred Stock"
+		  
+ },
+		  {
+			 "symbol":"WSZWF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESIZWE PLATINUM ORD by Wesizwe Platinum"
+		  
+ },
+		  {
+			 "symbol":"TLI",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Western Asset Corporate Loan Fund Inc Common Stock"
+		  
+ },
+		  {
+			 "symbol":"WTRNF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTERN RES CORP by Western Res Corp."
+		  
+ },
+		  {
+			 "symbol":"WFAFF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESFARMERS LTD OLD by Wesfarmers Ltd."
+		  
+ },
+		  {
+			 "symbol":"MHF",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Western Asset Municipal High Income Fund, Inc. Common Stock"
+		  
+ },
+		  {
+			 "symbol":"WRPSD",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"Western Pacific Resources Corp"
+		  
+ },
+		  {
+			 "symbol":"WJRYY",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEST JAPAN RWY UNSP\/ADR by West Japan Railway Co."
+		  
+ },
+		  {
+			 "symbol":"DMO",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Western Asset Mortgage Opportunity Fund Inc. Common Stock"
+		  
+ },
+		  {
+			 "symbol":"WFSTF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTERN FOREST PRODS INC by Western Forest Products Inc."
+		  
+ },
+		  {
+			 "symbol":"WTSHF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTSHORE TERM INVST CP by Westshore Terminals Investment Corp."
+		  
+ },
+		  {
+			 "symbol":"IGI",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Western Asset Investment Grade Defined Opportunity Trust Inc. Common Stock"
+		  
+ },
+		  {
+			 "symbol":"WIW",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Western Asset Inflation-Linked Opportunities & Income Fund"
+		  
+ },
+		  {
+			 "symbol":"WTHVF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTHAVEN VENTURES INC by Westhaven Ventures, Inc."
+		  
+ },
+		  {
+			 "symbol":"WSTTF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTPORTS HLDGS BHD ORD by WESTPORTS HLDGS BHD"
+		  
+ },
+		  {
+			 "symbol":"RLGMF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEST RED LAKE GOLD MNS by West Red Lake Gold Mines Inc."
+		  
+ },
+		  {
+			 "symbol":"WEYL",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEYLAND TECH INC by Weyland Tech Inc."
+		  
+ },
+		  {
+			 "symbol":"WFTIQ",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"Weatherford International PLC"
+		  
+ },
+		  {
+			 "symbol":"WFC'R",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Wells Fargo & Company Dep Shs Repstg 1\/1000th Int Perp Pfd Cl A (Ser R Fixed To Flltg)"
+		  
+ },
+		  {
+			 "symbol":"WTECQ",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTECH CAPITAL CORP by Westech Capital Corp"
+		  
+ },
+		  {
+			 "symbol":"WHSI",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEARABLE HEALTH SOLUTIONS by Wearable Health Solutions, Inc"
+		  
+ },
+		  {
+			 "symbol":"WHYRF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEST HIGH YIELD RES LTD by West High Yield Resources Ltd."
+		  
+ },
+		  {
+			 "symbol":"ERRCF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTKAM GOLD CORP by Westkam Gold Corp."
+		  
+ },
+		  {
+			 "symbol":"WTKN",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WELLTEK INC by WellTek Incorporated"
+		  
+ },
+		  {
+			 "symbol":"WNWG",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WENTWORTH ENERGY INC by Wentworth Energy, Inc."
+		  
+ },
+		  {
+			 "symbol":"WZHUF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WENZHOU KANGNING HOSP CO by Wenzhou Kangning Hosp Co Ltd."
+		  
+ },
+		  {
+			 "symbol":"WASM",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"Westmountain Co"
+		  
+ },
+		  {
+			 "symbol":"HYI",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Western Asset High Yield Defined Opportunity Fund Inc. Common Stock"
+		  
+ },
+		  {
+			 "symbol":"WFRSF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEST AFRICAN RES LTD ORD by West African Resources Ltd."
+		  
+ },
+		  {
+			 "symbol":"WQTEF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEIQIAO TEXTILE CO LTD H by Weiqiao Textile Co., Ltd."
+		  
+ },
+		  {
+			 "symbol":"WEICY",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEICHAI PWR CO UNSP\/ADR by Weichai Power Company Ltd."
+		  
+ },
+		  {
+			 "symbol":"WMTN",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTMOUNTAIN GOLD by Westmountain Gold, Inc."
+		  
+ },
+		  {
+			 "symbol":"WEWA",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEWARDS INC by WEWARDS, INC."
+		  
+ },
+		  {
+			 "symbol":"WMRSF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTMINSTER RES LTD by Westminster Resources Ltd"
+		  
+ },
+		  {
+			 "symbol":"WRN",
+			 "exchange":"A",
+			 "type":"stock",
+			 "description":"Western Copper and Gold Corporation Common Stock"
+		  
+ },
+		  {
+			 "symbol":"GFY",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Western Asset Variable Rate Strategic Fund Inc. Common Stock"
+		  
+ },
+		  {
+			 "symbol":"WRDEF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WERELDHAVE NV by Wereldhave NV"
+		  
+ },
+		  {
+			 "symbol":"WGRGF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTON GEORGE PFD SER V by Weston George Ltd. (Canada)"
+		  
+ },
+		  {
+			 "symbol":"WSSNY",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESSANEN NV UNSP \/ADR by Wessanen N.V. Koninklijke"
+		  
+ },
+		  {
+			 "symbol":"WKULF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEEKEND UNLIMITED IND INC by Weekend Unlimited Industries Inc."
+		  
+ },
+		  {
+			 "symbol":"WEDXF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTAIM CORP NEW by Westaim Corporation (The)"
+		  
+ },
+		  {
+			 "symbol":"WKYN",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEBSKY INC by WebSky, Inc."
+		  
+ },
+		  {
+			 "symbol":"WGNR",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEGENER CORP by Wegener Corp."
+		  
+ },
+		  {
+			 "symbol":"WMIG",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEST MICHIGAN NB & TR by West Michigan National Bank & Trust"
+		  
+ },
+		  {
+			 "symbol":"WVAW",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEST VIRGINIA WATER CO by West Virginia-American Water Co."
+		  
+ },
+		  {
+			 "symbol":"WEGYF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTBRIDGE ENERGY CP ORD by Westbridge Energy Corp"
+		  
+ },
+		  {
+			 "symbol":"WEIGF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEIR GROUP PLC ORD by Weir Group PLC"
+		  
+ },
+		  {
+			 "symbol":"WZENY",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"Webzen Inc ADR"
+		  
+ },
+		  {
+			 "symbol":"WEBC",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEBCO INDUSTRIES INC by Webco Industries, Inc."
+		  
+ },
+		  {
+			 "symbol":"WFAFY",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESFARMERS LTD UNSP\/ADR by Wesfarmers Ltd."
+		  
+ },
+		  {
+			 "symbol":"KJWNF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESSANEN NV KONINKLIJKE by Wessanen N.V. Koninklijke"
+		  
+ },
+		  {
+			 "symbol":"WEA",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Western Asset Bond Fund Share of Beneficial Interest"
+		  
+ },
+		  {
+			 "symbol":"WFC'P",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Wells Fargo & Company Dep Shs Repstg 1\/1000th Int Non Cum Perp Cl A Pfd (Ser P)"
+		  
+ },
+		  {
+			 "symbol":"WEBJF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEBJET LTD ORD by Webjet Ltd."
+		  
+ },
+		  {
+			 "symbol":"WNARF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTERN AREAS NL ORD by Western Areas NL"
+		  
+ },
+		  {
+			 "symbol":"WEEEF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTERN ENERGY SVCS CORP by Western Energy Services Corp."
+		  
+ },
+		  {
+			 "symbol":"WNRP",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEST SUBURBAN BANCORP INC by West Suburban Bancorp, Inc."
+		  
+ },
+		  {
+			 "symbol":"WEQL",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WELLQUEST MED&WELLNESS by WellQuest Medical & Wellness Corp."
+		  
+ },
+		  {
+			 "symbol":"WTCRF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTERN TROY CAP RES by Western Troy Capital Resources, Inc."
+		  
+ },
+		  {
+			 "symbol":"WLSI",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WELLSTAR INTL INC by Wellstar International, Inc."
+		  
+ },
+		  {
+			 "symbol":"WFC'X",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Wells Fargo & Company Depositary Shares, each representing a 1\/1,000th interest in a share of Non-Cumulative Perpetual Class A Preferred Stock, Series X"
+		  
+ },
+		  {
+			 "symbol":"WNRC",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WENR CORP by WENR Corp."
+		  
+ },
+		  {
+			 "symbol":"WBTMU",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"Westbrook Thompson Shs CDT-Overriding Royalty Units"
+		  
+ },
+		  {
+			 "symbol":"WEGZY",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEG SA S\/ADR by Weg SA"
+		  
+ },
+		  {
+			 "symbol":"WEIN",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEST END INDIANA BNCSHS by West End Indiana Bancshares Inc"
+		  
+ },
+		  {
+			 "symbol":"WSTRF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTERN URANIUM&VANADIUM by Western Uranium & Vanadium Corp."
+		  
+ },
+		  {
+			 "symbol":"WMELF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTMOUNT ENERGY LTD ORD by Westmount Energy Ltd."
+		  
+ },
+		  {
+			 "symbol":"HIX",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Western Asset High Income Fund II Inc. Common Stock"
+		  
+ },
+		  {
+			 "symbol":"WPMLF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WESTERN PACIFIC MNRLS LTD by Western Pacific Minerals Ltd."
+		  
+ },
+		  {
+			 "symbol":"WSPPU",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"Western Plains Energy LLC"
+		  
+ },
+		  {
+			 "symbol":"WEBEF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"Webster Ltd"
+		  
+ },
+		  {
+			 "symbol":"ERRCD",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WestKam Gold Corp"
+		  
+ },
+		  {
+			 "symbol":"WMWWF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEST WITS MINING LTD by West Wits Mining Ltd, Armadale Vic"
+		  
+ },
+		  {
+			 "symbol":"WLCGF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WELCIA HOLDINGS CO LTD by Welcia Holdings Co Ltd."
+		  
+ },
+		  {
+			 "symbol":"WFTLF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WEATHERFORD INTL PLC by Weatherford International plc"
+		  
+ },
+		  {
+			 "symbol":"WFCZL",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"Wells Fargo & Co 4.75% PRF PERPETUAL USD 25 Series Z Class A"
+		  
+ },
+		  {
+			 "symbol":"WFC'Z",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"Wells Fargo & Company Depositary Shares, each representing a 1\/1,000th interest in a share of Non-Cumulative Perpetual Class A Preferred Stock, Series Z"
+		  
+ },
+		  {
+			 "symbol":"WEYLD",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"Weyland Tech Inc"
+		  
+ },
+		  {
+			 "symbol":"WTRYU",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"Western Plains Energy LLC"
+		  
+ },
+		  {
+			 "symbol":"WETGF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WETRADE GROUP INC by WETRADE GROUP INC."
+		  
+ },
+		  {
+			 "symbol":"WETG",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"WETRADE GROUP INC by WETRADE GROUP INC."
+		  
+ },
+		  {
+			 "symbol":"WVMDF",
+			 "exchange":"V",
+			 "type":"stock",
+			 "description":"West Kirkland Mining Inc"
+		  
+ },
+		  {
+			 "symbol":"WCC'A",
+			 "exchange":"N",
+			 "type":"stock",
+			 "description":"WESCO International, Inc. Depositary Shares each representing 1\/1,000th interest in a share of Series A Fixed-Rate Reset Cumulative Perpetual Preferred Stock"
+		  
+ }
+	   
+ ]
+	
+ }
+ }
+ 
