@@ -44,8 +44,53 @@ void tradier::get_exchanges(std::function<void(beerja::status, std::vector<beerj
 
 namespace{
 std::vector<beerja::ticker> parse_ticker_list(const jsondom::value& json){
-	// TODO:
-	return std::vector<beerja::ticker>();
+	if(!json.is_object()){
+		ASSERT(false)
+		return std::vector<beerja::ticker>();
+	}
+
+	auto& root = json.object();
+	auto securities_i = root.find("securities");
+	if(securities_i == root.end() || !securities_i->second.is_object()){
+		return std::vector<beerja::ticker>();
+	}
+
+	auto& securities = securities_i->second.object();
+	auto security_i = securities.find("security");
+	if(security_i == securities.end() || !security_i->second.is_array()){
+		return std::vector<beerja::ticker>();
+	}
+	
+	auto& security = security_i->second.array();
+
+	std::vector<beerja::ticker> ret;
+
+	for(auto& s : security){
+		if(!s.is_object()){
+			continue;
+		}
+
+		auto& o = s.object();
+
+		auto symbol_i = o.find("symbol");
+		if(symbol_i == o.end() || !symbol_i->second.is_string()){
+			continue;
+		}
+		auto& symbol = symbol_i->second.string();
+
+		std::string description;
+		auto description_i = o.find("description");
+		if(description_i != o.end() && description_i->second.is_string()){
+			description = description_i->second.string();
+		}
+
+		ret.push_back(beerja::ticker{
+			.id = symbol,
+			.name = std::move(description)
+		});
+	}
+	
+	return ret;
 }
 }
 

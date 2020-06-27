@@ -1,0 +1,23 @@
+@column{
+	@text{
+		text{"Hello beerja, ticker search!"}
+	}
+	@text_input_line{
+		id{query_text_input}
+
+		text{"enter query here"}
+
+		layout{
+			dx{max} dy{min}
+		}
+	}
+	@push_button{
+		id{query_push_button}
+		@text{
+			text{"run query"}
+		}
+	}
+	@busy{
+		id{busy_spinner}
+	}
+}

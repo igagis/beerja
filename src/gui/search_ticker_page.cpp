@@ -1,5 +1,7 @@
 #include "search_ticker_page.hpp"
 
+#include <mordavokne/application.hpp>
+
 #include <utki/utf8.hpp>
 
 #include <morda/widgets/input/text_input_line.hpp>
@@ -11,31 +13,7 @@ search_ticker_page::search_ticker_page(std::shared_ptr<morda::context> c, std::s
 		morda::page(this->context, puu::forest()),
 		morda::pile(
 				this->context,
-				puu::read(R"qwertyuiop(
-					@column{
-						@text{
-							text{"Hello beerja, ticker search!"}
-						}
-						@text_input_line{
-							id{query_text_input}
-
-							text{"enter query here"}
-
-							layout{
-								dx{max} dy{min}
-							}
-						}
-						@push_button{
-							id{query_push_button}
-							@text{
-								text{"run query"}
-							}
-						}
-						@busy{
-							id{busy_spinner}
-						}
-					}
-				)qwertyuiop")
+				puu::read(*mordavokne::inst().get_res_file("res/search_ticker_page.gui"))
 			)
 {
 	auto spinner = this->try_get_widget_as<morda::busy>("busy_spinner");
@@ -49,6 +27,7 @@ search_ticker_page::search_ticker_page(std::shared_ptr<morda::context> c, std::s
 	query_disable_widgets->add(line);
 	query_disable_widgets->add(button);
 
+	// button click handler
 	button->click_handler = [query_disable_widgets, spinner, line, be](morda::push_button& but){
 		spinner->set_active(true);
 
@@ -57,8 +36,10 @@ search_ticker_page::search_ticker_page(std::shared_ptr<morda::context> c, std::s
 		TRACE(<< "find ticker" << std::endl)
 		auto asop = be->find_ticker(
 				utki::to_utf8(line->get_text()),
+				// backend operation complete handler
 				[query_disable_widgets, spinner](beerja::status s, const std::shared_ptr<beerja::async_operation>& asop, std::vector<beerja::ticker>&& ticker_list){
 					TRACE(<< ticker_list.size() << " tickers found" << std::endl)
+					// run from ui thread
 					spinner->context->run_from_ui_thread([spinner, query_disable_widgets](){
 						spinner->set_active(false);
 						query_disable_widgets->set_enabled(true);
