@@ -7,6 +7,7 @@
 #include <morda/widgets/input/text_input_line.hpp>
 #include <morda/widgets/button/push_button.hpp>
 #include <morda/widgets/label/busy.hpp>
+#include <morda/widgets/group/list.hpp>
 
 search_ticker_page::search_ticker_page(std::shared_ptr<morda::context> c, std::shared_ptr<beerja::backend> be) :
 		widget(std::move(c), puu::forest()),
@@ -22,10 +23,13 @@ search_ticker_page::search_ticker_page(std::shared_ptr<morda::context> c, std::s
 	ASSERT(line)
 	auto button = this->try_get_widget_as<morda::push_button>("query_push_button");
 	ASSERT(button)
+	auto list = this->try_get_widget_as<morda::list>("tickers_list");
+	ASSERT(list)
 
 	auto query_disable_widgets = std::make_shared<morda::widget_set>();
 	query_disable_widgets->add(line);
 	query_disable_widgets->add(button);
+	query_disable_widgets->add(list);
 
 	// button click handler
 	button->click_handler = [query_disable_widgets, spinner, line, be](morda::push_button& but){
