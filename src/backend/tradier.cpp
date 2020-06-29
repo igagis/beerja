@@ -35,7 +35,7 @@ void tradier::set_config(const puu::forest& config){
 		}
 	}
 
-	// TRACE(<< "API Key = " << this->access_token << std::endl)
+	TRACE(<< "API Key = " << this->access_token << std::endl)
 }
 
 void tradier::get_exchanges(std::function<void(beerja::status, std::vector<beerja::exchange>&&)>&& callback){
