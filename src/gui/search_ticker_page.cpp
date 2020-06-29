@@ -72,18 +72,18 @@ std::shared_ptr<morda::widget> ticker_list_provider::get_widget(size_t index){
 					@left{
 						@text{
 							text{"%s"}
-							color{0xffffff00}
+							color{0xff00ffff}
 						}
 					}
 					@left{
 						@text{
 							text{"%s"}
-							color{0xffaaaaaa}
+							color{0xff808080}
 						}
 					}
 					@color{
 						layout{dy{1} dx{fill}}
-						color{0xff00ff00}
+						color{0xff404040}
 					}
 				}
 			)qwertyuiop",
