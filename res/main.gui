@@ -17,8 +17,8 @@
 		color {0xff808080}
 	}
 
-	@book{
-		id{main_book}
+	@widget{
+		id{search_ticker_stub}
 		layout{
 			dx { 300dp }
 			dy {max}

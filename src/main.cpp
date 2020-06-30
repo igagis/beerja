@@ -48,7 +48,7 @@ public:
 			);
 		ASSERT(c)
 
-		c->get_widget_as<morda::book>("main_book").replace_by(
+		c->get_widget("search_ticker_stub").replace_by(
 				std::make_shared<search_ticker_widget>(
 						this->gui.context,
 						backends.id_to_backend_map[tradier::tag]
