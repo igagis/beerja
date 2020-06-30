@@ -13,7 +13,7 @@
 
 #include "backend/tradier.hpp"
 
-#include "gui/search_ticker_page.hpp"
+#include "gui/search_ticker_widget.hpp"
 
 class application : public mordavokne::application{
 	easyhttp::init_guard easyhttp_guard;
@@ -24,7 +24,7 @@ public:
 			mordavokne::application(
 					"beerja",
 					[](){
-						return mordavokne::window_params(r4::vec2ui(640, 480));
+						return mordavokne::window_params(r4::vec2ui(1200, 600));
 					}()
 				)
 	{
@@ -48,7 +48,12 @@ public:
 			);
 		ASSERT(c)
 
-		c->get_widget_as<morda::book>("main_book").push(std::make_shared<search_ticker_page>(this->gui.context, backends.id_to_backend_map[tradier::tag]));
+		c->get_widget_as<morda::book>("main_book").replace_by(
+				std::make_shared<search_ticker_widget>(
+						this->gui.context,
+						backends.id_to_backend_map[tradier::tag]
+					)
+			);
 
 		this->gui.set_root(c);
 	}

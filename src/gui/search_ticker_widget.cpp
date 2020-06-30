@@ -1,4 +1,4 @@
-#include "search_ticker_page.hpp"
+#include "search_ticker_widget.hpp"
 
 #include <mordavokne/application.hpp>
 
@@ -11,14 +11,29 @@
 #include <morda/widgets/group/list.hpp>
 #include <morda/util/widget_set.hpp>
 
-search_ticker_page::search_ticker_page(std::shared_ptr<morda::context> c, std::shared_ptr<beerja::backend> be) :
+namespace{
+class ticker_list_provider : public morda::list::provider{
+	std::vector<beerja::ticker> tickers;
+public:
+	size_t count()const noexcept override{
+		return this->tickers.size();
+	}
+
+	std::shared_ptr<morda::widget> get_widget(size_t index)override;
+
+	void set_tickers(std::vector<beerja::ticker>&& tickers){
+		this->tickers = std::move(tickers);
+		this->notify_data_set_changed();
+	}
+};
+}
+
+search_ticker_widget::search_ticker_widget(std::shared_ptr<morda::context> c, std::shared_ptr<beerja::backend> be) :
 		widget(std::move(c), puu::forest()),
-		morda::page(this->context, puu::forest()),
 		morda::pile(
 				this->context,
-				puu::read(*mordavokne::inst().get_res_file("res/search_ticker_page.gui"))
-			),
-		tickers_provider(std::make_shared<ticker_list_provider>())
+				puu::read(*mordavokne::inst().get_res_file("res/search_ticker_widget.gui"))
+			)
 {
 	auto spinner = this->try_get_widget_as<morda::busy>("busy_spinner");
 	ASSERT(spinner)
@@ -34,7 +49,7 @@ search_ticker_page::search_ticker_page(std::shared_ptr<morda::context> c, std::s
 	query_disable_widgets->add(button);
 	query_disable_widgets->add(list);
 
-	auto tickers_provider = this->tickers_provider;
+	auto tickers_provider = std::make_shared<ticker_list_provider>();
 
 	// button click handler
 	button->click_handler = [query_disable_widgets, spinner, line, be, tickers_provider](morda::push_button& but){
@@ -58,7 +73,7 @@ search_ticker_page::search_ticker_page(std::shared_ptr<morda::context> c, std::s
 			);
 	};
 
-	list->set_provider(this->tickers_provider);
+	list->set_provider(tickers_provider);
 }
 
 std::shared_ptr<morda::widget> ticker_list_provider::get_widget(size_t index){

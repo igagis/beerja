@@ -1,3 +1,27 @@
-@book{
-	id{main_book}
+@row{
+	@scroll_area{
+		layout{
+			dy {fill} dx {100dp}
+			weight {1}
+		}
+		@color{
+			dx{100} dy{100}
+		}
+	}
+
+	@color{
+		layout{
+			dx {1dp}
+			dy {fill}
+		}
+		color {0xff808080}
+	}
+
+	@book{
+		id{main_book}
+		layout{
+			dx { 300dp }
+			dy {max}
+		}
+	}
 }
