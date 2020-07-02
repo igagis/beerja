@@ -1,11 +1,23 @@
 @row{
 	@scroll_area{
 		layout{
-			dy {fill} dx {100dp}
+			dy {fill}
+			dx {100dp}
 			weight {1}
 		}
 		@color{
-			dx{100} dy{100}
+			layout{
+				dx {100}
+				dy {100}
+			}
+
+			color {0xff00ffff}
+		}
+		u_cells_container{
+			layout{
+				dx {max}
+				dy {min}
+			}
 		}
 	}
 

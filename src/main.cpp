@@ -13,6 +13,7 @@
 
 #include "backend/tradier.hpp"
 
+#include "gui/cells_container.hpp"
 #include "gui/search_ticker_widget.hpp"
 
 class application : public mordavokne::application{
@@ -42,6 +43,8 @@ public:
 			std::string id(be->id());
 			this->backends.register_backend(std::move(id), std::move(be));
 		}
+
+		this->gui.context->inflater.register_widget<cells_container>("u_cells_container");
 
 		auto c = this->gui.context->inflater.inflate(
 				*this->get_res_file("res/main.gui")
