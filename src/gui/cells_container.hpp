@@ -12,4 +12,9 @@ public:
 
     void set_num_cells_per_row(unsigned num);
 
+	void push(std::shared_ptr<morda::widget> w);
+
+	void erase(morda::widget& w);
+private:
+	void update_arrangement();
 };
