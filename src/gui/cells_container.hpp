@@ -17,4 +17,5 @@ public:
 	void erase(morda::widget& w);
 private:
 	void update_arrangement();
+	morda::container& push_new_row();
 };
