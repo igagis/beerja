@@ -2,7 +2,7 @@
 
 #include <mordavokne/application.hpp>
 
-#include <utki/utf8.hpp>
+#include <utki/unicode.hpp>
 #include <utki/string.hpp>
 
 #include <morda/widgets/input/text_input_line.hpp>
