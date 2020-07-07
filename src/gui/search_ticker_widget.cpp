@@ -8,6 +8,8 @@
 #include <morda/widgets/input/text_input_line.hpp>
 #include <morda/widgets/button/push_button.hpp>
 #include <morda/widgets/label/busy.hpp>
+#include <morda/widgets/label/color.hpp>
+#include <morda/widgets/proxy/click_proxy.hpp>
 #include <morda/widgets/group/list.hpp>
 #include <morda/util/widget_set.hpp>
 
@@ -82,23 +84,45 @@ std::shared_ptr<morda::widget> ticker_list_provider::get_widget(size_t index){
 
 	auto gui = utki::make_string(
 			R"qwertyuiop(
-				@column{
-					layout{dx{fill}}
-					@left{
-						@text{
-							text{"%s"}
-							color{0xff00ffff}
-						}
+				@pile{
+					layout{
+						dx {fill}
 					}
-					@left{
-						@text{
-							text{"%s"}
-							color{0xff808080}
+					@click_proxy{
+						id {click_proxy}
+						layout{
+							dx {fill}
+							dy {fill}
 						}
 					}
 					@color{
-						layout{dy{1} dx{fill}}
-						color{0xff404040}
+						id {bg_color}
+						layout{
+							dx {fill}
+							dy {fill}
+						}
+						color {0xff000000}
+					}
+					@column{
+						layout{
+							dx {fill}
+						}
+						@left{
+							@text{
+								text{"%s"}
+								color{0xff00ffff}
+							}
+						}
+						@left{
+							@text{
+								text{"%s"}
+								color{0xff808080}
+							}
+						}
+						@color{
+							layout{dy{1} dx{fill}}
+							color{0xff404040}
+						}
 					}
 				}
 			)qwertyuiop",
@@ -106,5 +130,19 @@ std::shared_ptr<morda::widget> ticker_list_provider::get_widget(size_t index){
 			t.name.c_str()
 		);
 
-	return this->get_list()->context->inflater.inflate(gui.c_str()); // TODO: remove .c_str()
+	auto ret = this->get_list()->context->inflater.inflate(gui);
+
+	auto& bg = ret->get_widget_as<morda::color>("bg_color");
+	auto& cp = ret->get_widget_as<morda::click_proxy>("click_proxy");
+
+	cp.press_handler = [bg{utki::make_shared_from_this(bg)}](morda::click_proxy& w, bool is_pressed) -> bool {
+		if(is_pressed){
+			bg->set_color(0xff808080);
+		}else{
+			bg->set_color(0xff000000);
+		}
+		return true;
+	};
+
+	return ret;
 }
