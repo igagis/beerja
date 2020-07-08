@@ -15,7 +15,13 @@ public:
 
 	void set_config(const puu::forest& config)override;
 
-	void get_exchanges(std::function<void(beerja::status, std::vector<beerja::exchange>&&)>&& callback)override;
+	virtual std::shared_ptr<beerja::async_operation> get_exchanges(
+			std::function<void(
+					beerja::status,
+					std::shared_ptr<beerja::async_operation>,
+					std::vector<beerja::exchange>&&
+				)>&& callback
+		)override;
 
 	std::shared_ptr<beerja::async_operation> find_ticker(
 			const std::string& query,
@@ -23,6 +29,15 @@ public:
 					beerja::status,
 					const std::shared_ptr<beerja::async_operation>&,
 					std::vector<beerja::ticker>&&
+				)>&& callback
+		)override;
+
+	virtual std::shared_ptr<beerja::async_operation> get_quote(
+			const std::string& symbol,
+			std::function<void(
+					beerja::status,
+					const std::shared_ptr<beerja::async_operation>&,
+					beerja::quote
 				)>&& callback
 		)override;
 };

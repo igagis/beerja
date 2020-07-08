@@ -11,7 +11,10 @@
 #include <morda/widgets/label/color.hpp>
 #include <morda/widgets/proxy/click_proxy.hpp>
 #include <morda/widgets/group/list.hpp>
+#include <morda/widgets/group/overlay.hpp>
 #include <morda/util/widget_set.hpp>
+
+#include "ticker_dialog.hpp"
 
 namespace{
 class ticker_list_provider : public morda::list::provider{
@@ -140,6 +143,16 @@ std::shared_ptr<morda::widget> ticker_list_provider::get_widget(size_t index){
 			bg->set_color(0xff808080);
 		}else{
 			bg->set_color(0xff000000);
+		}
+		return true;
+	};
+
+	cp.click_handler = [click_proxy{utki::make_shared_from_this(cp)}, symbol_name{t.id}](morda::click_proxy& w) -> bool{
+		auto overlay = w.find_ancestor<morda::overlay>();
+		if(overlay){
+			w.context->run_from_ui_thread([overlay, symbol_name(std::move(symbol_name))](){
+				overlay->push_back(std::make_shared<ticker_dialog>(overlay->context, symbol_name));
+			});
 		}
 		return true;
 	};
