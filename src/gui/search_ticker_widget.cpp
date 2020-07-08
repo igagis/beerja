@@ -28,7 +28,7 @@ public:
 
 	void set_tickers(std::vector<beerja::ticker>&& tickers){
 		this->tickers = std::move(tickers);
-		this->notify_data_set_changed();
+		this->notify_data_set_change();
 	}
 };
 }
