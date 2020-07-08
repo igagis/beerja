@@ -39,7 +39,7 @@ ticker_dialog::ticker_dialog(std::shared_ptr<morda::context> c, const std::strin
 		morda::pile(this->context, dialog_desc)
 {
 	auto& bg_mouse_proxy = this->get_widget_as<morda::mouse_proxy>("bg_mouse_proxy");
-	bg_mouse_proxy.mouse_button_handler = [](morda::mouse_proxy&, bool is_down, const morda::vector2&, morda::mouse_button, unsigned){
+	bg_mouse_proxy.mouse_button_handler = [](morda::mouse_proxy&, const morda::mouse_button_event& e){
 		return true;
 	};
 

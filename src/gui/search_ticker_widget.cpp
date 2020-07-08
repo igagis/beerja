@@ -138,8 +138,8 @@ std::shared_ptr<morda::widget> ticker_list_provider::get_widget(size_t index){
 	auto& bg = ret->get_widget_as<morda::color>("bg_color");
 	auto& cp = ret->get_widget_as<morda::click_proxy>("click_proxy");
 
-	cp.press_handler = [bg{utki::make_shared_from_this(bg)}](morda::click_proxy& w, bool is_pressed) -> bool {
-		if(is_pressed){
+	cp.press_change_handler = [bg{utki::make_shared_from_this(bg)}](morda::click_proxy& w) -> bool {
+		if(w.is_pressed()){
 			bg->set_color(0xff808080);
 		}else{
 			bg->set_color(0xff000000);
