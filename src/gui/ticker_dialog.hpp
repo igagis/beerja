@@ -1,13 +1,35 @@
 #pragma once
 
+#include "../backend/backend.hpp"
+
 #include <morda/widgets/group/pile.hpp>
+#include <morda/widgets/label/text.hpp>
+#include <morda/widgets/label/busy.hpp>
 
 class ticker_dialog : public morda::pile{
+	beerja::ticker ticker;
+
+	std::shared_ptr<beerja::backend> backend;
+
+	std::shared_ptr<morda::text> price_text;
+	std::shared_ptr<morda::text> change_percent_text;
+	std::shared_ptr<morda::text> change_text;
+
+	std::shared_ptr<morda::widget> refresh_button;
+	std::shared_ptr<morda::text> refresh_text;
+	std::shared_ptr<morda::busy> refresh_busy;
+
+	std::shared_ptr<beerja::async_operation> refresh_operation;
 public:
-	ticker_dialog(std::shared_ptr<morda::context> c, const std::string& ticker_symbol_name);
+	ticker_dialog(
+			std::shared_ptr<morda::context> c,
+			beerja::ticker&& ticker,
+			std::shared_ptr<beerja::backend> backend
+		);
 
 	ticker_dialog(const ticker_dialog&) = delete;
 	ticker_dialog& operator=(const ticker_dialog&) = delete;
 
-
+private:
+	void refresh();
 };

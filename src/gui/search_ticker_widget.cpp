@@ -12,14 +12,20 @@
 #include <morda/widgets/proxy/click_proxy.hpp>
 #include <morda/widgets/group/list.hpp>
 #include <morda/widgets/group/overlay.hpp>
-#include <morda/util/widget_set.hpp>
+#include <morda/util/weak_widget_set.hpp>
 
 #include "ticker_dialog.hpp"
 
 namespace{
 class ticker_list_provider : public morda::list::provider{
 	std::vector<beerja::ticker> tickers;
+
+	std::shared_ptr<beerja::backend> backend;
 public:
+	ticker_list_provider(std::shared_ptr<beerja::backend> backend) :
+			backend(std::move(backend))
+	{}
+
 	size_t count()const noexcept override{
 		return this->tickers.size();
 	}
@@ -33,12 +39,16 @@ public:
 };
 }
 
-search_ticker_widget::search_ticker_widget(std::shared_ptr<morda::context> c, std::shared_ptr<beerja::backend> be) :
+search_ticker_widget::search_ticker_widget(
+		std::shared_ptr<morda::context> c,
+		std::shared_ptr<beerja::backend> backend
+	) :
 		widget(std::move(c), puu::forest()),
 		morda::pile(
 				this->context,
 				puu::read(*mordavokne::inst().get_res_file("res/search_ticker_widget.gui"))
-			)
+			),
+		backend(std::move(backend))
 {
 	auto spinner = this->try_get_widget_as<morda::busy>("busy_spinner");
 	ASSERT(spinner)
@@ -49,30 +59,32 @@ search_ticker_widget::search_ticker_widget(std::shared_ptr<morda::context> c, st
 	auto list = this->try_get_widget_as<morda::list>("tickers_list");
 	ASSERT(list)
 
-	auto query_disable_widgets = std::make_shared<morda::widget_set>();
+	auto query_disable_widgets = std::make_shared<morda::weak_widget_set>();
 	query_disable_widgets->add(line);
 	query_disable_widgets->add(button);
 	query_disable_widgets->add(list);
 
-	auto tickers_provider = std::make_shared<ticker_list_provider>();
+	auto tickers_provider = std::make_shared<ticker_list_provider>(this->backend);
 
 	// button click handler
-	button->click_handler = [query_disable_widgets, spinner, line, be, tickers_provider](morda::push_button& but){
+	button->click_handler = [this, query_disable_widgets, spinner, line, tickers_provider](morda::push_button& but){
 		spinner->set_active(true);
 
 		query_disable_widgets->set_enabled(false);
 
 		TRACE(<< "find ticker" << std::endl)
-		auto asop = be->find_ticker(
+		ASSERT(!this->search_ticker_operation)
+		this->search_ticker_operation = this->backend->find_ticker(
 				utki::to_utf8(line->get_text()),
 				// backend operation complete handler
-				[query_disable_widgets, spinner, tickers_provider](beerja::status s, const std::shared_ptr<beerja::async_operation>& asop, std::vector<beerja::ticker>&& ticker_list){
+				[this, query_disable_widgets, spinner, tickers_provider](beerja::status s, const std::shared_ptr<beerja::async_operation>& asop, std::vector<beerja::ticker>&& ticker_list){
 					TRACE(<< ticker_list.size() << " tickers found" << std::endl)
 					// run from ui thread
-					spinner->context->run_from_ui_thread([spinner, query_disable_widgets, ticker_list{std::move(ticker_list)}, tickers_provider]()mutable{
+					spinner->context->run_from_ui_thread([this, spinner, query_disable_widgets, ticker_list{std::move(ticker_list)}, tickers_provider]()mutable{
 						tickers_provider->set_tickers(std::move(ticker_list));
 						spinner->set_active(false);
 						query_disable_widgets->set_enabled(true);
+						this->search_ticker_operation.reset();
 					});
 				}
 			);
@@ -138,7 +150,7 @@ std::shared_ptr<morda::widget> ticker_list_provider::get_widget(size_t index){
 	auto& bg = ret->get_widget_as<morda::color>("bg_color");
 	auto& cp = ret->get_widget_as<morda::click_proxy>("click_proxy");
 
-	cp.press_change_handler = [bg{utki::make_shared_from_this(bg)}](morda::click_proxy& w) -> bool {
+	cp.press_change_handler = [bg{utki::make_shared_from(bg)}](morda::click_proxy& w) -> bool {
 		if(w.is_pressed()){
 			bg->set_color(0xff808080);
 		}else{
@@ -147,14 +159,17 @@ std::shared_ptr<morda::widget> ticker_list_provider::get_widget(size_t index){
 		return true;
 	};
 
-	cp.click_handler = [click_proxy{utki::make_shared_from_this(cp)}, symbol_name{t.id}](morda::click_proxy& w) -> bool{
+	cp.click_handler = [ticker{t}, this](morda::click_proxy& w){
 		auto overlay = w.find_ancestor<morda::overlay>();
 		if(overlay){
-			w.context->run_from_ui_thread([overlay, symbol_name(std::move(symbol_name))](){
-				overlay->push_back(std::make_shared<ticker_dialog>(overlay->context, symbol_name));
+			w.context->run_from_ui_thread([overlay, ticker{ticker}, backend{this->backend}]()mutable{
+				overlay->push_back(std::make_shared<ticker_dialog>(
+						overlay->context,
+						std::move(ticker),
+						std::move(backend)
+					));
 			});
 		}
-		return true;
 	};
 
 	return ret;
