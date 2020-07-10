@@ -10,6 +10,7 @@
 #include <morda/widgets/label/busy.hpp>
 #include <morda/widgets/label/color.hpp>
 #include <morda/widgets/proxy/click_proxy.hpp>
+#include <morda/widgets/proxy/key_proxy.hpp>
 #include <morda/widgets/group/list.hpp>
 #include <morda/widgets/group/overlay.hpp>
 #include <morda/util/weak_widget_set.hpp>
@@ -39,6 +40,55 @@ public:
 };
 }
 
+namespace{
+const auto layout = puu::read(R"qwertyuiop(
+	@column{
+		layout{
+			dx {max}
+			dy {max}
+		}
+		@row{
+			layout{
+				dx {max}
+			}
+			@key_proxy{
+				id {input_key_proxy}
+				layout{
+					dx {0}
+					weight {1}
+				}
+				@text_input_line{
+					id {query_text_input}
+
+					text {"enter query here"}
+
+					layout{
+						dx {max}
+					}
+				}
+			}
+			@push_button{
+				id {query_push_button}
+				@text{
+					text {"run query"}
+				}
+			}
+		}
+		@list{
+			id {tickers_list}
+			layout{
+				dy {0}
+				dx {fill}
+				weight {1}
+			}
+		}
+	}
+	@busy{
+		id {busy_spinner}
+	}
+)qwertyuiop");
+}
+
 search_ticker_widget::search_ticker_widget(
 		std::shared_ptr<morda::context> c,
 		std::shared_ptr<beerja::backend> backend
@@ -46,18 +96,14 @@ search_ticker_widget::search_ticker_widget(
 		widget(std::move(c), puu::forest()),
 		morda::pile(
 				this->context,
-				puu::read(*mordavokne::inst().get_res_file("res/search_ticker_widget.gui"))
+				layout
 			),
 		backend(std::move(backend))
 {
-	auto spinner = this->try_get_widget_as<morda::busy>("busy_spinner");
-	ASSERT(spinner)
-	auto line = this->get_widget("query_text_input").try_get_widget<morda::text_input_line>();
-	ASSERT(line)
-	auto button = this->try_get_widget_as<morda::push_button>("query_push_button");
-	ASSERT(button)
-	auto list = this->try_get_widget_as<morda::list>("tickers_list");
-	ASSERT(list)
+	auto spinner = utki::make_shared_from(this->get_widget_as<morda::busy>("busy_spinner"));
+	auto line = utki::make_shared_from(this->get_widget("query_text_input").get_widget<morda::text_input_line>());
+	auto button = utki::make_shared_from(this->get_widget_as<morda::push_button>("query_push_button"));
+	auto list = utki::make_shared_from(this->get_widget_as<morda::list>("tickers_list"));
 
 	auto query_disable_widgets = std::make_shared<morda::weak_widget_set>();
 	query_disable_widgets->add(line);
@@ -88,6 +134,16 @@ search_ticker_widget::search_ticker_widget(
 					});
 				}
 			);
+	};
+
+	this->get_widget_as<morda::key_proxy>("input_key_proxy").key_handler = [button](morda::key_proxy&, bool is_down, morda::key code) -> bool {
+		if(code == morda::key::enter){
+			if(is_down){
+				button->click_handler(*button);
+			}
+			return true;
+		}
+		return false;
 	};
 
 	list->set_provider(tickers_provider);
