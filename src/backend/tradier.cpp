@@ -190,65 +190,25 @@ std::shared_ptr<beerja::async_operation> tradier::find_ticker(
 
 namespace{
 beerja::quote parse_quote(const jsondom::value& json){
-	if(!json.is_object()){
-		throw std::runtime_error("parse_quote(): malformed JSON/DSL");
-	}
-
-	auto& root = json.object();
-	auto quotes_i = root.find("quotes");
-	if(quotes_i == root.end() || !quotes_i->second.is_object()){
-		throw std::runtime_error("tradier::parse_quote(): malformed get quotes response, 'quotes' key not found or is not an object");
-	}
-
-	auto& quotes = quotes_i->second.object();
-	auto quote_i = quotes.find("quote");
-	if(quote_i == quotes.end() || !quote_i->second.is_object()){
-		throw std::runtime_error("tradier::parse_quote(): malformed get quotes response, 'quote' key not found or is not an object");
-	}
-	
-	auto& quote = quote_i->second.object();
+	auto& quote = json.object().at("quotes").object().at("quote").object();
 
 	beerja::quote ret;
 
-	{
-		auto i = quote.find("last");
-		if(i == quote.end() || !i->second.is_number()){
-			throw std::runtime_error("tradier::parse_quote(): malformed get quotes response, 'last' key not found or is not a number");
+	ret.last = quote.at("last").number().to_float();
+	ret.change = quote.at("change").number().to_float();
+	ret.change_percent = quote.at("change_percentage").number().to_float();
+	{ // check if trading is not closed yet
+		auto& c = quote.at("close");
+		if(c.is_null()){
+			ret.close = -1;
+		}else{
+			ret.close = c.number().to_float();
 		}
-		ret.last = i->second.number().to_float();
 	}
-
-	// for(auto& s : security){
-	// 	if(!s.is_object()){
-	// 		continue;
-	// 	}
-
-	// 	auto& o = s.object();
-
-	// 	auto symbol_i = o.find("symbol");
-	// 	if(symbol_i == o.end() || !symbol_i->second.is_string()){
-	// 		continue;
-	// 	}
-	// 	auto& symbol = symbol_i->second.string();
-
-	// 	std::string description;
-	// 	auto description_i = o.find("description");
-	// 	if(description_i != o.end() && description_i->second.is_string()){
-	// 		description = description_i->second.string();
-	// 	}
-
-	// 	std::string exchange;
-	// 	auto exchange_i = o.find("exchange");
-	// 	if(exchange_i != o.end() && exchange_i->second.is_string()){
-	// 		exchange = exchange_i->second.string();
-	// 	}
-
-	// 	ret.push_back(beerja::ticker{
-	// 		.id = symbol,
-	// 		.name = std::move(description),
-	// 		.exchange_id = std::move(exchange)
-	// 	});
-	// }
+	ret.open = quote.at("open").number().to_float();
+	ret.high = quote.at("high").number().to_float();
+	ret.low = quote.at("low").number().to_float();
+	ret.volume = quote.at("volume").number().to_uint64();
 	
 	return ret;
 }
