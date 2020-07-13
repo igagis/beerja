@@ -1,0 +1,33 @@
+{
+   "quotes":{
+      "quote":{
+         "symbol":"VXRT",
+         "description":"Vaxart Inc",
+         "exch":"Q",
+         "type":"stock",
+         "last":10.34,
+         "change":2.36,
+         "volume":38928787,
+         "open":9.02,
+         "high":10.58,
+         "low":8.56,
+         "close":null,
+         "bid":10.32,
+         "ask":10.34,
+         "change_percentage":29.58,
+         "average_volume":7814547,
+         "last_volume":5000,
+         "trade_date":1594651890600,
+         "prevclose":7.98,
+         "week_52_high":14.3,
+         "week_52_low":0.2543,
+         "bidsize":10,
+         "bidexch":"P",
+         "bid_date":1594651889000,
+         "asksize":4,
+         "askexch":"Q",
+         "ask_date":1594651889000,
+         "root_symbols":"VXRT"
+		}
+	}
+}

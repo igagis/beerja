@@ -29,26 +29,29 @@ const auto dialog_desc = puu::read(R"qwertyuiop(
 		@nine_patch{
 			image {morda_npt_window_bg}
 
-			@row{
-				@text{
-					id {ticker_name_text}
+			@column{
+				@row{
+					@text{
+						id {ticker_name_text}
+					}
+
+					@text{
+						id {price_text}
+					}
+
+					@text{
+						id {change_percent_text}
+					}
+
+					@text{
+						id {change_text}
+					}
+
+					@u_refresh_button{
+						id {refresh_button}
+					}
 				}
 
-				@text{
-					id {price_text}
-				}
-
-				@text{
-					id {change_percent_text}
-				}
-
-				@text{
-					id {change_text}
-				}
-
-				@u_refresh_button{
-					id {refresh_button}
-				}
 			}
 		}
 	)qwertyuiop");
@@ -95,11 +98,14 @@ void ticker_dialog::refresh(){
 			[this, refresh_button{this->refresh_button}](
 					beerja::status s,
 					const std::shared_ptr<beerja::async_operation>& asop,
-					beerja::quote
+					beerja::quote quote
 				)
 			{
-				refresh_button->context->run_from_ui_thread([this, refresh_button](){
+				TRACE(<< "quote.last = " << quote.last << std::endl)
+				refresh_button->context->run_from_ui_thread([this, refresh_button, quote{std::move(quote)}](){
 					refresh_button->set_refreshing(false);
+					
+					this->price_text->set_text(std::to_string(quote.last));
 				});
 			}
 		);

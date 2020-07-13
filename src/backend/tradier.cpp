@@ -194,23 +194,29 @@ beerja::quote parse_quote(const jsondom::value& json){
 		throw std::runtime_error("parse_quote(): malformed JSON/DSL");
 	}
 
+	auto& root = json.object();
+	auto quotes_i = root.find("quotes");
+	if(quotes_i == root.end() || !quotes_i->second.is_object()){
+		throw std::runtime_error("tradier::parse_quote(): malformed get quotes response, 'quotes' key not found or is not an object");
+	}
+
+	auto& quotes = quotes_i->second.object();
+	auto quote_i = quotes.find("quote");
+	if(quote_i == quotes.end() || !quote_i->second.is_object()){
+		throw std::runtime_error("tradier::parse_quote(): malformed get quotes response, 'quote' key not found or is not an object");
+	}
+	
+	auto& quote = quote_i->second.object();
+
 	beerja::quote ret;
 
-	// auto& root = json.object();
-	// auto securities_i = root.find("securities");
-	// if(securities_i == root.end() || !securities_i->second.is_object()){
-	// 	return std::vector<beerja::ticker>();
-	// }
-
-	// auto& securities = securities_i->second.object();
-	// auto security_i = securities.find("security");
-	// if(security_i == securities.end() || !security_i->second.is_array()){
-	// 	return std::vector<beerja::ticker>();
-	// }
-	
-	// auto& security = security_i->second.array();
-
-	// std::vector<beerja::ticker> ret;
+	{
+		auto i = quote.find("last");
+		if(i == quote.end() || !i->second.is_number()){
+			throw std::runtime_error("tradier::parse_quote(): malformed get quotes response, 'last' key not found or is not a number");
+		}
+		ret.last = i->second.number().to_float();
+	}
 
 	// for(auto& s : security){
 	// 	if(!s.is_object()){
