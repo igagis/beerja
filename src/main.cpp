@@ -13,13 +13,14 @@
 
 #include "backend/tradier.hpp"
 
+#include "gui/refresh_button.hpp"
 #include "gui/cells_container.hpp"
 #include "gui/search_ticker_widget.hpp"
 
 class application : public mordavokne::application{
 	easyhttp::init_guard easyhttp_guard;
 public:
-	backend_register backends;
+	beerja::backend_register backends;
 
 	application() :
 			mordavokne::application(
@@ -44,7 +45,8 @@ public:
 			this->backends.register_backend(std::move(id), std::move(be));
 		}
 
-		this->gui.context->inflater.register_widget<cells_container>("u_cells_container");
+		this->gui.context->inflater.register_widget<beerja::refresh_button>("u_refresh_button");
+		this->gui.context->inflater.register_widget<beerja::cells_container>("u_cells_container");
 
 		auto c = this->gui.context->inflater.inflate(
 				*this->get_res_file("res/main.gui")
@@ -52,7 +54,7 @@ public:
 		ASSERT(c)
 
 		c->get_widget("search_ticker_stub").replace_by(
-				std::make_shared<search_ticker_widget>(
+				std::make_shared<beerja::search_ticker_widget>(
 						this->gui.context,
 						backends.id_to_backend_map[tradier::tag]
 					)

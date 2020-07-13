@@ -4,6 +4,8 @@
 #include <morda/widgets/label/text.hpp>
 #include <morda/widgets/button/push_button.hpp>
 
+using namespace beerja;
+
 namespace{
 const auto dialog_desc = puu::read(R"qwertyuiop(
 		layout{
@@ -44,15 +46,8 @@ const auto dialog_desc = puu::read(R"qwertyuiop(
 					id {change_text}
 				}
 
-				@push_button{
+				@u_refresh_button{
 					id {refresh_button}
-					@text{
-						id {refresh_text}
-						text {"refresh"}
-					}
-					@busy{
-						id {refresh_busy}
-					}
 				}
 			}
 		}
@@ -80,11 +75,9 @@ ticker_dialog::ticker_dialog(
 	this->price_text = utki::make_shared_from(this->get_widget_as<morda::text>("price_text"));	
 	this->change_percent_text = utki::make_shared_from(this->get_widget_as<morda::text>("change_percent_text"));
 	this->change_text = utki::make_shared_from(this->get_widget_as<morda::text>("change_text"));
-	this->refresh_text = utki::make_shared_from(this->get_widget_as<morda::text>("refresh_text"));
-	this->refresh_busy = utki::make_shared_from(this->get_widget_as<morda::busy>("refresh_busy"));
 
 	{
-		auto& b = this->get_widget_as<morda::push_button>("refresh_button");
+		auto& b = this->get_widget_as<beerja::refresh_button>("refresh_button");
 		b.click_handler = [this](morda::push_button& button){
 			this->refresh();
 		};
@@ -95,9 +88,7 @@ ticker_dialog::ticker_dialog(
 }
 
 void ticker_dialog::refresh(){
-	this->refresh_button->set_enabled(false);
-	this->refresh_text->set_visible(false);
-	this->refresh_busy->set_active(true);
+	this->refresh_button->set_refreshing(true);
 
 	ASSERT(!this->refresh_operation)
 	this->refresh_operation = this->backend->get_quote(

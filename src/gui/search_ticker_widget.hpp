@@ -4,6 +4,8 @@
 
 #include "../backend/backend.hpp"
 
+namespace beerja{
+
 class search_ticker_widget :
 		virtual public morda::widget,
 		private morda::pile
@@ -18,3 +20,5 @@ public:
 		);
 
 };
+
+}

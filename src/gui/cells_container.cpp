@@ -2,6 +2,8 @@
 
 #include <morda/widgets/group/row.hpp>
 
+using namespace beerja;
+
 cells_container::cells_container(std::shared_ptr<morda::context> c, const puu::forest& desc) :
 		morda::widget(std::move(c), desc),
 		morda::column(this->context, puu::forest())

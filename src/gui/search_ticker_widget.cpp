@@ -17,6 +17,8 @@
 
 #include "ticker_dialog.hpp"
 
+using namespace beerja;
+
 namespace{
 class ticker_list_provider : public morda::list::provider{
 	std::vector<beerja::ticker> tickers;

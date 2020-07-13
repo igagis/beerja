@@ -6,6 +6,10 @@
 #include <morda/widgets/label/text.hpp>
 #include <morda/widgets/label/busy.hpp>
 
+#include "refresh_button.hpp"
+
+namespace beerja{
+
 class ticker_dialog : public morda::pile{
 	beerja::ticker ticker;
 
@@ -15,9 +19,7 @@ class ticker_dialog : public morda::pile{
 	std::shared_ptr<morda::text> change_percent_text;
 	std::shared_ptr<morda::text> change_text;
 
-	std::shared_ptr<morda::widget> refresh_button;
-	std::shared_ptr<morda::text> refresh_text;
-	std::shared_ptr<morda::busy> refresh_busy;
+	std::shared_ptr<beerja::refresh_button> refresh_button;
 
 	std::shared_ptr<beerja::async_operation> refresh_operation;
 public:
@@ -33,3 +35,5 @@ public:
 private:
 	void refresh();
 };
+
+}

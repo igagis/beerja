@@ -2,6 +2,8 @@
 
 #include <morda/widgets/group/column.hpp>
 
+namespace beerja{
+
 class cells_container :
         virtual public morda::widget,
         private morda::column
@@ -19,3 +21,5 @@ private:
 	void update_arrangement();
 	morda::container& push_new_row();
 };
+
+}
