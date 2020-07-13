@@ -90,16 +90,23 @@ ticker_dialog::ticker_dialog(
 void ticker_dialog::refresh(){
 	this->refresh_button->set_refreshing(true);
 
-	ASSERT(!this->refresh_operation)
 	this->refresh_operation = this->backend->get_quote(
 			this->ticker.id,
-			[](
+			[this, refresh_button{this->refresh_button}](
 					beerja::status s,
 					const std::shared_ptr<beerja::async_operation>& asop,
 					beerja::quote
 				)
 			{
-				// TODO:
+				refresh_button->context->run_from_ui_thread([this, refresh_button](){
+					refresh_button->set_refreshing(false);
+				});
 			}
 		);
+}
+
+ticker_dialog::~ticker_dialog(){
+	if(auto op = this->refresh_operation.lock()){
+		op->cancel();
+	}
 }

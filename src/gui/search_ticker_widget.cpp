@@ -121,7 +121,6 @@ search_ticker_widget::search_ticker_widget(
 		query_disable_widgets->set_enabled(false);
 
 		TRACE(<< "find ticker" << std::endl)
-		ASSERT(!this->search_ticker_operation)
 		this->search_ticker_operation = this->backend->find_ticker(
 				utki::to_utf8(line->get_text()),
 				// backend operation complete handler
@@ -149,6 +148,12 @@ search_ticker_widget::search_ticker_widget(
 	};
 
 	list->set_provider(tickers_provider);
+}
+
+search_ticker_widget::~search_ticker_widget(){
+	if(auto op = this->search_ticker_operation.lock()){
+		op->cancel();
+	}
 }
 
 std::shared_ptr<morda::widget> ticker_list_provider::get_widget(size_t index){
