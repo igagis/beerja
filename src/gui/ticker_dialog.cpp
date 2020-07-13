@@ -106,6 +106,8 @@ void ticker_dialog::refresh(){
 					refresh_button->set_refreshing(false);
 					
 					this->price_text->set_text(std::to_string(quote.last));
+					this->change_text->set_text(std::to_string(quote.change));
+					this->change_percent_text->set_text(std::to_string(quote.change_percent));
 				});
 			}
 		);
