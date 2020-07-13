@@ -47,6 +47,13 @@ const auto dialog_desc = puu::read(R"qwertyuiop(
 						id {change_text}
 					}
 
+					@push_button{
+						id {add_to_grid}
+						@text{
+							text {"add to grid"}
+						}
+					}
+
 					@u_refresh_button{
 						id {refresh_button}
 					}
