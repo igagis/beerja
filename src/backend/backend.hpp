@@ -8,6 +8,7 @@
 #include "../model/exchange.hpp"
 #include "../model/ticker.hpp"
 #include "../model/quote.hpp"
+#include "../model/granule.hpp"
 
 #include <utki/shared.hpp>
 
@@ -54,6 +55,26 @@ public:
 					status,
 					const std::shared_ptr<async_operation>&,
 					beerja::quote
+				)>&& callback
+		) = 0;
+
+	enum class granularity{
+		minute,
+		five_minutes,
+		fivteen_minutes,
+		// TODO: add?
+		// hour,
+		// day,
+		// week
+	};
+
+	virtual std::shared_ptr<async_operation> get_data(
+			const std::string& symbol,
+			granularity gran,
+			std::function<void(
+					status,
+					const std::shared_ptr<async_operation>&,
+					std::vector<beerja::granule>&& data
 				)>&& callback
 		) = 0;
 };

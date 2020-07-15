@@ -260,3 +260,17 @@ std::shared_ptr<beerja::async_operation> tradier::get_quote(
 
 	return asop;
 }
+
+std::shared_ptr<beerja::async_operation> tradier::get_data(
+		const std::string& symbol,
+		granularity gran,
+		std::function<void(
+				beerja::status,
+				const std::shared_ptr<beerja::async_operation>&,
+				std::vector<beerja::granule>&& data
+			)>&& callback
+	)
+{
+	// TODO:
+	return nullptr;
+}

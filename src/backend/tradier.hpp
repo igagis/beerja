@@ -40,4 +40,14 @@ public:
 					beerja::quote
 				)>&& callback
 		)override;
+
+	virtual std::shared_ptr<beerja::async_operation> get_data(
+			const std::string& symbol,
+			granularity gran,
+			std::function<void(
+					beerja::status,
+					const std::shared_ptr<beerja::async_operation>&,
+					std::vector<beerja::granule>&& data
+				)>&& callback
+		)override;
 };
