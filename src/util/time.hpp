@@ -25,16 +25,11 @@ public:
 		return this->month;
 	}
 
-	void set_month(unsigned month){
-		if(month >= 12){
-			throw std::logic_error("date::set_month(): passed in month value is out of range, must be from 0 to 11");
-		}
-		// TODO: check if currently set day is valid for the given month/year
-		this->month = decltype(this->month)(month);
-	}
+	void set_month(unsigned month);
 
 	/**
 	 * @brief Get day of month.
+	 * Zero is an invalid value.  Valid values are from 1 to 28/29/30/31, depending on month.
 	 * @return day of month.
 	 */
 	unsigned get_day()const{
@@ -48,11 +43,41 @@ public:
 };
 
 class datetime : public date{
-	unsigned hour;
-	unsigned minute;
-	unsigned second;
+	uint8_t hour;
+	uint8_t minute;
+	uint8_t second;
 
 public:
+
+	unsigned get_hour()const{
+		return this->hour;
+	}
+
+	void set_hour(unsigned hour){
+		// TODO: check validity
+		this->hour = hour;
+	}
+
+	unsigned get_minute()const{
+		return this->minute;
+	}
+
+	void set_minute(unsigned minute){
+		// TODO: check validity
+		this->minute = minute;
+	}
+
+	unsigned get_second()const{
+		return this->second;
+	}
+
+	void set_second(unsigned second){
+		// TODO: check validity
+		this->second = second;
+	}
+
+	std::string to_string()const;
+
 	static datetime parse(const std::string& str);
 };
 

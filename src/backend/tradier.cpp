@@ -261,7 +261,17 @@ std::shared_ptr<beerja::async_operation> tradier::get_quote(
 	return asop;
 }
 
-std::shared_ptr<beerja::async_operation> tradier::get_data(
+namespace{
+std::vector<beerja::granule> parse_prices(const jsondom::value& json){
+	std::vector<beerja::granule> ret;
+
+	// TODO:
+
+	return ret;
+}
+}
+
+std::shared_ptr<beerja::async_operation> tradier::get_prices(
 		const std::string& symbol,
 		granularity gran,
 		std::function<void(
@@ -271,6 +281,65 @@ std::shared_ptr<beerja::async_operation> tradier::get_data(
 			)>&& callback
 	)
 {
-	// TODO:
-	return nullptr;
+	if(!callback){
+		throw std::logic_error("tradier::get_quote(): passed in callback is nullptr");
+	}
+
+	auto asop = std::make_shared<tradier_async_operation>();
+
+	auto r = std::make_shared<easyhttp::request>([callback, asop](easyhttp::request& r){
+		auto& resp = r.get_response();
+		if(resp.status != easyhttp::status_code::ok || resp.response_code != easyhttp::http_code::ok){
+			TRACE(<< "resp.status = " << unsigned(resp.status) << " resp.response_code = " << unsigned(resp.response_code) << std::endl)
+			callback(beerja::status::failure, asop, std::vector<beerja::granule>());
+			return;
+		}
+
+		try{
+			TRACE(<< "BODY = " << utki::make_string(resp.body) << std::endl)
+			auto json = jsondom::read(utki::make_span(resp.body));
+
+			callback(beerja::status::ok, asop, parse_prices(json));
+		}catch(...){
+			callback(beerja::status::failure, asop, std::vector<beerja::granule>());
+		}
+	});
+
+	asop->http_req = r;
+
+	std::string interval;
+	std::string start_time;
+	std::string end_time;
+	switch(gran){
+		case granularity::minute:
+			interval = "1min";
+			start_time = "";
+			end_time = "";
+			break;
+		case granularity::five_minutes:
+			interval = "5min";
+			start_time = "";
+			end_time = "";
+			break;
+		case granularity::fivteen_minutes:
+			interval = "15min";
+			start_time = "";
+			end_time = "";
+			break;
+	}
+
+	r->set_url(end_point + "markets/timesales?symbol=" + easyhttp::escape(symbol) +
+			"&session_filter=open&interval=" + interval +
+			"&start=" + easyhttp::escape(start_time) +
+			"&end=" + easyhttp::escape(end_time)
+		);
+
+	r->set_headers({
+			{"Authorization", std::string("Bearer ") + this->access_token},
+			{"Accept", "application/json"}
+		});
+
+	r->start();
+
+	return asop;
 }

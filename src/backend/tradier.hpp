@@ -41,7 +41,7 @@ public:
 				)>&& callback
 		)override;
 
-	virtual std::shared_ptr<beerja::async_operation> get_data(
+	virtual std::shared_ptr<beerja::async_operation> get_prices(
 			const std::string& symbol,
 			granularity gran,
 			std::function<void(

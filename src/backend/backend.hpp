@@ -68,7 +68,7 @@ public:
 		// week
 	};
 
-	virtual std::shared_ptr<async_operation> get_data(
+	virtual std::shared_ptr<async_operation> get_prices(
 			const std::string& symbol,
 			granularity gran,
 			std::function<void(
