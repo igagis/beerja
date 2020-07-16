@@ -7,6 +7,8 @@
 
 #include <jsondom/dom.hpp>
 
+#include "../date/date.h"
+
 const std::string tradier::tag = "tradier";
 
 namespace{
@@ -288,6 +290,12 @@ std::shared_ptr<beerja::async_operation> tradier::get_prices(
 
 	auto asop = std::make_shared<tradier_async_operation>();
 
+	if(gran == granularity::day){
+		//TODO:
+		ASSERT(false)
+		return asop;
+	}
+
 	auto r = std::make_shared<easyhttp::request>([callback, asop](easyhttp::request& r){
 		auto& resp = r.get_response();
 		if(resp.status != easyhttp::status_code::ok || resp.response_code != easyhttp::http_code::ok){
@@ -309,28 +317,38 @@ std::shared_ptr<beerja::async_operation> tradier::get_prices(
 	asop->http_req = r;
 
 	std::string interval;
-	std::string start_time;
-	std::string end_time;
 	switch(gran){
 		case granularity::minute:
-			interval = "1min";
-			start_time = "";
-			end_time = "";
+			{
+				interval = "1min";
+			}
 			break;
 		case granularity::five_minutes:
 			interval = "5min";
-			start_time = "";
-			end_time = "";
 			break;
 		case granularity::fivteen_minutes:
 			interval = "15min";
-			start_time = "";
-			end_time = "";
 			break;
 		case granularity::day:
 			ASSERT(false)
 			break;
 	}
+
+	std::string start_time;
+	std::string end_time;
+	{
+		using ::date::operator<<;
+		std::stringstream ss;
+		ss << now_time;
+		end_time = ss.str();
+		ss.clear();
+		ss << backend::get_start_time(now_time, gran);
+		start_time = ss.str();
+	}
+	
+	TRACE(<< "interval = " << interval << std::endl)
+	TRACE(<< "start_time = " << start_time << std::endl)
+	TRACE(<< "end_time = " << end_time << std::endl)
 
 	r->set_url(end_point + "markets/timesales?symbol=" + easyhttp::escape(symbol) +
 			"&session_filter=open&interval=" + interval +

@@ -77,7 +77,7 @@ public:
 				)>&& callback
 		) = 0;
 	
-private:
+protected:
 	static std::chrono::system_clock::time_point get_start_time(
 			const std::chrono::system_clock::time_point& end_time,
 			granularity gran
