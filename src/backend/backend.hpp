@@ -2,6 +2,7 @@
 
 #include <string>
 #include <functional>
+#include <chrono>
 
 #include <puu/tree.hpp>
 
@@ -62,14 +63,12 @@ public:
 		minute,
 		five_minutes,
 		fivteen_minutes,
-		// TODO: add?
-		// hour,
-		// day,
-		// week
+		day
 	};
 
 	virtual std::shared_ptr<async_operation> get_prices(
 			const std::string& symbol,
+			std::chrono::system_clock::time_point now_time,
 			granularity gran,
 			std::function<void(
 					status,
@@ -77,6 +76,12 @@ public:
 					std::vector<beerja::granule>&& data
 				)>&& callback
 		) = 0;
+	
+private:
+	static std::chrono::system_clock::time_point get_start_time(
+			const std::chrono::system_clock::time_point& end_time,
+			granularity gran
+		);
 };
 
 }

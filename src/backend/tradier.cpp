@@ -273,6 +273,7 @@ std::vector<beerja::granule> parse_prices(const jsondom::value& json){
 
 std::shared_ptr<beerja::async_operation> tradier::get_prices(
 		const std::string& symbol,
+		std::chrono::system_clock::time_point now_time,
 		granularity gran,
 		std::function<void(
 				beerja::status,
@@ -325,6 +326,9 @@ std::shared_ptr<beerja::async_operation> tradier::get_prices(
 			interval = "15min";
 			start_time = "";
 			end_time = "";
+			break;
+		case granularity::day:
+			ASSERT(false)
 			break;
 	}
 
