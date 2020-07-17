@@ -9,16 +9,24 @@ std::chrono::system_clock::time_point backend::get_start_time(
 		granularity gran
 	)
 {
+	std::chrono::system_clock::time_point ret;
+
 	switch(gran){
 		case granularity::minute:
-			return end_time - ::date::days(2);
+			ret = end_time - ::date::days(2);
+			break;
 		case granularity::five_minutes:
-			return end_time - ::date::weeks(2);
+			ret = end_time - ::date::weeks(2);
+			break;
 		case granularity::fivteen_minutes:
-			return end_time - ::date::months(1);
+			ret = end_time - ::date::months(1);
+			break;
 		case granularity::day:
-			return end_time - ::date::years(10);
+			ret = end_time - ::date::years(10);
+			break;
 	}
 
-	return end_time;
+	using ::date::floor;
+
+	return floor<std::chrono::seconds>(ret);
 }

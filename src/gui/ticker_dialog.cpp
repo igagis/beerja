@@ -118,10 +118,27 @@ void ticker_dialog::refresh(){
 				});
 			}
 		);
+	
+	this->get_prices_operation = this->backend->get_prices(
+			this->ticker.id,
+			std::chrono::system_clock::now(),
+			beerja::backend::granularity::minute,
+			[](
+					beerja::status s,
+					const std::shared_ptr<beerja::async_operation> asop,
+					std::vector<beerja::granule>&& prices
+				)
+			{
+				// tODO:
+			}
+		);
 }
 
 ticker_dialog::~ticker_dialog(){
 	if(auto op = this->refresh_operation.lock()){
+		op->cancel();
+	}
+	if(auto op = this->get_prices_operation.lock()){
 		op->cancel();
 	}
 }

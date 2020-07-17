@@ -319,9 +319,7 @@ std::shared_ptr<beerja::async_operation> tradier::get_prices(
 	std::string interval;
 	switch(gran){
 		case granularity::minute:
-			{
-				interval = "1min";
-			}
+			interval = "1min";
 			break;
 		case granularity::five_minutes:
 			interval = "5min";
@@ -338,14 +336,19 @@ std::shared_ptr<beerja::async_operation> tradier::get_prices(
 	std::string end_time;
 	{
 		using ::date::operator<<;
-		std::stringstream ss;
-		ss << now_time;
-		end_time = ss.str();
-		ss.clear();
-		ss << backend::get_start_time(now_time, gran);
-		start_time = ss.str();
+		using ::date::floor;
+		{
+			std::stringstream ss;
+			ss << floor<std::chrono::seconds>(now_time);
+			end_time = ss.str();
+		}
+		{
+			std::stringstream ss;
+			ss << floor<std::chrono::seconds>(backend::get_start_time(now_time, gran));
+			start_time = ss.str();
+		}
 	}
-	
+
 	TRACE(<< "interval = " << interval << std::endl)
 	TRACE(<< "start_time = " << start_time << std::endl)
 	TRACE(<< "end_time = " << end_time << std::endl)

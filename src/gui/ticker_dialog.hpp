@@ -22,6 +22,7 @@ class ticker_dialog : public morda::pile{
 	std::shared_ptr<beerja::refresh_button> refresh_button;
 
 	std::weak_ptr<beerja::async_operation> refresh_operation;
+	std::weak_ptr<beerja::async_operation> get_prices_operation;
 public:
 	ticker_dialog(
 			std::shared_ptr<morda::context> c,
