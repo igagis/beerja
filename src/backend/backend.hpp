@@ -68,7 +68,7 @@ public:
 
 	virtual std::shared_ptr<async_operation> get_prices(
 			const std::string& symbol,
-			std::chrono::system_clock::time_point now_time,
+			::date::sys_time<std::chrono::minutes> now_time,
 			granularity gran,
 			std::function<void(
 					status,

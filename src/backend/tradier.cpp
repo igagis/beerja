@@ -264,10 +264,33 @@ std::shared_ptr<beerja::async_operation> tradier::get_quote(
 }
 
 namespace{
+::date::sys_seconds parse_datetime(const std::string& str){
+	std::istringstream in(str);
+	::date::sys_seconds tp;
+	in >> ::date::parse("%FT%T", tp);
+	return tp;
+}
+}
+
+namespace{
 std::vector<beerja::granule> parse_prices(const jsondom::value& json){
+	auto& data = json.object().at("series").object().at("data").array();
+
 	std::vector<beerja::granule> ret;
 
-	// TODO:
+	for(auto& obj : data){
+		auto& o = obj.object();
+
+		ret.push_back(beerja::granule{
+				.timestamp = parse_datetime(o.at("time").string()),
+				.volume = o.at("volume").number().to_uint64(),
+				.open = o.at("open").number().to_float(),
+				.close = o.at("close").number().to_float(),
+				.high = o.at("high").number().to_float(),
+				.low = o.at("low").number().to_float(),
+				.price = o.at("vwap").number().to_float()
+			});
+	}
 
 	return ret;
 }
@@ -275,7 +298,7 @@ std::vector<beerja::granule> parse_prices(const jsondom::value& json){
 
 std::shared_ptr<beerja::async_operation> tradier::get_prices(
 		const std::string& symbol,
-		std::chrono::system_clock::time_point now_time,
+		::date::sys_time<std::chrono::minutes> now_time,
 		granularity gran,
 		std::function<void(
 				beerja::status,
@@ -285,7 +308,7 @@ std::shared_ptr<beerja::async_operation> tradier::get_prices(
 	)
 {
 	if(!callback){
-		throw std::logic_error("tradier::get_quote(): passed in callback is nullptr");
+			throw std::logic_error("tradier::get_quote(): passed in callback is nullptr");
 	}
 
 	auto asop = std::make_shared<tradier_async_operation>();
@@ -310,6 +333,7 @@ std::shared_ptr<beerja::async_operation> tradier::get_prices(
 
 			callback(beerja::status::ok, asop, parse_prices(json));
 		}catch(...){
+			TRACE(<< "Error parsing prices" << std::endl)
 			callback(beerja::status::failure, asop, std::vector<beerja::granule>());
 		}
 	});
