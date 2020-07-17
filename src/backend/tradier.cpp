@@ -308,7 +308,7 @@ std::shared_ptr<beerja::async_operation> tradier::get_prices(
 	)
 {
 	if(!callback){
-			throw std::logic_error("tradier::get_quote(): passed in callback is nullptr");
+		throw std::logic_error("tradier::get_quote(): passed in callback is nullptr");
 	}
 
 	auto asop = std::make_shared<tradier_async_operation>();
@@ -363,12 +363,12 @@ std::shared_ptr<beerja::async_operation> tradier::get_prices(
 		using ::date::floor;
 		{
 			std::stringstream ss;
-			ss << floor<std::chrono::seconds>(now_time);
+			ss << floor<std::chrono::minutes>(now_time);
 			end_time = ss.str();
 		}
 		{
 			std::stringstream ss;
-			ss << floor<std::chrono::seconds>(backend::get_start_time(now_time, gran));
+			ss << floor<std::chrono::minutes>(backend::get_start_time(now_time, gran));
 			start_time = ss.str();
 		}
 	}
