@@ -94,7 +94,9 @@ ticker_dialog::ticker_dialog(
 		this->refresh_button = utki::make_shared_from(b);
 	}
 
-	this->refresh();
+	this->context->run_from_ui_thread([this](){
+		this->refresh();
+	});
 }
 
 void ticker_dialog::refresh(){
@@ -102,38 +104,45 @@ void ticker_dialog::refresh(){
 
 	this->refresh_operation = this->backend->get_quote(
 			this->ticker.id,
-			[this, refresh_button{this->refresh_button}](
+			[self{utki::make_shared_from(*this)}, refresh_button{this->refresh_button}](
 					beerja::status s,
 					const std::shared_ptr<beerja::async_operation>& asop,
 					beerja::quote quote
 				)
 			{
-				TRACE(<< "quote.last = " << quote.last << std::endl)
-				refresh_button->context->run_from_ui_thread([this, refresh_button, quote{std::move(quote)}](){
-					refresh_button->set_refreshing(false);
-					
-					this->price_text->set_text(std::to_string(quote.last));
-					this->change_text->set_text(std::to_string(quote.change));
-					this->change_percent_text->set_text(std::to_string(quote.change_percent));
-				});
+				if(s != beerja::status::ok){
+					TRACE(<< "get_quote(): operation failed!" << std::endl)
+					self->context->run_from_ui_thread([self, refresh_button](){
+						refresh_button->set_refreshing(false);
+					});
+				}else{
+					TRACE(<< "quote.last = " << quote.last << std::endl)
+					self->context->run_from_ui_thread([self, refresh_button, quote{std::move(quote)}](){
+						refresh_button->set_refreshing(false);
+						
+						self->price_text->set_text(std::to_string(quote.last));
+						self->change_text->set_text(std::to_string(quote.change));
+						self->change_percent_text->set_text(std::to_string(quote.change_percent));
+					});
+				}
 			}
 		);
 	
 	using ::date::floor;
 
-	this->get_prices_operation = this->backend->get_prices(
-			this->ticker.id,
-			floor<std::chrono::minutes>(std::chrono::system_clock::now()),
-			beerja::backend::granularity::minute,
-			[](
-					beerja::status s,
-					const std::shared_ptr<beerja::async_operation> asop,
-					std::vector<beerja::granule>&& prices
-				)
-			{
-				// tODO:
-			}
-		);
+	// this->get_prices_operation = this->backend->get_prices(
+	// 		this->ticker.id,
+	// 		floor<std::chrono::minutes>(std::chrono::system_clock::now()),
+	// 		beerja::backend::granularity::minute,
+	// 		[](
+	// 				beerja::status s,
+	// 				const std::shared_ptr<beerja::async_operation> asop,
+	// 				std::vector<beerja::granule>&& prices
+	// 			)
+	// 		{
+	// 			// tODO:
+	// 		}
+	// 	);
 }
 
 ticker_dialog::~ticker_dialog(){

@@ -191,6 +191,15 @@ std::shared_ptr<beerja::async_operation> tradier::find_ticker(
 }
 
 namespace{
+float get_float(const jsondom::value& v){
+	if(v.is_number()){
+		return v.number().to_float();
+	}
+	return -1;
+}
+}
+
+namespace{
 beerja::quote parse_quote(const jsondom::value& json){
 	auto& quote = json.object().at("quotes").object().at("quote").object();
 
@@ -199,17 +208,12 @@ beerja::quote parse_quote(const jsondom::value& json){
 	ret.last = quote.at("last").number().to_float();
 	ret.change = quote.at("change").number().to_float();
 	ret.change_percent = quote.at("change_percentage").number().to_float();
-	{ // check if trading is not closed yet
-		auto& c = quote.at("close");
-		if(c.is_null()){
-			ret.close = -1;
-		}else{
-			ret.close = c.number().to_float();
-		}
-	}
-	ret.open = quote.at("open").number().to_float();
-	ret.high = quote.at("high").number().to_float();
-	ret.low = quote.at("low").number().to_float();
+
+	ret.close = get_float(quote.at("close"));
+	ret.open = get_float(quote.at("open"));
+	ret.high = get_float(quote.at("high"));
+	ret.low = get_float(quote.at("low"));
+	
 	ret.volume = quote.at("volume").number().to_uint64();
 	
 	return ret;
@@ -244,7 +248,11 @@ std::shared_ptr<beerja::async_operation> tradier::get_quote(
 			auto json = jsondom::read(utki::make_span(resp.body));
 
 			callback(beerja::status::ok, asop, parse_quote(json));
+		}catch(std::exception& e){
+			TRACE(<< "parsing response failed: " << e.what() << std::endl)
+			callback(beerja::status::failure, asop, beerja::quote());
 		}catch(...){
+			TRACE(<< "parsing response failed" << std::endl)
 			callback(beerja::status::failure, asop, beerja::quote());
 		}
 	});
