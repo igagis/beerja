@@ -130,19 +130,20 @@ void ticker_dialog::refresh(){
 	
 	using ::date::floor;
 
-	// this->get_prices_operation = this->backend->get_prices(
-	// 		this->ticker.id,
-	// 		floor<std::chrono::minutes>(std::chrono::system_clock::now()),
-	// 		beerja::backend::granularity::minute,
-	// 		[](
-	// 				beerja::status s,
-	// 				const std::shared_ptr<beerja::async_operation> asop,
-	// 				std::vector<beerja::granule>&& prices
-	// 			)
-	// 		{
-	// 			// tODO:
-	// 		}
-	// 	);
+	this->get_prices_operation = this->backend->get_prices(
+			this->ticker.id,
+			floor<std::chrono::minutes>(std::chrono::system_clock::now() - ::date::days(7)),
+			floor<std::chrono::minutes>(std::chrono::system_clock::now()),
+			beerja::backend::granularity::minute,
+			[](
+					beerja::status s,
+					const std::shared_ptr<beerja::async_operation> asop,
+					std::vector<beerja::granule>&& prices
+				)
+			{
+				// tODO:
+			}
+		);
 }
 
 ticker_dialog::~ticker_dialog(){

@@ -213,7 +213,7 @@ beerja::quote parse_quote(const jsondom::value& json){
 	ret.open = get_float(quote.at("open"));
 	ret.high = get_float(quote.at("high"));
 	ret.low = get_float(quote.at("low"));
-	
+
 	ret.volume = quote.at("volume").number().to_uint64();
 	
 	return ret;
@@ -306,7 +306,8 @@ std::vector<beerja::granule> parse_prices(const jsondom::value& json){
 
 std::shared_ptr<beerja::async_operation> tradier::get_prices(
 		const std::string& symbol,
-		::date::sys_time<std::chrono::minutes> now_time,
+		::date::sys_time<std::chrono::minutes> from,
+		::date::sys_time<std::chrono::minutes> to,
 		granularity gran,
 		std::function<void(
 				beerja::status,
@@ -371,12 +372,12 @@ std::shared_ptr<beerja::async_operation> tradier::get_prices(
 		using ::date::floor;
 		{
 			std::stringstream ss;
-			ss << floor<std::chrono::minutes>(now_time);
+			ss << floor<std::chrono::minutes>(to);
 			end_time = ss.str();
 		}
 		{
 			std::stringstream ss;
-			ss << floor<std::chrono::minutes>(backend::get_start_time(now_time, gran));
+			ss << floor<std::chrono::minutes>(backend::get_start_time(to, gran));
 			start_time = ss.str();
 		}
 	}

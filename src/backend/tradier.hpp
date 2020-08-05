@@ -43,7 +43,8 @@ public:
 
 	virtual std::shared_ptr<beerja::async_operation> get_prices(
 			const std::string& symbol,
-			::date::sys_time<std::chrono::minutes> now_time,
+			::date::sys_time<std::chrono::minutes> from,
+			::date::sys_time<std::chrono::minutes> to,
 			granularity gran,
 			std::function<void(
 					beerja::status,

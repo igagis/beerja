@@ -87,6 +87,7 @@ const auto layout = puu::read(R"qwertyuiop(
 	}
 	@busy{
 		id {busy_spinner}
+		visible {false}
 	}
 )qwertyuiop");
 }
