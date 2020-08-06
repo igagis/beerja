@@ -20,11 +20,13 @@ void line_chart::on_resize(){
 void line_chart::update_path_vba(){
 	morda::path p;
 
-	
-
-	// TODO:
+	if(this->points.size() < size_t(this->rect().d.x)){
+		// TODO:
+	}else{
+		// TODO:
+	}
 }
 
 void line_chart::render(const morda::matrix4& matrix)const{
-	// TODO:
+	this->path_vba.render(matrix, this->get_color());
 }

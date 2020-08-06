@@ -10,7 +10,7 @@ namespace beerja{
 class line_chart : virtual public morda::color_widget{
 	std::vector<float> points;
 
-	// morda::path_vba path_vba;
+	morda::path_vba path_vba;
 public:
 	line_chart(std::shared_ptr<morda::context> c, const puu::forest& desc);
 

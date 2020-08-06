@@ -16,6 +16,7 @@
 #include "gui/refresh_button.hpp"
 #include "gui/cells_container.hpp"
 #include "gui/search_ticker_widget.hpp"
+#include "gui/line_chart.hpp"
 
 class application : public mordavokne::application{
 	easyhttp::init_guard easyhttp_guard;
@@ -47,6 +48,7 @@ public:
 
 		this->gui.context->inflater.register_widget<beerja::refresh_button>("u_refresh_button");
 		this->gui.context->inflater.register_widget<beerja::cells_container>("u_cells_container");
+		this->gui.context->inflater.register_widget<beerja::line_chart>("u_line_chart");
 
 		auto c = this->gui.context->inflater.inflate(
 				*this->get_res_file("res/main.gui")

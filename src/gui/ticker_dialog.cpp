@@ -59,6 +59,12 @@ const auto dialog_desc = puu::read(R"qwertyuiop(
 					}
 				}
 
+				@u_line_chart{
+					layout{
+						dx {fill}
+						dy {100}
+					}
+				}
 			}
 		}
 	)qwertyuiop");
