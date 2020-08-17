@@ -57,6 +57,13 @@ const auto dialog_desc = puu::read(R"qwertyuiop(
 					@u_refresh_button{
 						id {refresh_button}
 					}
+
+					@push_button{
+						id {close_button}
+						@text{
+							text{X}
+						}
+					}
 				}
 
 				@u_line_chart{
@@ -98,6 +105,15 @@ ticker_dialog::ticker_dialog(
 			this->refresh();
 		};
 		this->refresh_button = utki::make_shared_from(b);
+	}
+
+	{
+		auto& b = this->get_widget_as<morda::push_button>("close_button");
+		b.click_handler = [this](morda::push_button& button){
+			button.context->run_from_ui_thread([this](){
+				this->remove_from_parent();
+			});
+		};
 	}
 
 	this->context->run_from_ui_thread([this](){
