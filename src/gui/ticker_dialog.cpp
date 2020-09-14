@@ -66,10 +66,23 @@ const auto dialog_desc = puu::read(R"qwertyuiop(
 					}
 				}
 
-				@u_line_chart{
+				@pile{
 					layout{
 						dx {fill}
-						dy {100}
+						dy {min}
+					}
+					@ratio_proxy{
+						layout{
+							dx {100}
+							dy {min}
+						}
+						ratio {2}
+					}
+					@u_line_chart{
+						layout{
+							dx {fill}
+							dy {fill}
+						}
 					}
 				}
 			}
@@ -157,13 +170,13 @@ void ticker_dialog::refresh(){
 			floor<std::chrono::minutes>(std::chrono::system_clock::now() - ::date::days(7)),
 			floor<std::chrono::minutes>(std::chrono::system_clock::now()),
 			beerja::backend::granularity::minute,
-			[](
+			[self{utki::make_weak_from(*this)}](
 					beerja::status s,
 					const std::shared_ptr<beerja::async_operation> asop,
 					std::vector<beerja::granule>&& prices
 				)
 			{
-				// tODO:
+				// TODO:
 			}
 		);
 }

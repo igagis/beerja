@@ -23,7 +23,7 @@ void cells_container::set_num_cells_per_row(unsigned num){
 morda::container& cells_container::push_new_row(){
 	auto r = std::make_shared<morda::row>(this->context, puu::forest());
 	this->push_back(r);
-	this->children().back()->get_layout_params().dims.x = morda::widget::layout_params::max;
+	this->children().back()->get_layout_params().dims.x() = morda::widget::layout_params::max;
 	return *r;
 }
 

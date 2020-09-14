@@ -20,7 +20,7 @@ void line_chart::on_resize(){
 void line_chart::update_path_vba(){
 	morda::path p;
 
-	if(this->points.size() < size_t(this->rect().d.x)){
+	if(this->points.size() < size_t(this->rect().d.x())){
 		// TODO:
 	}else{
 		// TODO:
