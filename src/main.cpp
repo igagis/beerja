@@ -27,7 +27,7 @@ public:
 			mordavokne::application(
 					"beerja",
 					[](){
-						return mordavokne::window_params(r4::vec2ui(1200, 600));
+						return mordavokne::window_params(r4::vector2<unsigned>(1200, 600));
 					}()
 				)
 	{

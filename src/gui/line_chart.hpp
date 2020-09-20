@@ -1,7 +1,7 @@
 #pragma once
 
 #include <morda/widgets/base/color_widget.hpp>
-#include <morda/paint/path_vba.hpp>
+#include <morda/paint/path_vao.hpp>
 
 #include <vector>
 
@@ -10,7 +10,7 @@ namespace beerja{
 class line_chart : virtual public morda::color_widget{
 	std::vector<float> points;
 
-	morda::path_vba path_vba;
+	morda::path_vao path_vao;
 public:
 	line_chart(std::shared_ptr<morda::context> c, const puu::forest& desc);
 

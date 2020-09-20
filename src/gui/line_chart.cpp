@@ -28,5 +28,5 @@ void line_chart::update_path_vba(){
 }
 
 void line_chart::render(const morda::matrix4& matrix)const{
-	this->path_vba.render(matrix, this->get_color());
+	this->path_vao.render(matrix, this->get_color());
 }
