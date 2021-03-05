@@ -39,7 +39,7 @@ public:
 			auto be = std::make_shared<tradier>();
 			papki::fs_file cfg_file(this->storage_dir + "backend/" + be->id() + ".puu");
 			if(cfg_file.exists()){
-				be->set_config(puu::read(cfg_file));
+				be->set_config(treeml::read(cfg_file));
 			}
 			ASSERT(be)
 			std::string id(be->id());

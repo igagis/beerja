@@ -2,7 +2,7 @@
 
 using namespace beerja;
 
-line_chart::line_chart(std::shared_ptr<morda::context> c, const puu::forest& desc) :
+line_chart::line_chart(std::shared_ptr<morda::context> c, const treeml::forest& desc) :
 		morda::widget(std::move(c), desc),
 		morda::color_widget(this->context, desc)
 {}

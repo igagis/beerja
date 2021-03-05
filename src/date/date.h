@@ -45,9 +45,7 @@
 #include <cctype>
 #include <chrono>
 #include <climits>
-#if !(__cplusplus >= 201402)
-#  include <cmath>
-#endif
+#include <cmath>
 #include <cstddef>
 #include <cstdint>
 #include <cstdlib>
@@ -1166,7 +1164,11 @@ private:
     static const std::intmax_t d1 = R1::den / gcd_d1_d2;
     static const std::intmax_t n2 = R2::num / gcd_n1_n2;
     static const std::intmax_t d2 = R2::den / gcd_d1_d2;
+#ifdef __cpp_constexpr
     static const std::intmax_t max = std::numeric_limits<std::intmax_t>::max();
+#else
+    static const std::intmax_t max = LLONG_MAX;
+#endif
 
     template <std::intmax_t Xp, std::intmax_t Yp, bool overflow>
     struct mul    // overflow == false
@@ -1353,6 +1355,47 @@ using std::chrono::round;
 using std::chrono::abs;
 
 #endif  // HAS_CHRONO_ROUNDING
+
+namespace detail
+{
+
+template <class To, class Rep, class Period>
+CONSTCD14
+inline
+typename std::enable_if
+<
+    !std::chrono::treat_as_floating_point<typename To::rep>::value,
+    To
+>::type
+round_i(const std::chrono::duration<Rep, Period>& d)
+{
+    return round<To>(d);
+}
+
+template <class To, class Rep, class Period>
+CONSTCD14
+inline
+typename std::enable_if
+<
+    std::chrono::treat_as_floating_point<typename To::rep>::value,
+    To
+>::type
+round_i(const std::chrono::duration<Rep, Period>& d)
+{
+    return d;
+}
+
+template <class To, class Clock, class FromDuration>
+CONSTCD11
+inline
+std::chrono::time_point<Clock, To>
+round_i(const std::chrono::time_point<Clock, FromDuration>& tp)
+{
+    using std::chrono::time_point;
+    return time_point<Clock, To>{round_i<To>(tp.time_since_epoch())};
+}
+
+}  // detail
 
 // trunc towards zero
 template <class To, class Clock, class FromDuration>
@@ -3681,11 +3724,12 @@ struct undocumented {explicit undocumented() = default;};
 // Example:  width<4>::value    ==  2
 // Example:  width<10>::value   ==  1
 // Example:  width<1000>::value ==  3
-template <std::uint64_t n, std::uint64_t d = 10, unsigned w = 0,
-          bool should_continue = !(n < 2) && d != 0 && (w < 19)>
+template <std::uint64_t n, std::uint64_t d, unsigned w = 0,
+          bool should_continue = n%d != 0 && (w < 19)>
 struct width
 {
-    static CONSTDATA unsigned value = 1 + width<n, d%n*10, w+1>::value;
+    static_assert(d > 0, "width called with zero denominator");
+    static CONSTDATA unsigned value = 1 + width<n%d*10, d, w+1>::value;
 };
 
 template <std::uint64_t n, std::uint64_t d, unsigned w>
@@ -3714,9 +3758,10 @@ class decimal_format_seconds
 {
     using CT = typename std::common_type<Duration, std::chrono::seconds>::type;
     using rep = typename CT::rep;
+    static unsigned CONSTDATA trial_width =
+        detail::width<CT::period::num, CT::period::den>::value;
 public:
-    static unsigned CONSTDATA width = detail::width<CT::period::den>::value < 19 ?
-                                      detail::width<CT::period::den>::value : 6u;
+    static unsigned CONSTDATA width = trial_width < 19 ? trial_width : 6u;
     using precision = std::chrono::duration<rep,
                                             std::ratio<1, static_pow10<width>::value>>;
 
@@ -4734,7 +4779,7 @@ scan_keyword(std::basic_istream<CharT, Traits>& is, FwdIter kb, FwdIter ke)
             is.setstate(std::ios::eofbit);
             break;
         }
-        auto c = static_cast<char>(toupper(ic));
+        auto c = static_cast<char>(toupper(static_cast<unsigned char>(ic)));
         bool consume = false;
         // For each keyword which might match, see if the indx character is c
         // If a match if found, consume c
@@ -4747,7 +4792,7 @@ scan_keyword(std::basic_istream<CharT, Traits>& is, FwdIter kb, FwdIter ke)
         {
             if (*st == might_match)
             {
-                if (c == static_cast<char>(toupper((*ky)[indx])))
+                if (c == static_cast<char>(toupper(static_cast<unsigned char>((*ky)[indx]))))
                 {
                     consume = true;
                     if (ky->size() == indx+1)
@@ -6122,9 +6167,16 @@ long double
 read_long_double(std::basic_istream<CharT, Traits>& is, unsigned m = 1, unsigned M = 10)
 {
     unsigned count = 0;
+    unsigned fcount = 0;
+    unsigned long long i = 0;
+    unsigned long long f = 0;
+    bool parsing_fraction = false;
+#if ONLY_C_LOCALE
+    typename Traits::int_type decimal_point = '.';
+#else
     auto decimal_point = Traits::to_int_type(
         std::use_facet<std::numpunct<CharT>>(is.getloc()).decimal_point());
-    std::string buf;
+#endif
     while (true)
     {
         auto ic = is.peek();
@@ -6132,18 +6184,25 @@ read_long_double(std::basic_istream<CharT, Traits>& is, unsigned m = 1, unsigned
             break;
         if (Traits::eq_int_type(ic, decimal_point))
         {
-            buf += '.';
             decimal_point = Traits::eof();
-            is.get();
+            parsing_fraction = true;
         }
         else
         {
             auto c = static_cast<char>(Traits::to_char_type(ic));
             if (!('0' <= c && c <= '9'))
                 break;
-            buf += c;
-            (void)is.get();
+            if (!parsing_fraction)
+            {
+                i = 10*i + static_cast<unsigned>(c - '0');
+            }
+            else
+            {
+                f = 10*f + static_cast<unsigned>(c - '0');
+                ++fcount;
+            }
         }
+        (void)is.get();
         if (++count == M)
             break;
     }
@@ -6152,7 +6211,7 @@ read_long_double(std::basic_istream<CharT, Traits>& is, unsigned m = 1, unsigned
         is.setstate(std::ios::failbit);
         return 0;
     }
-    return std::stold(buf);
+    return i + f/std::pow(10.L, fcount);
 }
 
 struct rs
@@ -6309,6 +6368,7 @@ from_stream(std::basic_istream<CharT, Traits>& is, const CharT* fmt,
     using std::chrono::seconds;
     using std::chrono::minutes;
     using std::chrono::hours;
+    using detail::round_i;
     typename std::basic_istream<CharT, Traits>::sentry ok{is, true};
     if (ok)
     {
@@ -6522,7 +6582,7 @@ from_stream(std::basic_istream<CharT, Traits>& is, const CharT* fmt,
                                                CharT{':'}, rld{S, 1, w});
                         checked_set(H, tH, not_a_hour, is);
                         checked_set(M, tM, not_a_minute, is);
-                        checked_set(s, round<Duration>(duration<long double>{S}),
+                        checked_set(s, round_i<Duration>(duration<long double>{S}),
                                     not_a_second, is);
                         ws(is);
                         int tY = not_a_year;
@@ -6602,7 +6662,7 @@ from_stream(std::basic_istream<CharT, Traits>& is, const CharT* fmt,
                                                CharT{':'}, rld{S, 1, w});
                         checked_set(H, tH, not_a_hour, is);
                         checked_set(M, tM, not_a_minute, is);
-                        checked_set(s, round<Duration>(duration<long double>{S}),
+                        checked_set(s, round_i<Duration>(duration<long double>{S}),
                                     not_a_second, is);
 #endif
                     }
@@ -6918,7 +6978,7 @@ from_stream(std::basic_istream<CharT, Traits>& is, const CharT* fmt,
 #else
                         auto nm = detail::ampm_names();
                         auto i = detail::scan_keyword(is, nm.first, nm.second) - nm.first;
-                        tp = i;
+                        tp = static_cast<decltype(tp)>(i);
 #endif
                         checked_set(p, tp, not_a_ampm, is);
                     }
@@ -6959,7 +7019,7 @@ from_stream(std::basic_istream<CharT, Traits>& is, const CharT* fmt,
                                                CharT{':'}, rld{S, 1, w});
                         checked_set(I, tI, not_a_hour_12_value, is);
                         checked_set(M, tM, not_a_minute, is);
-                        checked_set(s, round<Duration>(duration<long double>{S}),
+                        checked_set(s, round_i<Duration>(duration<long double>{S}),
                                     not_a_second, is);
                         ws(is);
                         auto nm = detail::ampm_names();
@@ -7010,7 +7070,7 @@ from_stream(std::basic_istream<CharT, Traits>& is, const CharT* fmt,
                         CONSTDATA auto w = Duration::period::den == 1 ? 2 : 3 + dfs::width;
                         long double S;
                         read(is, rld{S, 1, width == -1 ? w : static_cast<unsigned>(width)});
-                        checked_set(s, round<Duration>(duration<long double>{S}),
+                        checked_set(s, round_i<Duration>(duration<long double>{S}),
                                     not_a_second, is);
                     }
 #if !ONLY_C_LOCALE
@@ -7047,7 +7107,7 @@ from_stream(std::basic_istream<CharT, Traits>& is, const CharT* fmt,
                                                CharT{':'}, rld{S, 1, w});
                         checked_set(H, tH, not_a_hour, is);
                         checked_set(M, tM, not_a_minute, is);
-                        checked_set(s, round<Duration>(duration<long double>{S}),
+                        checked_set(s, round_i<Duration>(duration<long double>{S}),
                                     not_a_second, is);
                     }
                     else
@@ -7750,6 +7810,7 @@ from_stream(std::basic_istream<CharT, Traits>& is, const CharT* fmt,
             std::chrono::minutes* offset = nullptr)
 {
     using CT = typename std::common_type<Duration, std::chrono::seconds>::type;
+    using detail::round_i;
     std::chrono::minutes offset_local{};
     auto offptr = offset ? offset : &offset_local;
     fields<CT> fds{};
@@ -7758,7 +7819,7 @@ from_stream(std::basic_istream<CharT, Traits>& is, const CharT* fmt,
     if (!fds.ymd.ok() || !fds.tod.in_conventional_range())
         is.setstate(std::ios::failbit);
     if (!is.fail())
-        tp = round<Duration>(sys_days(fds.ymd) - *offptr + fds.tod.to_duration());
+        tp = round_i<Duration>(sys_days(fds.ymd) - *offptr + fds.tod.to_duration());
     return is;
 }
 
@@ -7769,13 +7830,14 @@ from_stream(std::basic_istream<CharT, Traits>& is, const CharT* fmt,
             std::chrono::minutes* offset = nullptr)
 {
     using CT = typename std::common_type<Duration, std::chrono::seconds>::type;
+    using detail::round_i;
     fields<CT> fds{};
     fds.has_tod = true;
     from_stream(is, fmt, fds, abbrev, offset);
     if (!fds.ymd.ok() || !fds.tod.in_conventional_range())
         is.setstate(std::ios::failbit);
     if (!is.fail())
-        tp = round<Duration>(local_seconds{local_days(fds.ymd)} + fds.tod.to_duration());
+        tp = round_i<Duration>(local_seconds{local_days(fds.ymd)} + fds.tod.to_duration());
     return is;
 }
 

@@ -28,7 +28,7 @@ struct tradier_async_operation : public beerja::async_operation{
 };
 }
 
-void tradier::set_config(const puu::forest& config){
+void tradier::set_config(const treeml::forest& config){
 
 	auto i = std::find(config.begin(), config.end(), "access_token");
 	if(i != config.end()){

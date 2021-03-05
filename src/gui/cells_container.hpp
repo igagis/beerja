@@ -10,7 +10,7 @@ class cells_container :
 {
     unsigned num_cells_per_row = 3;
 public:
-    cells_container(std::shared_ptr<morda::context> c, const puu::forest& desc);
+    cells_container(std::shared_ptr<morda::context> c, const treeml::forest& desc);
 
     void set_num_cells_per_row(unsigned num);
 

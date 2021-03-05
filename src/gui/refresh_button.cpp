@@ -3,14 +3,14 @@
 using namespace beerja;
 
 namespace{
-const auto layout = puu::read(R"qwertyuiop(
+const auto layout = treeml::read(R"qwertyuiop(
 	@refresh{
 		id {refresh}
 	}
 )qwertyuiop");
 }
 
-refresh_button::refresh_button(std::shared_ptr<morda::context> c, const puu::forest& desc) :
+refresh_button::refresh_button(std::shared_ptr<morda::context> c, const treeml::forest& desc) :
 		morda::widget(std::move(c), desc),
 		morda::button(this->context, desc),
 		morda::push_button(this->context, desc),

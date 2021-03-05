@@ -43,7 +43,7 @@ public:
 }
 
 namespace{
-const auto layout = puu::read(R"qwertyuiop(
+const auto layout = treeml::read(R"qwertyuiop(
 	@column{
 		layout{
 			dx {max}
@@ -96,7 +96,7 @@ search_ticker_widget::search_ticker_widget(
 		std::shared_ptr<morda::context> c,
 		std::shared_ptr<beerja::backend> backend
 	) :
-		widget(std::move(c), puu::forest()),
+		widget(std::move(c), treeml::forest()),
 		morda::pile(
 				this->context,
 				layout

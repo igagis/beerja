@@ -4,7 +4,7 @@
 #include <functional>
 #include <chrono>
 
-#include <puu/tree.hpp>
+#include <treeml/tree.hpp>
 
 #include "../model/exchange.hpp"
 #include "../model/ticker.hpp"
@@ -31,7 +31,7 @@ public:
 
 	virtual const std::string& id()const = 0;
 
-	virtual void set_config(const puu::forest& config) = 0;
+	virtual void set_config(const treeml::forest& config) = 0;
 
 	virtual std::shared_ptr<async_operation> get_exchanges(
 			std::function<void(

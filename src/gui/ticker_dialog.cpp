@@ -7,7 +7,7 @@
 using namespace beerja;
 
 namespace{
-const auto dialog_desc = puu::read(R"qwertyuiop(
+const auto dialog_desc = treeml::read(R"qwertyuiop(
 		layout{
 			dx {max}
 			dy {max}
