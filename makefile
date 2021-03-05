@@ -15,6 +15,9 @@ this_cxxflags += -g # include debugging symbols
 this_cxxflags += -std=c++17
 this_cxxflags += -fPIC
 
+# this is to prevent deprecation error in date library
+this_cxxflags += -DHAS_UNCAUGHT_EXCEPTIONS=1
+
 ifeq ($(debug),true)
     this_cxxflags += -DDEBUG
 endif
