@@ -2,12 +2,12 @@
 
 #include <utki/string.hpp>
 
-#include <easyhttp/request.hpp>
-#include <easyhttp/util.hpp>
+#include <httpc/request.hpp>
+#include <httpc/util.hpp>
 
 #include <jsondom/dom.hpp>
 
-#include "../date/date.h"
+#include "../util/date.hpp"
 
 const std::string tradier::tag = "tradier";
 
@@ -17,7 +17,7 @@ const std::string end_point = "https://sandbox.tradier.com/v1/";
 
 namespace{
 struct tradier_async_operation : public beerja::async_operation{
-	std::weak_ptr<easyhttp::request> http_req;
+	std::weak_ptr<httpc::request> http_req;
 
 	bool cancel()override{
 		if(auto r = this->http_req.lock()){
@@ -158,9 +158,9 @@ std::shared_ptr<beerja::async_operation> tradier::find_ticker(
 
 	auto asop = std::make_shared<tradier_async_operation>();
 
-	auto r = std::make_shared<easyhttp::request>([callback, asop](easyhttp::request& r){
+	auto r = std::make_shared<httpc::request>([callback, asop](httpc::request& r){
 		auto& resp = r.get_response();
-		if(resp.status != easyhttp::status_code::ok || resp.response_code != easyhttp::http_code::ok){
+		if(resp.status != httpc::status_code::ok || resp.response_code != httpc::http_code::ok){
 			TRACE(<< "resp.status = " << unsigned(resp.status) << " resp.response_code = " << unsigned(resp.response_code) << std::endl)
 			callback(beerja::status::failure, asop, std::vector<beerja::ticker>());
 			return;
@@ -178,7 +178,7 @@ std::shared_ptr<beerja::async_operation> tradier::find_ticker(
 
 	asop->http_req = r;
 
-	r->set_url(end_point + "markets/search?q=" + easyhttp::escape(query) + "&indexes=false");
+	r->set_url(end_point + "markets/search?q=" + httpc::escape(query) + "&indexes=false");
 
 	r->set_headers({
 			{"Authorization", std::string("Bearer ") + this->access_token},
@@ -235,9 +235,9 @@ std::shared_ptr<beerja::async_operation> tradier::get_quote(
 
 	auto asop = std::make_shared<tradier_async_operation>();
 
-	auto r = std::make_shared<easyhttp::request>([callback, asop](easyhttp::request& r){
+	auto r = std::make_shared<httpc::request>([callback, asop](httpc::request& r){
 		auto& resp = r.get_response();
-		if(resp.status != easyhttp::status_code::ok || resp.response_code != easyhttp::http_code::ok){
+		if(resp.status != httpc::status_code::ok || resp.response_code != httpc::http_code::ok){
 			TRACE(<< "resp.status = " << unsigned(resp.status) << " resp.response_code = " << unsigned(resp.response_code) << std::endl)
 			callback(beerja::status::failure, asop, beerja::quote());
 			return;
@@ -259,7 +259,7 @@ std::shared_ptr<beerja::async_operation> tradier::get_quote(
 
 	asop->http_req = r;
 
-	r->set_url(end_point + "markets/quotes?symbols=" + easyhttp::escape(symbol) + "&greeks=false");
+	r->set_url(end_point + "markets/quotes?symbols=" + httpc::escape(symbol) + "&greeks=false");
 
 	r->set_headers({
 			{"Authorization", std::string("Bearer ") + this->access_token},
@@ -328,9 +328,9 @@ std::shared_ptr<beerja::async_operation> tradier::get_prices(
 		return asop;
 	}
 
-	auto r = std::make_shared<easyhttp::request>([callback, asop](easyhttp::request& r){
+	auto r = std::make_shared<httpc::request>([callback, asop](httpc::request& r){
 		auto& resp = r.get_response();
-		if(resp.status != easyhttp::status_code::ok || resp.response_code != easyhttp::http_code::ok){
+		if(resp.status != httpc::status_code::ok || resp.response_code != httpc::http_code::ok){
 			TRACE(<< "resp.status = " << unsigned(resp.status) << " resp.response_code = " << unsigned(resp.response_code) << std::endl)
 			callback(beerja::status::failure, asop, std::vector<beerja::granule>());
 			return;
@@ -386,10 +386,10 @@ std::shared_ptr<beerja::async_operation> tradier::get_prices(
 	TRACE(<< "start_time = " << start_time << std::endl)
 	TRACE(<< "end_time = " << end_time << std::endl)
 
-	r->set_url(end_point + "markets/timesales?symbol=" + easyhttp::escape(symbol) +
+	r->set_url(end_point + "markets/timesales?symbol=" + httpc::escape(symbol) +
 			"&session_filter=open&interval=" + interval +
-			"&start=" + easyhttp::escape(start_time) +
-			"&end=" + easyhttp::escape(end_time)
+			"&start=" + httpc::escape(start_time) +
+			"&end=" + httpc::escape(end_time)
 		);
 
 	r->set_headers({

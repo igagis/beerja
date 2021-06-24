@@ -5,7 +5,7 @@
 
 #include <papki/fs_file.hpp>
 
-#include <easyhttp/init_guard.hpp>
+#include <httpc/init_guard.hpp>
 
 #include <morda/widgets/group/book.hpp>
 
@@ -19,7 +19,7 @@
 #include "gui/line_chart.hpp"
 
 class application : public mordavokne::application{
-	easyhttp::init_guard easyhttp_guard;
+	httpc::init_guard httpc_guard;
 public:
 	beerja::backend_register backends;
 

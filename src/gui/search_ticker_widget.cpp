@@ -224,7 +224,7 @@ std::shared_ptr<morda::widget> ticker_list_provider::get_widget(size_t index){
 	};
 
 	cp.click_handler = [ticker{t}, this](morda::click_proxy& w){
-		auto overlay = w.find_ancestor<morda::overlay>();
+		auto overlay = w.try_get_ancestor<morda::overlay>();
 		if(overlay){
 			w.context->run_from_ui_thread([overlay, ticker{ticker}, backend{this->backend}]()mutable{
 				overlay->push_back(std::make_shared<ticker_dialog>(
