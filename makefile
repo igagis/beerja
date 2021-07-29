@@ -1,4 +1,5 @@
 include prorab.mk
+include prorab-license.mk
 
 $(eval $(call prorab-config, config))
 
@@ -19,3 +20,7 @@ run: $(prorab_this_name)
 $(.RECIPEPREFIX)$(a)(cd $(d) && $(prorab_this_name))
 endef
 $(eval $(this_rules))
+
+this_license_file := LICENSE
+this_src_dir := src
+$(eval $(prorab-license))
