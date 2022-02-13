@@ -159,9 +159,9 @@ search_ticker_widget::search_ticker_widget(
 			);
 	};
 
-	this->get_widget_as<morda::key_proxy>("input_key_proxy").key_handler = [button](morda::key_proxy&, bool is_down, morda::key code) -> bool {
-		if(code == morda::key::enter){
-			if(is_down){
+	this->get_widget_as<morda::key_proxy>("input_key_proxy").key_handler = [button](morda::key_proxy&, const morda::key_event& e) -> bool {
+		if(e.combo.key == morda::key::enter){
+			if(e.is_down){
 				button->click_handler(*button);
 			}
 			return true;
