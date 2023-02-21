@@ -25,8 +25,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace beerja;
 
-cells_container::cells_container(std::shared_ptr<morda::context> c, const treeml::forest& desc) :
-		morda::widget(std::move(c), desc),
+cells_container::cells_container(utki::shared_ref<morda::context> c, const treeml::forest& desc) :
+		morda::widget(c, desc),
 		morda::column(this->context, treeml::forest())
 {}
 
@@ -42,14 +42,13 @@ void cells_container::set_num_cells_per_row(unsigned num){
 }
 
 morda::container& cells_container::push_new_row(){
-	auto r = std::make_shared<morda::row>(this->context, treeml::forest());
+	auto r = utki::make_shared_ref<morda::row>(this->context, treeml::forest());
 	this->push_back(r);
 	this->children().back()->get_layout_params().dims.x() = morda::widget::layout_params::max;
 	return *r;
 }
 
-void cells_container::push(std::shared_ptr<morda::widget> w){
-	ASSERT(w)
+void cells_container::push(utki::shared_ref<morda::widget> w){
 	if(this->children().empty() || dynamic_cast<morda::row&>(*this->children().back()).children().size() == this->num_cells_per_row){
 		this->push_new_row();
 	}
@@ -58,7 +57,7 @@ void cells_container::push(std::shared_ptr<morda::widget> w){
 	auto& lp = row.get_layout_params_as<morda::linear_container::layout_params>(*w);
 	lp.weight = 1;
 
-	row.push_back(std::move(w));
+	row.push_back(w);
 }
 
 void cells_container::erase(morda::widget& w){
@@ -75,7 +74,7 @@ void cells_container::erase(morda::widget& w){
 }
 
 void cells_container::update_arrangement(){
-	std::vector<std::shared_ptr<morda::widget>> widgets;
+	std::vector<utki::shared_ref<morda::widget>> widgets;
 	for(auto& r : this->children()){
 		auto& row = dynamic_cast<morda::row&>(*r);
 		for(auto& c : row.children()){

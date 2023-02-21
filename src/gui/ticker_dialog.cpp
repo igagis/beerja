@@ -167,12 +167,12 @@ void ticker_dialog::refresh(){
 				)
 			{
 				if(s != beerja::status::ok){
-					TRACE(<< "get_quote(): operation failed!" << std::endl)
+					LOG([](auto&o){o << "get_quote(): operation failed!" << std::endl;})
 					self->context->run_from_ui_thread([self, refresh_button](){
 						refresh_button->set_refreshing(false);
 					});
 				}else{
-					TRACE(<< "quote.last = " << quote.last << std::endl)
+					LOG([&](auto&o){o << "quote.last = " << quote.last << std::endl;})
 					self->context->run_from_ui_thread([self, refresh_button, quote{std::move(quote)}](){
 						refresh_button->set_refreshing(false);
 						

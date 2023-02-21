@@ -21,11 +21,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "line_chart.hpp"
 
+#include <morda/context.hpp>
+
 using namespace beerja;
 
 line_chart::line_chart(std::shared_ptr<morda::context> c, const treeml::forest& desc) :
 		morda::widget(std::move(c), desc),
-		morda::color_widget(this->context, desc)
+		morda::color_widget(this->context, desc),
+		path_vao(this->context->renderer)
 {}
 
 void line_chart::set_points(std::vector<float>&& points){

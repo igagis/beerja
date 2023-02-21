@@ -31,11 +31,11 @@ class cells_container :
 {
     unsigned num_cells_per_row = 3;
 public:
-    cells_container(std::shared_ptr<morda::context> c, const treeml::forest& desc);
+    cells_container(utki::shared_ref<morda::context> c, const treeml::forest& desc);
 
     void set_num_cells_per_row(unsigned num);
 
-	void push(std::shared_ptr<morda::widget> w);
+	void push(utki::shared_ref<morda::widget> w);
 
 	void erase(morda::widget& w);
 private:

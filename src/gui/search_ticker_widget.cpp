@@ -54,7 +54,7 @@ public:
 		return this->tickers.size();
 	}
 
-	std::shared_ptr<morda::widget> get_widget(size_t index)override;
+	utki::shared_ref<morda::widget> get_widget(size_t index)override;
 
 	void set_tickers(std::vector<beerja::ticker>&& tickers){
 		this->tickers = std::move(tickers);
@@ -142,12 +142,12 @@ search_ticker_widget::search_ticker_widget(
 
 		query_disable_widgets->set_enabled(false);
 
-		TRACE(<< "find ticker" << std::endl)
+		LOG([](auto&o){o << "find ticker" << std::endl;})
 		this->search_ticker_operation = this->backend->find_ticker(
 				utki::to_utf8(line->get_text()),
 				// backend operation complete handler
 				[this, query_disable_widgets, spinner, tickers_provider](beerja::status s, const std::shared_ptr<beerja::async_operation>& asop, std::vector<beerja::ticker>&& ticker_list){
-					TRACE(<< ticker_list.size() << " tickers found" << std::endl)
+					LOG([&](auto&o){o << ticker_list.size() << " tickers found" << std::endl;})
 					// run from ui thread
 					spinner->context->run_from_ui_thread([this, spinner, query_disable_widgets, ticker_list{std::move(ticker_list)}, tickers_provider]()mutable{
 						tickers_provider->set_tickers(std::move(ticker_list));
@@ -178,7 +178,7 @@ search_ticker_widget::~search_ticker_widget(){
 	}
 }
 
-std::shared_ptr<morda::widget> ticker_list_provider::get_widget(size_t index){
+utki::shared_ref<morda::widget> ticker_list_provider::get_widget(size_t index){
 	ASSERT(index < this->tickers.size());
 	auto& t = this->tickers[index];
 
@@ -248,7 +248,7 @@ std::shared_ptr<morda::widget> ticker_list_provider::get_widget(size_t index){
 		auto overlay = w.try_get_ancestor<morda::overlay>();
 		if(overlay){
 			w.context->run_from_ui_thread([overlay, ticker{ticker}, backend{this->backend}]()mutable{
-				overlay->push_back(std::make_shared<ticker_dialog>(
+				overlay->push_back(utki::make_shared_ref<ticker_dialog>(
 						overlay->context,
 						std::move(ticker),
 						std::move(backend)

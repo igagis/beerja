@@ -58,7 +58,7 @@ void tradier::set_config(const treeml::forest& config){
 		}
 	}
 
-	TRACE(<< "API Key = " << this->access_token << std::endl)
+	LOG([this](auto&o){o << "API Key = " << this->access_token << std::endl;})
 }
 
 std::shared_ptr<beerja::async_operation> tradier::get_exchanges(
@@ -182,13 +182,13 @@ std::shared_ptr<beerja::async_operation> tradier::find_ticker(
 	auto r = std::make_shared<httpc::request>([callback, asop](httpc::request& r){
 		auto& resp = r.get_response();
 		if(resp.status != httpc::status_code::ok || resp.response_code != httpc::http_code::ok){
-			TRACE(<< "resp.status = " << unsigned(resp.status) << " resp.response_code = " << unsigned(resp.response_code) << std::endl)
+			LOG([&](auto&o){o << "resp.status = " << unsigned(resp.status) << " resp.response_code = " << unsigned(resp.response_code) << std::endl;})
 			callback(beerja::status::failure, asop, std::vector<beerja::ticker>());
 			return;
 		}
 
 		try{
-			TRACE(<< "BODY = " << utki::make_string(resp.body) << std::endl)
+			LOG([&](auto&o){o << "BODY = " << utki::make_string(resp.body) << std::endl;})
 			auto json = jsondom::read(utki::make_span(resp.body));
 
 			callback(beerja::status::ok, asop, parse_ticker_list(json));
@@ -259,21 +259,21 @@ std::shared_ptr<beerja::async_operation> tradier::get_quote(
 	auto r = std::make_shared<httpc::request>([callback, asop](httpc::request& r){
 		auto& resp = r.get_response();
 		if(resp.status != httpc::status_code::ok || resp.response_code != httpc::http_code::ok){
-			TRACE(<< "resp.status = " << unsigned(resp.status) << " resp.response_code = " << unsigned(resp.response_code) << std::endl)
+			LOG([&](auto&o){o << "resp.status = " << unsigned(resp.status) << " resp.response_code = " << unsigned(resp.response_code) << std::endl;})
 			callback(beerja::status::failure, asop, beerja::quote());
 			return;
 		}
 
 		try{
-			TRACE(<< "BODY = " << utki::make_string(resp.body) << std::endl)
+			LOG([&](auto&o){o << "BODY = " << utki::make_string(resp.body) << std::endl;})
 			auto json = jsondom::read(utki::make_span(resp.body));
 
 			callback(beerja::status::ok, asop, parse_quote(json));
 		}catch(std::exception& e){
-			TRACE(<< "parsing response failed: " << e.what() << std::endl)
+			LOG([&](auto&o){o << "parsing response failed: " << e.what() << std::endl;})
 			callback(beerja::status::failure, asop, beerja::quote());
 		}catch(...){
-			TRACE(<< "parsing response failed" << std::endl)
+			LOG([](auto&o){o << "parsing response failed" << std::endl;})
 			callback(beerja::status::failure, asop, beerja::quote());
 		}
 	});
@@ -352,18 +352,18 @@ std::shared_ptr<beerja::async_operation> tradier::get_prices(
 	auto r = std::make_shared<httpc::request>([callback, asop](httpc::request& r){
 		auto& resp = r.get_response();
 		if(resp.status != httpc::status_code::ok || resp.response_code != httpc::http_code::ok){
-			TRACE(<< "resp.status = " << unsigned(resp.status) << " resp.response_code = " << unsigned(resp.response_code) << std::endl)
+			LOG([&](auto&o){o << "resp.status = " << unsigned(resp.status) << " resp.response_code = " << unsigned(resp.response_code) << std::endl;})
 			callback(beerja::status::failure, asop, std::vector<beerja::granule>());
 			return;
 		}
 
 		try{
-			TRACE(<< "BODY = " << utki::make_string(resp.body) << std::endl)
+			LOG([&](auto&o){o << "BODY = " << utki::make_string(resp.body) << std::endl;})
 			auto json = jsondom::read(utki::make_span(resp.body));
 
 			callback(beerja::status::ok, asop, parse_prices(json));
 		}catch(...){
-			TRACE(<< "Error parsing prices" << std::endl)
+			LOG([](auto&o){o << "Error parsing prices" << std::endl;})
 			callback(beerja::status::failure, asop, std::vector<beerja::granule>());
 		}
 	});
@@ -403,9 +403,9 @@ std::shared_ptr<beerja::async_operation> tradier::get_prices(
 		}
 	}
 
-	TRACE(<< "interval = " << interval << std::endl)
-	TRACE(<< "start_time = " << start_time << std::endl)
-	TRACE(<< "end_time = " << end_time << std::endl)
+	LOG([&](auto&o){o << "interval = " << interval << std::endl;})
+	LOG([&](auto&o){o << "start_time = " << start_time << std::endl;})
+	LOG([&](auto&o){o << "end_time = " << end_time << std::endl;})
 
 	r->set_url(end_point + "markets/timesales?symbol=" + httpc::escape(symbol) +
 			"&session_filter=open&interval=" + interval +
