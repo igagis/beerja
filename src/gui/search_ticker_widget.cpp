@@ -114,10 +114,10 @@ const auto layout = treeml::read(R"qwertyuiop(
 }
 
 search_ticker_widget::search_ticker_widget(
-		std::shared_ptr<morda::context> c,
+		const utki::shared_ref<morda::context>& c,
 		std::shared_ptr<beerja::backend> backend
 	) :
-		widget(std::move(c), treeml::forest()),
+		widget(c, treeml::forest()),
 		morda::pile(
 				this->context,
 				layout
@@ -130,28 +130,28 @@ search_ticker_widget::search_ticker_widget(
 	auto list = utki::make_shared_from(this->get_widget_as<morda::list>("tickers_list"));
 
 	auto query_disable_widgets = std::make_shared<morda::weak_widget_set>();
-	query_disable_widgets->add(line);
-	query_disable_widgets->add(button);
-	query_disable_widgets->add(list);
+	query_disable_widgets->add(line.to_shared_ptr());
+	query_disable_widgets->add(button.to_shared_ptr());
+	query_disable_widgets->add(list.to_shared_ptr());
 
 	auto tickers_provider = std::make_shared<ticker_list_provider>(this->backend);
 
 	// button click handler
-	button->click_handler = [this, query_disable_widgets, spinner, line, tickers_provider](morda::push_button& but){
-		spinner->set_active(true);
+	button.get().click_handler = [this, query_disable_widgets, spinner, line, tickers_provider](morda::push_button& but){
+		spinner.get().set_active(true);
 
 		query_disable_widgets->set_enabled(false);
 
 		LOG([](auto&o){o << "find ticker" << std::endl;})
 		this->search_ticker_operation = this->backend->find_ticker(
-				utki::to_utf8(line->get_text()),
+				utki::to_utf8(line.get().get_text()),
 				// backend operation complete handler
 				[this, query_disable_widgets, spinner, tickers_provider](beerja::status s, const std::shared_ptr<beerja::async_operation>& asop, std::vector<beerja::ticker>&& ticker_list){
 					LOG([&](auto&o){o << ticker_list.size() << " tickers found" << std::endl;})
 					// run from ui thread
-					spinner->context->run_from_ui_thread([this, spinner, query_disable_widgets, ticker_list{std::move(ticker_list)}, tickers_provider]()mutable{
+					spinner.get().context.get().run_from_ui_thread([this, spinner, query_disable_widgets, ticker_list{std::move(ticker_list)}, tickers_provider]()mutable{
 						tickers_provider->set_tickers(std::move(ticker_list));
-						spinner->set_active(false);
+						spinner.get().set_active(false);
 						query_disable_widgets->set_enabled(true);
 						this->search_ticker_operation.reset();
 					});
@@ -162,14 +162,14 @@ search_ticker_widget::search_ticker_widget(
 	this->get_widget_as<morda::key_proxy>("input_key_proxy").key_handler = [button](morda::key_proxy&, const morda::key_event& e) -> bool {
 		if(e.combo.key == morda::key::enter){
 			if(e.is_down){
-				button->click_handler(*button);
+				button.get().click_handler(button.get());
 			}
 			return true;
 		}
 		return false;
 	};
 
-	list->set_provider(tickers_provider);
+	list.get().set_provider(tickers_provider);
 }
 
 search_ticker_widget::~search_ticker_widget(){
@@ -230,16 +230,16 @@ utki::shared_ref<morda::widget> ticker_list_provider::get_widget(size_t index){
 			t.name.c_str()
 		);
 
-	auto ret = this->get_list()->context->inflater.inflate(gui);
+	auto ret = this->get_list()->context.get().inflater.inflate(gui);
 
-	auto& bg = ret->get_widget_as<morda::color>("bg_color");
-	auto& cp = ret->get_widget_as<morda::click_proxy>("click_proxy");
+	auto& bg = ret.get().get_widget_as<morda::color>("bg_color");
+	auto& cp = ret.get().get_widget_as<morda::click_proxy>("click_proxy");
 
 	cp.press_change_handler = [bg{utki::make_shared_from(bg)}](morda::click_proxy& w) -> bool {
 		if(w.is_pressed()){
-			bg->set_color(0xff808080);
+			bg.get().set_color(0xff808080);
 		}else{
-			bg->set_color(0xff000000);
+			bg.get().set_color(0xff000000);
 		}
 		return true;
 	};
@@ -247,8 +247,8 @@ utki::shared_ref<morda::widget> ticker_list_provider::get_widget(size_t index){
 	cp.click_handler = [ticker{t}, this](morda::click_proxy& w){
 		auto overlay = w.try_get_ancestor<morda::overlay>();
 		if(overlay){
-			w.context->run_from_ui_thread([overlay, ticker{ticker}, backend{this->backend}]()mutable{
-				overlay->push_back(utki::make_shared_ref<ticker_dialog>(
+			w.context.get().run_from_ui_thread([overlay, ticker{ticker}, backend{this->backend}]()mutable{
+				overlay->push_back(utki::make_shared<ticker_dialog>(
 						overlay->context,
 						std::move(ticker),
 						std::move(backend)

@@ -32,7 +32,7 @@ class refresh_button :
 {
 	std::shared_ptr<morda::spinner> refresh_label;
 public:
-	refresh_button(std::shared_ptr<morda::context> c, const treeml::forest& desc);
+	refresh_button(const utki::shared_ref<morda::context>& c, const treeml::forest& desc);
 
 	void set_refreshing(bool refreshing);
 };

@@ -54,7 +54,7 @@ public:
 	{
 		this->gui.initStandardWidgets(*this->get_res_file());
 		
-		this->gui.context->loader.mount_res_pack(*this->get_res_file("res/"));
+		this->gui.context.get().loader.mount_res_pack(*this->get_res_file("res/"));
 
 		{
 			auto be = std::make_shared<tradier>();
@@ -67,22 +67,22 @@ public:
 			this->backends.register_backend(std::move(id), std::move(be));
 		}
 
-		this->gui.context->inflater.register_widget<beerja::refresh_button>("u_refresh_button");
-		this->gui.context->inflater.register_widget<beerja::cells_container>("u_cells_container");
-		this->gui.context->inflater.register_widget<beerja::line_chart>("u_line_chart");
+		this->gui.context.get().inflater.register_widget<beerja::refresh_button>("u_refresh_button");
+		this->gui.context.get().inflater.register_widget<beerja::cells_container>("u_cells_container");
+		this->gui.context.get().inflater.register_widget<beerja::line_chart>("u_line_chart");
 
-		auto c = this->gui.context->inflater.inflate(
+		auto c = this->gui.context.get().inflater.inflate(
 				*this->get_res_file("res/main.gui")
 			);
 
-		c->get_widget("search_ticker_stub").replace_by(
-				utki::make_shared_ref<beerja::search_ticker_widget>(
+		c.get().get_widget("search_ticker_stub").replace_by(
+				utki::make_shared<beerja::search_ticker_widget>(
 						this->gui.context,
 						backends.id_to_backend_map[tradier::tag]
 					)
 			);
 
-		this->gui.set_root(c);
+		this->gui.set_root(c.to_shared_ptr());
 	}
 };
 

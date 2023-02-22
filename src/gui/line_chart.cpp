@@ -25,10 +25,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace beerja;
 
-line_chart::line_chart(std::shared_ptr<morda::context> c, const treeml::forest& desc) :
-		morda::widget(std::move(c), desc),
+line_chart::line_chart(const utki::shared_ref<morda::context>& c, const treeml::forest& desc) :
+		morda::widget(c, desc),
 		morda::color_widget(this->context, desc),
-		path_vao(this->context->renderer)
+		path_vao(this->context.get().renderer)
 {}
 
 void line_chart::set_points(std::vector<float>&& points){

@@ -31,7 +31,7 @@ const auto layout = treeml::read(R"qwertyuiop(
 )qwertyuiop");
 }
 
-refresh_button::refresh_button(std::shared_ptr<morda::context> c, const treeml::forest& desc) :
+refresh_button::refresh_button(const utki::shared_ref<morda::context>& c, const treeml::forest& desc) :
 		morda::widget(std::move(c), desc),
 		morda::button(this->context, desc),
 		morda::push_button(this->context, desc),

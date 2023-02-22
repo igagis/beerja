@@ -36,7 +36,7 @@ class search_ticker_widget :
 	std::weak_ptr<beerja::async_operation> search_ticker_operation;
 public:
 	search_ticker_widget(
-			std::shared_ptr<morda::context> c,
+			const utki::shared_ref<morda::context>& c,
 			std::shared_ptr<beerja::backend> backend
 		);
 

@@ -42,19 +42,19 @@ void cells_container::set_num_cells_per_row(unsigned num){
 }
 
 morda::container& cells_container::push_new_row(){
-	auto r = utki::make_shared_ref<morda::row>(this->context, treeml::forest());
+	auto r = utki::make_shared<morda::row>(this->context, treeml::forest());
 	this->push_back(r);
-	this->children().back()->get_layout_params().dims.x() = morda::widget::layout_params::max;
-	return *r;
+	this->children().back().get().get_layout_params().dims.x() = morda::widget::layout_params::max;
+	return r.get();
 }
 
 void cells_container::push(utki::shared_ref<morda::widget> w){
-	if(this->children().empty() || dynamic_cast<morda::row&>(*this->children().back()).children().size() == this->num_cells_per_row){
+	if(this->children().empty() || dynamic_cast<morda::row&>(this->children().back().get()).children().size() == this->num_cells_per_row){
 		this->push_new_row();
 	}
-	auto& row = dynamic_cast<morda::row&>(*this->children().back());
+	auto& row = dynamic_cast<morda::row&>(this->children().back().get());
 
-	auto& lp = row.get_layout_params_as<morda::linear_container::layout_params>(*w);
+	auto& lp = row.get_layout_params_as<morda::linear_container::layout_params>(w.get());
 	lp.weight = 1;
 
 	row.push_back(w);
@@ -62,7 +62,7 @@ void cells_container::push(utki::shared_ref<morda::widget> w){
 
 void cells_container::erase(morda::widget& w){
 	for(auto& r : this->children()){
-		auto& row = dynamic_cast<morda::row&>(*r);
+		auto& row = dynamic_cast<morda::row&>(r.get());
 		auto i = row.find(w);
 		if(i != row.children().end()){
 			row.erase(i);
@@ -76,7 +76,7 @@ void cells_container::erase(morda::widget& w){
 void cells_container::update_arrangement(){
 	std::vector<utki::shared_ref<morda::widget>> widgets;
 	for(auto& r : this->children()){
-		auto& row = dynamic_cast<morda::row&>(*r);
+		auto& row = dynamic_cast<morda::row&>(r.get());
 		for(auto& c : row.children()){
 			widgets.push_back(c);
 		}

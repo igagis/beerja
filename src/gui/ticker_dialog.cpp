@@ -112,7 +112,7 @@ const auto dialog_desc = treeml::read(R"qwertyuiop(
 }
 
 ticker_dialog::ticker_dialog(
-		std::shared_ptr<morda::context> c,
+		const utki::shared_ref<morda::context>& c,
 		beerja::ticker&& ticker,
 		std::shared_ptr<beerja::backend> backend
 	) :
@@ -129,28 +129,28 @@ ticker_dialog::ticker_dialog(
 	auto& ticker_name_text = this->get_widget_as<morda::text>("ticker_name_text");
 	ticker_name_text.set_text(this->ticker.name);
 
-	this->price_text = utki::make_shared_from(this->get_widget_as<morda::text>("price_text"));	
-	this->change_percent_text = utki::make_shared_from(this->get_widget_as<morda::text>("change_percent_text"));
-	this->change_text = utki::make_shared_from(this->get_widget_as<morda::text>("change_text"));
+	this->price_text = utki::make_shared_from(this->get_widget_as<morda::text>("price_text")).to_shared_ptr();
+	this->change_percent_text = utki::make_shared_from(this->get_widget_as<morda::text>("change_percent_text")).to_shared_ptr();
+	this->change_text = utki::make_shared_from(this->get_widget_as<morda::text>("change_text")).to_shared_ptr();
 
 	{
 		auto& b = this->get_widget_as<beerja::refresh_button>("refresh_button");
 		b.click_handler = [this](morda::push_button& button){
 			this->refresh();
 		};
-		this->refresh_button = utki::make_shared_from(b);
+		this->refresh_button = utki::make_shared_from(b).to_shared_ptr();
 	}
 
 	{
 		auto& b = this->get_widget_as<morda::push_button>("close_button");
 		b.click_handler = [this](morda::push_button& button){
-			button.context->run_from_ui_thread([this](){
+			button.context.get().run_from_ui_thread([this](){
 				this->remove_from_parent();
 			});
 		};
 	}
 
-	this->context->run_from_ui_thread([this](){
+	this->context.get().run_from_ui_thread([this](){
 		this->refresh();
 	});
 }
@@ -168,17 +168,17 @@ void ticker_dialog::refresh(){
 			{
 				if(s != beerja::status::ok){
 					LOG([](auto&o){o << "get_quote(): operation failed!" << std::endl;})
-					self->context->run_from_ui_thread([self, refresh_button](){
+					self.get().context.get().run_from_ui_thread([self, refresh_button](){
 						refresh_button->set_refreshing(false);
 					});
 				}else{
 					LOG([&](auto&o){o << "quote.last = " << quote.last << std::endl;})
-					self->context->run_from_ui_thread([self, refresh_button, quote{std::move(quote)}](){
+					self.get().context.get().run_from_ui_thread([self, refresh_button, quote{std::move(quote)}](){
 						refresh_button->set_refreshing(false);
 						
-						self->price_text->set_text(std::to_string(quote.last));
-						self->change_text->set_text(std::to_string(quote.change));
-						self->change_percent_text->set_text(std::to_string(quote.change_percent));
+						self.get().price_text->set_text(std::to_string(quote.last));
+						self.get().change_text->set_text(std::to_string(quote.change));
+						self.get().change_percent_text->set_text(std::to_string(quote.change_percent));
 					});
 				}
 			}

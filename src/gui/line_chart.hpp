@@ -33,7 +33,7 @@ class line_chart : virtual public morda::color_widget{
 
 	morda::path_vao path_vao;
 public:
-	line_chart(std::shared_ptr<morda::context> c, const treeml::forest& desc);
+	line_chart(const utki::shared_ref<morda::context>& c, const treeml::forest& desc);
 
 	void set_points(std::vector<float>&& points);
 

@@ -46,7 +46,7 @@ class ticker_dialog : public morda::pile{
 	std::weak_ptr<beerja::async_operation> get_prices_operation;
 public:
 	ticker_dialog(
-			std::shared_ptr<morda::context> c,
+			const utki::shared_ref<morda::context>& c,
 			beerja::ticker&& ticker,
 			std::shared_ptr<beerja::backend> backend
 		);
