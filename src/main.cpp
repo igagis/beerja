@@ -74,10 +74,9 @@ public:
 		auto c = this->gui.context->inflater.inflate(
 				*this->get_res_file("res/main.gui")
 			);
-		ASSERT(c)
 
 		c->get_widget("search_ticker_stub").replace_by(
-				std::make_shared<beerja::search_ticker_widget>(
+				utki::make_shared_ref<beerja::search_ticker_widget>(
 						this->gui.context,
 						backends.id_to_backend_map[tradier::tag]
 					)
