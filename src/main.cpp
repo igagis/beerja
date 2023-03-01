@@ -82,7 +82,7 @@ public:
 					)
 			);
 
-		this->gui.set_root(c.to_shared_ptr());
+		this->gui.set_root(c);
 	}
 };
 

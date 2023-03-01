@@ -44,7 +44,7 @@ void cells_container::set_num_cells_per_row(unsigned num){
 morda::container& cells_container::push_new_row(){
 	auto r = utki::make_shared<morda::row>(this->context, treeml::forest());
 	this->push_back(r);
-	this->children().back().get().get_layout_params().dims.x() = morda::widget::layout_params::max;
+	this->children().back().get().get_layout_params().dims.x() = morda::layout_params::max;
 	return r.get();
 }
 
@@ -54,7 +54,7 @@ void cells_container::push(utki::shared_ref<morda::widget> w){
 	}
 	auto& row = dynamic_cast<morda::row&>(this->children().back().get());
 
-	auto& lp = row.get_layout_params_as<morda::linear_container::layout_params>(w.get());
+	auto& lp = w.get().get_layout_params();
 	lp.weight = 1;
 
 	row.push_back(w);
