@@ -35,7 +35,7 @@ refresh_button::refresh_button(const utki::shared_ref<morda::context>& c, const 
 		morda::widget(std::move(c), desc),
 		morda::button(this->context, desc),
 		morda::push_button(this->context, desc),
-		morda::nine_patch_push_button(this->context, layout)
+		morda::nine_patch_push_button(this->context, ::layout)
 {
 	this->refresh_label = this->try_get_widget_as<morda::spinner>("refresh");
 }

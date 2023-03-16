@@ -29,19 +29,20 @@ using namespace beerja;
 
 namespace{
 const auto dialog_desc = treeml::read(R"qwertyuiop(
-		layout{
+		layout{pile}
+		lp{
 			dx {max}
 			dy {max}
 		}
 		@mouse_proxy{
 			id {bg_mouse_proxy}
-			layout{
+			lp{
 				dx {fill}
 				dy {fill}
 			}
 		}
 		@color{
-			layout{
+			lp{
 				dx {fill}
 				dy {fill}
 			}
@@ -88,19 +89,19 @@ const auto dialog_desc = treeml::read(R"qwertyuiop(
 				}
 
 				@pile{
-					layout{
+					lp{
 						dx {fill}
 						dy {min}
 					}
 					@ratio_proxy{
-						layout{
+						lp{
 							dx {100}
 							dy {min}
 						}
 						ratio {2}
 					}
 					@u_line_chart{
-						layout{
+						lp{
 							dx {fill}
 							dy {fill}
 						}
@@ -117,7 +118,7 @@ ticker_dialog::ticker_dialog(
 		std::shared_ptr<beerja::backend> backend
 	) :
 		morda::widget(std::move(c), dialog_desc),
-		morda::pile(this->context, dialog_desc),
+		morda::container(this->context, dialog_desc),
 		ticker(std::move(ticker)),
 		backend(std::move(backend))
 {

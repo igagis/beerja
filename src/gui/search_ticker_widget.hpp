@@ -21,7 +21,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <morda/widgets/group/pile.hpp>
+#include <morda/container.hpp>
 
 #include "../backend/backend.hpp"
 
@@ -29,7 +29,7 @@ namespace beerja{
 
 class search_ticker_widget :
 		virtual public morda::widget,
-		private morda::pile
+		private morda::container
 {
 	std::shared_ptr<beerja::backend> backend;
 

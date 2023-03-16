@@ -65,18 +65,19 @@ public:
 
 namespace{
 const auto layout = treeml::read(R"qwertyuiop(
+	layout{pile}
 	@column{
-		layout{
+		lp{
 			dx {max}
 			dy {max}
 		}
 		@row{
-			layout{
+			lp{
 				dx {max}
 			}
 			@key_proxy{
 				id {input_key_proxy}
-				layout{
+				lp{
 					dx {0}
 					weight {1}
 				}
@@ -85,7 +86,7 @@ const auto layout = treeml::read(R"qwertyuiop(
 
 					text {"enter query here"}
 
-					layout{
+					lp{
 						dx {max}
 					}
 				}
@@ -99,7 +100,7 @@ const auto layout = treeml::read(R"qwertyuiop(
 		}
 		@list{
 			id {tickers_list}
-			layout{
+			lp{
 				dy {0}
 				dx {fill}
 				weight {1}
@@ -118,9 +119,9 @@ search_ticker_widget::search_ticker_widget(
 		std::shared_ptr<beerja::backend> backend
 	) :
 		widget(c, treeml::forest()),
-		morda::pile(
+		morda::container(
 				this->context,
-				layout
+				::layout
 			),
 		backend(std::move(backend))
 {
@@ -185,26 +186,26 @@ utki::shared_ref<morda::widget> ticker_list_provider::get_widget(size_t index){
 	auto gui = utki::make_string(
 			R"qwertyuiop(
 				@pile{
-					layout{
+					lp{
 						dx {fill}
 					}
 					@click_proxy{
 						id {click_proxy}
-						layout{
+						lp{
 							dx {fill}
 							dy {fill}
 						}
 					}
 					@color{
 						id {bg_color}
-						layout{
+						lp{
 							dx {fill}
 							dy {fill}
 						}
 						color {0xff000000}
 					}
 					@column{
-						layout{
+						lp{
 							dx {fill}
 						}
 						@left{
@@ -220,7 +221,7 @@ utki::shared_ref<morda::widget> ticker_list_provider::get_widget(size_t index){
 							}
 						}
 						@color{
-							layout{dy{1} dx{fill}}
+							lp{dy{1} dx{fill}}
 							color{0xff404040}
 						}
 					}

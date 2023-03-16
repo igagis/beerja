@@ -23,7 +23,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "../backend/backend.hpp"
 
-#include <morda/widgets/group/pile.hpp>
 #include <morda/widgets/label/text.hpp>
 #include <morda/widgets/label/busy.hpp>
 
@@ -31,7 +30,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 namespace beerja{
 
-class ticker_dialog : public morda::pile{
+class ticker_dialog : public morda::container{
 	beerja::ticker ticker;
 
 	std::shared_ptr<beerja::backend> backend;

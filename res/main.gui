@@ -1,17 +1,17 @@
 @overlay{
 	@row{
-		layout{
+		lp{
 			dx {max}
 			dy {max}
 		}
 		@scroll_area{
-			layout{
+			lp{
 				dy {fill}
 				dx {100dp}
 				weight {1}
 			}
 			@color{
-				layout{
+				lp{
 					dx {100}
 					dy {100}
 				}
@@ -19,7 +19,7 @@
 				color {0xff00ffff}
 			}
 			u_cells_container{
-				layout{
+				lp{
 					dx {max}
 					dy {min}
 				}
@@ -27,7 +27,7 @@
 		}
 
 		@color{
-			layout{
+			lp{
 				dx {1dp}
 				dy {fill}
 			}
@@ -36,7 +36,7 @@
 
 		@widget{
 			id{search_ticker_stub}
-			layout{
+			lp{
 				dx { 300dp }
 				dy {max}
 			}
