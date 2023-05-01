@@ -181,7 +181,7 @@ std::shared_ptr<beerja::async_operation> tradier::find_ticker(
 
 	auto r = std::make_shared<httpc::request>([callback, asop](httpc::request& r){
 		auto& resp = r.get_response();
-		if(resp.status != httpc::status_code::ok || resp.response_code != httpc::http_code::ok){
+		if(resp.status != httpc::status_code::ok || resp.response_code != httpmodel::status::http_200_ok){
 			LOG([&](auto&o){o << "resp.status = " << unsigned(resp.status) << " resp.response_code = " << unsigned(resp.response_code) << std::endl;})
 			callback(beerja::status::failure, asop, std::vector<beerja::ticker>());
 			return;
@@ -258,7 +258,7 @@ std::shared_ptr<beerja::async_operation> tradier::get_quote(
 
 	auto r = std::make_shared<httpc::request>([callback, asop](httpc::request& r){
 		auto& resp = r.get_response();
-		if(resp.status != httpc::status_code::ok || resp.response_code != httpc::http_code::ok){
+		if(resp.status != httpc::status_code::ok || resp.response_code != httpmodel::status::http_200_ok){
 			LOG([&](auto&o){o << "resp.status = " << unsigned(resp.status) << " resp.response_code = " << unsigned(resp.response_code) << std::endl;})
 			callback(beerja::status::failure, asop, beerja::quote());
 			return;
@@ -351,7 +351,7 @@ std::shared_ptr<beerja::async_operation> tradier::get_prices(
 
 	auto r = std::make_shared<httpc::request>([callback, asop](httpc::request& r){
 		auto& resp = r.get_response();
-		if(resp.status != httpc::status_code::ok || resp.response_code != httpc::http_code::ok){
+		if(resp.status != httpc::status_code::ok || resp.response_code != httpmodel::status::http_200_ok){
 			LOG([&](auto&o){o << "resp.status = " << unsigned(resp.status) << " resp.response_code = " << unsigned(resp.response_code) << std::endl;})
 			callback(beerja::status::failure, asop, std::vector<beerja::granule>());
 			return;

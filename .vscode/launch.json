@@ -8,7 +8,7 @@
 			"name": "(gdb) Launch",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}/build/beerja",
+			"program": "${workspaceFolder}/out/dbg/beerja",
 			"args": [],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
