@@ -23,21 +23,21 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "../backend/backend.hpp"
 
-#include <morda/widgets/label/text.hpp>
-#include <morda/widgets/label/busy.hpp>
+#include <ruis/widgets/label/text.hpp>
+#include <ruis/widgets/label/busy.hpp>
 
 #include "refresh_button.hpp"
 
 namespace beerja{
 
-class ticker_dialog : public morda::container{
+class ticker_dialog : public ruis::container{
 	beerja::ticker ticker;
 
 	std::shared_ptr<beerja::backend> backend;
 
-	std::shared_ptr<morda::text> price_text;
-	std::shared_ptr<morda::text> change_percent_text;
-	std::shared_ptr<morda::text> change_text;
+	std::shared_ptr<ruis::text> price_text;
+	std::shared_ptr<ruis::text> change_percent_text;
+	std::shared_ptr<ruis::text> change_text;
 
 	std::shared_ptr<beerja::refresh_button> refresh_button;
 
@@ -45,7 +45,7 @@ class ticker_dialog : public morda::container{
 	std::weak_ptr<beerja::async_operation> get_prices_operation;
 public:
 	ticker_dialog(
-			const utki::shared_ref<morda::context>& c,
+			const utki::shared_ref<ruis::context>& c,
 			beerja::ticker&& ticker,
 			std::shared_ptr<beerja::backend> backend
 		);

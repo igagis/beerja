@@ -21,9 +21,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "ticker_dialog.hpp"
 
-#include <morda/widgets/proxy/mouse_proxy.hpp>
-#include <morda/widgets/label/text.hpp>
-#include <morda/widgets/button/push_button.hpp>
+#include <ruis/widgets/proxy/mouse_proxy.hpp>
+#include <ruis/widgets/label/text.hpp>
+#include <ruis/widgets/button/push_button.hpp>
 
 using namespace beerja;
 
@@ -49,7 +49,7 @@ const auto dialog_desc = treeml::read(R"qwertyuiop(
 			color {0xa0000000}
 		}
 		@nine_patch{
-			image {morda_npt_window_bg}
+			image {ruis_npt_window_bg}
 
 			@column{
 				@row{
@@ -113,38 +113,38 @@ const auto dialog_desc = treeml::read(R"qwertyuiop(
 }
 
 ticker_dialog::ticker_dialog(
-		const utki::shared_ref<morda::context>& c,
+		const utki::shared_ref<ruis::context>& c,
 		beerja::ticker&& ticker,
 		std::shared_ptr<beerja::backend> backend
 	) :
-		morda::widget(std::move(c), dialog_desc),
-		morda::container(this->context, dialog_desc),
+		ruis::widget(std::move(c), dialog_desc),
+		ruis::container(this->context, dialog_desc),
 		ticker(std::move(ticker)),
 		backend(std::move(backend))
 {
-	auto& bg_mouse_proxy = this->get_widget_as<morda::mouse_proxy>("bg_mouse_proxy");
-	bg_mouse_proxy.mouse_button_handler = [](morda::mouse_proxy&, const morda::mouse_button_event& e){
+	auto& bg_mouse_proxy = this->get_widget_as<ruis::mouse_proxy>("bg_mouse_proxy");
+	bg_mouse_proxy.mouse_button_handler = [](ruis::mouse_proxy&, const ruis::mouse_button_event& e){
 		return true;
 	};
 
-	auto& ticker_name_text = this->get_widget_as<morda::text>("ticker_name_text");
+	auto& ticker_name_text = this->get_widget_as<ruis::text>("ticker_name_text");
 	ticker_name_text.set_text(this->ticker.name);
 
-	this->price_text = utki::make_shared_from(this->get_widget_as<morda::text>("price_text")).to_shared_ptr();
-	this->change_percent_text = utki::make_shared_from(this->get_widget_as<morda::text>("change_percent_text")).to_shared_ptr();
-	this->change_text = utki::make_shared_from(this->get_widget_as<morda::text>("change_text")).to_shared_ptr();
+	this->price_text = utki::make_shared_from(this->get_widget_as<ruis::text>("price_text")).to_shared_ptr();
+	this->change_percent_text = utki::make_shared_from(this->get_widget_as<ruis::text>("change_percent_text")).to_shared_ptr();
+	this->change_text = utki::make_shared_from(this->get_widget_as<ruis::text>("change_text")).to_shared_ptr();
 
 	{
 		auto& b = this->get_widget_as<beerja::refresh_button>("refresh_button");
-		b.click_handler = [this](morda::push_button& button){
+		b.click_handler = [this](ruis::push_button& button){
 			this->refresh();
 		};
 		this->refresh_button = utki::make_shared_from(b).to_shared_ptr();
 	}
 
 	{
-		auto& b = this->get_widget_as<morda::push_button>("close_button");
-		b.click_handler = [this](morda::push_button& button){
+		auto& b = this->get_widget_as<ruis::push_button>("close_button");
+		b.click_handler = [this](ruis::push_button& button){
 			button.context.get().run_from_ui_thread([this](){
 				this->remove_from_parent();
 			});

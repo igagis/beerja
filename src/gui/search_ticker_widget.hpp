@@ -21,22 +21,22 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <morda/container.hpp>
+#include <ruis/container.hpp>
 
 #include "../backend/backend.hpp"
 
 namespace beerja{
 
 class search_ticker_widget :
-		virtual public morda::widget,
-		private morda::container
+		virtual public ruis::widget,
+		private ruis::container
 {
 	std::shared_ptr<beerja::backend> backend;
 
 	std::weak_ptr<beerja::async_operation> search_ticker_operation;
 public:
 	search_ticker_widget(
-			const utki::shared_ref<morda::context>& c,
+			const utki::shared_ref<ruis::context>& c,
 			std::shared_ptr<beerja::backend> backend
 		);
 

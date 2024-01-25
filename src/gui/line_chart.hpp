@@ -21,25 +21,25 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <morda/widgets/base/color_widget.hpp>
-#include <morda/paint/path_vao.hpp>
+#include <ruis/widgets/base/color_widget.hpp>
+#include <ruis/paint/path_vao.hpp>
 
 #include <vector>
 
 namespace beerja{
 
-class line_chart : virtual public morda::color_widget{
+class line_chart : virtual public ruis::color_widget{
 	std::vector<float> points;
 
-	morda::path_vao path_vao;
+	ruis::path_vao path_vao;
 public:
-	line_chart(const utki::shared_ref<morda::context>& c, const treeml::forest& desc);
+	line_chart(const utki::shared_ref<ruis::context>& c, const treeml::forest& desc);
 
 	void set_points(std::vector<float>&& points);
 
 	void on_resize()override;
 
-	void render(const morda::matrix4& matrix)const override;
+	void render(const ruis::matrix4& matrix)const override;
 
 private:
 	void update_path_vba();

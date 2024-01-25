@@ -21,18 +21,16 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <morda/widgets/button/nine_patch_push_button.hpp>
-#include <morda/widgets/label/spinner.hpp>
+#include <ruis/widgets/button/nine_patch_push_button.hpp>
+#include <ruis/widgets/label/spinner.hpp>
 
 namespace beerja{
 
-class refresh_button :
-		virtual public morda::push_button,
-		private morda::nine_patch_push_button
+class refresh_button : public ruis::nine_patch_push_button
 {
-	std::shared_ptr<morda::spinner> refresh_label;
+	std::shared_ptr<ruis::spinner> refresh_label;
 public:
-	refresh_button(const utki::shared_ref<morda::context>& c, const treeml::forest& desc);
+	refresh_button(const utki::shared_ref<ruis::context>& c, const treeml::forest& desc);
 
 	void set_refreshing(bool refreshing);
 };

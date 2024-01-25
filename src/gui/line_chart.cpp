@@ -21,13 +21,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "line_chart.hpp"
 
-#include <morda/context.hpp>
+#include <ruis/context.hpp>
 
 using namespace beerja;
 
-line_chart::line_chart(const utki::shared_ref<morda::context>& c, const treeml::forest& desc) :
-		morda::widget(c, desc),
-		morda::color_widget(this->context, desc),
+line_chart::line_chart(const utki::shared_ref<ruis::context>& c, const treeml::forest& desc) :
+		ruis::widget(c, desc),
+		ruis::color_widget(this->context, desc),
 		path_vao(this->context.get().renderer)
 {}
 
@@ -42,7 +42,7 @@ void line_chart::on_resize(){
 }
 
 void line_chart::update_path_vba(){
-	morda::path p;
+	ruis::path p;
 
 	if(this->points.size() < size_t(this->rect().d.x())){
 		// TODO:
@@ -51,6 +51,6 @@ void line_chart::update_path_vba(){
 	}
 }
 
-void line_chart::render(const morda::matrix4& matrix)const{
+void line_chart::render(const ruis::matrix4& matrix)const{
 	this->path_vao.render(matrix, this->get_color());
 }

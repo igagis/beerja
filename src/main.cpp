@@ -20,7 +20,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 /* ================ LICENSE END ================ */
 
 
-#include <mordavokne/application.hpp>
+#include <ruisapp/application.hpp>
 
 #include <utki/debug.hpp>
 
@@ -28,7 +28,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <httpc/init_guard.hpp>
 
-#include <morda/widgets/group/book.hpp>
+#include <ruis/widgets/group/book.hpp>
 
 #include "backend_register.hpp"
 
@@ -39,20 +39,20 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "gui/search_ticker_widget.hpp"
 #include "gui/line_chart.hpp"
 
-class application : public mordavokne::application{
+class application : public ruisapp::application{
 	httpc::init_guard httpc_guard;
 public:
 	beerja::backend_register backends;
 
 	application() :
-			mordavokne::application(
+			ruisapp::application(
 					"beerja",
 					[](){
-						return mordavokne::window_params(r4::vector2<unsigned>(1200, 600));
+						return ruisapp::window_params(r4::vector2<unsigned>(1200, 600));
 					}()
 				)
 	{
-		this->gui.initStandardWidgets(*this->get_res_file());
+		this->gui.init_standard_widgets(*this->get_res_file());
 		
 		this->gui.context.get().loader.mount_res_pack(*this->get_res_file("res/"));
 
@@ -86,6 +86,6 @@ public:
 	}
 };
 
-mordavokne::application_factory app_fac([](auto args){
+ruisapp::application_factory app_fac([](auto args){
 	return std::make_unique<::application>();
 });

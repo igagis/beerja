@@ -21,27 +21,27 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "search_ticker_widget.hpp"
 
-#include <mordavokne/application.hpp>
+#include <ruisapp/application.hpp>
 
 #include <utki/unicode.hpp>
 #include <utki/string.hpp>
 
-#include <morda/widgets/input/text_input_line.hpp>
-#include <morda/widgets/button/push_button.hpp>
-#include <morda/widgets/label/busy.hpp>
-#include <morda/widgets/label/color.hpp>
-#include <morda/widgets/proxy/click_proxy.hpp>
-#include <morda/widgets/proxy/key_proxy.hpp>
-#include <morda/widgets/group/list.hpp>
-#include <morda/widgets/group/overlay.hpp>
-#include <morda/util/weak_widget_set.hpp>
+#include <ruis/widgets/input/text_input_line.hpp>
+#include <ruis/widgets/button/push_button.hpp>
+#include <ruis/widgets/label/busy.hpp>
+#include <ruis/widgets/label/color.hpp>
+#include <ruis/widgets/proxy/click_proxy.hpp>
+#include <ruis/widgets/proxy/key_proxy.hpp>
+#include <ruis/widgets/group/list.hpp>
+#include <ruis/widgets/group/overlay.hpp>
+#include <ruis/util/weak_widget_set.hpp>
 
 #include "ticker_dialog.hpp"
 
 using namespace beerja;
 
 namespace{
-class ticker_list_provider : public morda::list::provider{
+class ticker_list_provider : public ruis::list::provider{
 	std::vector<beerja::ticker> tickers;
 
 	std::shared_ptr<beerja::backend> backend;
@@ -54,7 +54,7 @@ public:
 		return this->tickers.size();
 	}
 
-	utki::shared_ref<morda::widget> get_widget(size_t index)override;
+	utki::shared_ref<ruis::widget> get_widget(size_t index)override;
 
 	void set_tickers(std::vector<beerja::ticker>&& tickers){
 		this->tickers = std::move(tickers);
@@ -115,22 +115,22 @@ const auto layout = treeml::read(R"qwertyuiop(
 }
 
 search_ticker_widget::search_ticker_widget(
-		const utki::shared_ref<morda::context>& c,
+		const utki::shared_ref<ruis::context>& c,
 		std::shared_ptr<beerja::backend> backend
 	) :
 		widget(c, treeml::forest()),
-		morda::container(
+		ruis::container(
 				this->context,
 				::layout
 			),
 		backend(std::move(backend))
 {
-	auto spinner = utki::make_shared_from(this->get_widget_as<morda::busy>("busy_spinner"));
-	auto line = utki::make_shared_from(this->get_widget("query_text_input").get_widget<morda::text_input_line>());
-	auto button = utki::make_shared_from(this->get_widget_as<morda::push_button>("query_push_button"));
-	auto list = utki::make_shared_from(this->get_widget_as<morda::list>("tickers_list"));
+	auto spinner = utki::make_shared_from(this->get_widget_as<ruis::busy>("busy_spinner"));
+	auto line = utki::make_shared_from(this->get_widget("query_text_input").get_widget<ruis::text_input_line>());
+	auto button = utki::make_shared_from(this->get_widget_as<ruis::push_button>("query_push_button"));
+	auto list = utki::make_shared_from(this->get_widget_as<ruis::list>("tickers_list"));
 
-	auto query_disable_widgets = std::make_shared<morda::weak_widget_set>();
+	auto query_disable_widgets = std::make_shared<ruis::weak_widget_set>();
 	query_disable_widgets->add(line.to_shared_ptr());
 	query_disable_widgets->add(button.to_shared_ptr());
 	query_disable_widgets->add(list.to_shared_ptr());
@@ -138,7 +138,7 @@ search_ticker_widget::search_ticker_widget(
 	auto tickers_provider = std::make_shared<ticker_list_provider>(this->backend);
 
 	// button click handler
-	button.get().click_handler = [this, query_disable_widgets, spinner, line, tickers_provider](morda::push_button& but){
+	button.get().click_handler = [this, query_disable_widgets, spinner, line, tickers_provider](ruis::push_button& but){
 		spinner.get().set_active(true);
 
 		query_disable_widgets->set_enabled(false);
@@ -160,8 +160,8 @@ search_ticker_widget::search_ticker_widget(
 			);
 	};
 
-	this->get_widget_as<morda::key_proxy>("input_key_proxy").key_handler = [button](morda::key_proxy&, const morda::key_event& e) -> bool {
-		if(e.combo.key == morda::key::enter){
+	this->get_widget_as<ruis::key_proxy>("input_key_proxy").key_handler = [button](ruis::key_proxy&, const ruis::key_event& e) -> bool {
+		if(e.combo.key == ruis::key::enter){
 			if(e.is_down){
 				button.get().click_handler(button.get());
 			}
@@ -179,7 +179,7 @@ search_ticker_widget::~search_ticker_widget(){
 	}
 }
 
-utki::shared_ref<morda::widget> ticker_list_provider::get_widget(size_t index){
+utki::shared_ref<ruis::widget> ticker_list_provider::get_widget(size_t index){
 	ASSERT(index < this->tickers.size());
 	auto& t = this->tickers[index];
 
@@ -233,10 +233,10 @@ utki::shared_ref<morda::widget> ticker_list_provider::get_widget(size_t index){
 
 	auto ret = this->get_list()->context.get().inflater.inflate(gui);
 
-	auto& bg = ret.get().get_widget_as<morda::color>("bg_color");
-	auto& cp = ret.get().get_widget_as<morda::click_proxy>("click_proxy");
+	auto& bg = ret.get().get_widget_as<ruis::color>("bg_color");
+	auto& cp = ret.get().get_widget_as<ruis::click_proxy>("click_proxy");
 
-	cp.press_change_handler = [bg{utki::make_shared_from(bg)}](morda::click_proxy& w) -> bool {
+	cp.press_change_handler = [bg{utki::make_shared_from(bg)}](ruis::click_proxy& w) -> bool {
 		if(w.is_pressed()){
 			bg.get().set_color(0xff808080);
 		}else{
@@ -245,8 +245,8 @@ utki::shared_ref<morda::widget> ticker_list_provider::get_widget(size_t index){
 		return true;
 	};
 
-	cp.click_handler = [ticker{t}, this](morda::click_proxy& w){
-		auto overlay = w.try_get_ancestor<morda::overlay>();
+	cp.click_handler = [ticker{t}, this](ruis::click_proxy& w){
+		auto overlay = w.try_get_ancestor<ruis::overlay>();
 		if(overlay){
 			w.context.get().run_from_ui_thread([overlay, ticker{ticker}, backend{this->backend}]()mutable{
 				overlay->push_back(utki::make_shared<ticker_dialog>(

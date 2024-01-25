@@ -21,13 +21,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "cells_container.hpp"
 
-#include <morda/widgets/group/row.hpp>
+#include <ruis/layouts/linear_layout.hpp>
 
 using namespace beerja;
 
-cells_container::cells_container(utki::shared_ref<morda::context> c, const treeml::forest& desc) :
-		morda::widget(c, desc),
-		morda::column(this->context, treeml::forest())
+cells_container::cells_container(utki::shared_ref<ruis::context> c, const treeml::forest& desc) :
+		ruis::widget(c, desc),
+		ruis::container(this->context, treeml::forest(), ruis::column_layout::instance)
 {}
 
 void cells_container::set_num_cells_per_row(unsigned num){
@@ -41,18 +41,18 @@ void cells_container::set_num_cells_per_row(unsigned num){
 	this->update_arrangement();
 }
 
-morda::container& cells_container::push_new_row(){
-	auto r = utki::make_shared<morda::row>(this->context, treeml::forest());
+ruis::container& cells_container::push_new_row(){
+	auto r = utki::make_shared<ruis::container>(this->context, treeml::forest(), ruis::row_layout::instance);
 	this->push_back(r);
-	this->children().back().get().get_layout_params().dims.x() = morda::layout_params::max;
+	this->children().back().get().get_layout_params().dims.x() = ruis::layout_params::max;
 	return r.get();
 }
 
-void cells_container::push(utki::shared_ref<morda::widget> w){
-	if(this->children().empty() || dynamic_cast<morda::row&>(this->children().back().get()).children().size() == this->num_cells_per_row){
+void cells_container::push(utki::shared_ref<ruis::widget> w){
+	if(this->children().empty() || dynamic_cast<ruis::container&>(this->children().back().get()).children().size() == this->num_cells_per_row){
 		this->push_new_row();
 	}
-	auto& row = dynamic_cast<morda::row&>(this->children().back().get());
+	auto& row = dynamic_cast<ruis::container&>(this->children().back().get());
 
 	auto& lp = w.get().get_layout_params();
 	lp.weight = 1;
@@ -60,9 +60,9 @@ void cells_container::push(utki::shared_ref<morda::widget> w){
 	row.push_back(w);
 }
 
-void cells_container::erase(morda::widget& w){
+void cells_container::erase(ruis::widget& w){
 	for(auto& r : this->children()){
-		auto& row = dynamic_cast<morda::row&>(r.get());
+		auto& row = dynamic_cast<ruis::container&>(r.get());
 		auto i = row.find(w);
 		if(i != row.children().end()){
 			row.erase(i);
@@ -74,9 +74,9 @@ void cells_container::erase(morda::widget& w){
 }
 
 void cells_container::update_arrangement(){
-	std::vector<utki::shared_ref<morda::widget>> widgets;
+	std::vector<utki::shared_ref<ruis::widget>> widgets;
 	for(auto& r : this->children()){
-		auto& row = dynamic_cast<morda::row&>(r.get());
+		auto& row = dynamic_cast<ruis::container&>(r.get());
 		for(auto& c : row.children()){
 			widgets.push_back(c);
 		}

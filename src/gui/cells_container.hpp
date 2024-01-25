@@ -21,26 +21,26 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <morda/widgets/group/column.hpp>
+#include <ruis/container.hpp>
 
 namespace beerja{
 
 class cells_container :
-        virtual public morda::widget,
-        private morda::column
+        virtual public ruis::widget,
+        private ruis::container
 {
     unsigned num_cells_per_row = 3;
 public:
-    cells_container(utki::shared_ref<morda::context> c, const treeml::forest& desc);
+    cells_container(utki::shared_ref<ruis::context> c, const treeml::forest& desc);
 
     void set_num_cells_per_row(unsigned num);
 
-	void push(utki::shared_ref<morda::widget> w);
+	void push(utki::shared_ref<ruis::widget> w);
 
-	void erase(morda::widget& w);
+	void erase(ruis::widget& w);
 private:
 	void update_arrangement();
-	morda::container& push_new_row();
+	ruis::container& push_new_row();
 };
 
 }

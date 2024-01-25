@@ -31,13 +31,12 @@ const auto layout = treeml::read(R"qwertyuiop(
 )qwertyuiop");
 }
 
-refresh_button::refresh_button(const utki::shared_ref<morda::context>& c, const treeml::forest& desc) :
-		morda::widget(std::move(c), desc),
-		morda::button(this->context, desc),
-		morda::push_button(this->context, desc),
-		morda::nine_patch_push_button(this->context, ::layout)
+refresh_button::refresh_button(const utki::shared_ref<ruis::context>& c, const treeml::forest& desc) :
+		ruis::widget(std::move(c), desc),
+		ruis::button(this->context, desc),
+		ruis::nine_patch_push_button(this->context, ::layout)
 {
-	this->refresh_label = this->try_get_widget_as<morda::spinner>("refresh");
+	this->refresh_label = this->try_get_widget_as<ruis::spinner>("refresh");
 }
 
 void refresh_button::set_refreshing(bool refreshing){

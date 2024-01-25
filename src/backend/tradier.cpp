@@ -179,10 +179,10 @@ std::shared_ptr<beerja::async_operation> tradier::find_ticker(
 
 	auto asop = std::make_shared<tradier_async_operation>();
 
-	auto r = std::make_shared<httpc::request>([callback, asop](httpc::request& r){
+	auto r = std::make_shared<httpc::request>([callback, asop](httpc::status_code status_code, httpc::request& r){
 		auto& resp = r.get_response();
-		if(resp.status != httpc::status_code::ok || resp.response_code != httpmodel::status::http_200_ok){
-			LOG([&](auto&o){o << "resp.status = " << unsigned(resp.status) << " resp.response_code = " << unsigned(resp.response_code) << std::endl;})
+		if(status_code != httpc::status_code::ok || resp.status != httpmodel::status::http_200_ok){
+			LOG([&](auto&o){o << "status_code = " << unsigned(status_code) << " resp.status = " << unsigned(resp.status) << std::endl;})
 			callback(beerja::status::failure, asop, std::vector<beerja::ticker>());
 			return;
 		}
@@ -256,10 +256,10 @@ std::shared_ptr<beerja::async_operation> tradier::get_quote(
 
 	auto asop = std::make_shared<tradier_async_operation>();
 
-	auto r = std::make_shared<httpc::request>([callback, asop](httpc::request& r){
+	auto r = std::make_shared<httpc::request>([callback, asop](httpc::status_code status_code, httpc::request& r){
 		auto& resp = r.get_response();
-		if(resp.status != httpc::status_code::ok || resp.response_code != httpmodel::status::http_200_ok){
-			LOG([&](auto&o){o << "resp.status = " << unsigned(resp.status) << " resp.response_code = " << unsigned(resp.response_code) << std::endl;})
+		if(status_code != httpc::status_code::ok || resp.status != httpmodel::status::http_200_ok){
+			LOG([&](auto&o){o << "status_code = " << unsigned(status_code) << " resp.status = " << unsigned(resp.status) << std::endl;})
 			callback(beerja::status::failure, asop, beerja::quote());
 			return;
 		}
@@ -349,10 +349,10 @@ std::shared_ptr<beerja::async_operation> tradier::get_prices(
 		return asop;
 	}
 
-	auto r = std::make_shared<httpc::request>([callback, asop](httpc::request& r){
+	auto r = std::make_shared<httpc::request>([callback, asop](httpc::status_code status_code, httpc::request& r){
 		auto& resp = r.get_response();
-		if(resp.status != httpc::status_code::ok || resp.response_code != httpmodel::status::http_200_ok){
-			LOG([&](auto&o){o << "resp.status = " << unsigned(resp.status) << " resp.response_code = " << unsigned(resp.response_code) << std::endl;})
+		if(status_code != httpc::status_code::ok || resp.status != httpmodel::status::http_200_ok){
+			LOG([&](auto&o){o << "status_code = " << unsigned(status_code) << " resp.status = " << unsigned(resp.status) << std::endl;})
 			callback(beerja::status::failure, asop, std::vector<beerja::granule>());
 			return;
 		}
