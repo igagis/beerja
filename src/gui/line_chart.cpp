@@ -25,7 +25,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace beerja;
 
-line_chart::line_chart(const utki::shared_ref<ruis::context>& c, const treeml::forest& desc) :
+line_chart::line_chart(const utki::shared_ref<ruis::context>& c, const tml::forest& desc) :
 		ruis::widget(c, desc),
 		ruis::color_widget(this->context, desc),
 		path_vao(this->context.get().renderer)

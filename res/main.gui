@@ -7,7 +7,7 @@
 		@scroll_area{
 			lp{
 				dy {fill}
-				dx {100dp}
+				dx {100pp}
 				weight {1}
 			}
 			@color{
@@ -28,7 +28,7 @@
 
 		@color{
 			lp{
-				dx {1dp}
+				dx {1pp}
 				dy {fill}
 			}
 			color {0xff808080}
@@ -37,7 +37,7 @@
 		@widget{
 			id{search_ticker_stub}
 			lp{
-				dx { 300dp }
+				dx { 300pp }
 				dy {max}
 			}
 		}

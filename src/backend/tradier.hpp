@@ -34,7 +34,7 @@ public:
 		return tag;
 	}
 
-	void set_config(const treeml::forest& config)override;
+	void set_config(const tml::forest& config)override;
 
 	virtual std::shared_ptr<beerja::async_operation> get_exchanges(
 			std::function<void(

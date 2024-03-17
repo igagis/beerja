@@ -30,7 +30,7 @@ class refresh_button : public ruis::nine_patch_push_button
 {
 	std::shared_ptr<ruis::spinner> refresh_label;
 public:
-	refresh_button(const utki::shared_ref<ruis::context>& c, const treeml::forest& desc);
+	refresh_button(const utki::shared_ref<ruis::context>& c, const tml::forest& desc);
 
 	void set_refreshing(bool refreshing);
 };

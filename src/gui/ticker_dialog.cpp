@@ -23,12 +23,12 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <ruis/widgets/proxy/mouse_proxy.hpp>
 #include <ruis/widgets/label/text.hpp>
-#include <ruis/widgets/button/push_button.hpp>
+#include <ruis/widgets/button/base/push_button.hpp>
 
 using namespace beerja;
 
 namespace{
-const auto dialog_desc = treeml::read(R"qwertyuiop(
+const auto dialog_desc = tml::read(R"qwertyuiop(
 		layout{pile}
 		lp{
 			dx {max}

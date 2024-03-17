@@ -27,7 +27,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <utki/string.hpp>
 
 #include <ruis/widgets/input/text_input_line.hpp>
-#include <ruis/widgets/button/push_button.hpp>
+#include <ruis/widgets/button/base/push_button.hpp>
 #include <ruis/widgets/label/busy.hpp>
 #include <ruis/widgets/label/color.hpp>
 #include <ruis/widgets/proxy/click_proxy.hpp>
@@ -64,7 +64,7 @@ public:
 }
 
 namespace{
-const auto layout = treeml::read(R"qwertyuiop(
+const auto layout = tml::read(R"qwertyuiop(
 	layout{pile}
 	@column{
 		lp{
@@ -78,7 +78,7 @@ const auto layout = treeml::read(R"qwertyuiop(
 			@key_proxy{
 				id {input_key_proxy}
 				lp{
-					dx {0}
+					dx {fill}
 					weight {1}
 				}
 				@text_input_line{
@@ -101,7 +101,7 @@ const auto layout = treeml::read(R"qwertyuiop(
 		@list{
 			id {tickers_list}
 			lp{
-				dy {0}
+				dy {fill}
 				dx {fill}
 				weight {1}
 			}
@@ -118,7 +118,7 @@ search_ticker_widget::search_ticker_widget(
 		const utki::shared_ref<ruis::context>& c,
 		std::shared_ptr<beerja::backend> backend
 	) :
-		widget(c, treeml::forest()),
+		widget(c, tml::forest()),
 		ruis::container(
 				this->context,
 				::layout
@@ -236,7 +236,7 @@ utki::shared_ref<ruis::widget> ticker_list_provider::get_widget(size_t index){
 	auto& bg = ret.get().get_widget_as<ruis::color>("bg_color");
 	auto& cp = ret.get().get_widget_as<ruis::click_proxy>("click_proxy");
 
-	cp.press_change_handler = [bg{utki::make_shared_from(bg)}](ruis::click_proxy& w) -> bool {
+	cp.pressed_change_handler = [bg{utki::make_shared_from(bg)}](ruis::click_proxy& w) -> bool {
 		if(w.is_pressed()){
 			bg.get().set_color(0xff808080);
 		}else{

@@ -21,7 +21,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <ruis/container.hpp>
+#include <ruis/widgets/container.hpp>
 
 namespace beerja{
 
@@ -31,7 +31,7 @@ class cells_container :
 {
     unsigned num_cells_per_row = 3;
 public:
-    cells_container(utki::shared_ref<ruis::context> c, const treeml::forest& desc);
+    cells_container(utki::shared_ref<ruis::context> c, const tml::forest& desc);
 
     void set_num_cells_per_row(unsigned num);
 

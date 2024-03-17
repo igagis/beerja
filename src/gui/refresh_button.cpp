@@ -24,14 +24,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 using namespace beerja;
 
 namespace{
-const auto layout = treeml::read(R"qwertyuiop(
+const auto layout = tml::read(R"qwertyuiop(
 	@refresh{
 		id {refresh}
 	}
 )qwertyuiop");
 }
 
-refresh_button::refresh_button(const utki::shared_ref<ruis::context>& c, const treeml::forest& desc) :
+refresh_button::refresh_button(const utki::shared_ref<ruis::context>& c, const tml::forest& desc) :
 		ruis::widget(std::move(c), desc),
 		ruis::button(this->context, desc),
 		ruis::nine_patch_push_button(this->context, ::layout)

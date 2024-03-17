@@ -49,12 +49,12 @@ struct tradier_async_operation : public beerja::async_operation{
 };
 }
 
-void tradier::set_config(const treeml::forest& config){
+void tradier::set_config(const tml::forest& config){
 
 	auto i = std::find(config.begin(), config.end(), "access_token");
 	if(i != config.end()){
 		if(!i->children.empty()){
-			this->access_token = i->children.front().value.to_string();
+			this->access_token = i->children.front().value.string;
 		}
 	}
 

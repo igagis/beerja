@@ -21,13 +21,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "cells_container.hpp"
 
-#include <ruis/layouts/linear_layout.hpp>
+#include <ruis/layouts/layout.hpp>
 
 using namespace beerja;
 
-cells_container::cells_container(utki::shared_ref<ruis::context> c, const treeml::forest& desc) :
+cells_container::cells_container(utki::shared_ref<ruis::context> c, const tml::forest& desc) :
 		ruis::widget(c, desc),
-		ruis::container(this->context, treeml::forest(), ruis::column_layout::instance)
+		ruis::container(this->context, tml::forest(), ruis::layout::column)
 {}
 
 void cells_container::set_num_cells_per_row(unsigned num){
@@ -42,9 +42,9 @@ void cells_container::set_num_cells_per_row(unsigned num){
 }
 
 ruis::container& cells_container::push_new_row(){
-	auto r = utki::make_shared<ruis::container>(this->context, treeml::forest(), ruis::row_layout::instance);
+	auto r = utki::make_shared<ruis::container>(this->context, tml::forest(), ruis::layout::row);
 	this->push_back(r);
-	this->children().back().get().get_layout_params().dims.x() = ruis::layout_params::max;
+	this->children().back().get().get_layout_params().dims.x() = ruis::lp::max;
 	return r.get();
 }
 
@@ -56,6 +56,7 @@ void cells_container::push(utki::shared_ref<ruis::widget> w){
 
 	auto& lp = w.get().get_layout_params();
 	lp.weight = 1;
+	lp.dims.x() = ruis::lp::fill;
 
 	row.push_back(w);
 }

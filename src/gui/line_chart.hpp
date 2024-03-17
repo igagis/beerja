@@ -33,7 +33,7 @@ class line_chart : virtual public ruis::color_widget{
 
 	ruis::path_vao path_vao;
 public:
-	line_chart(const utki::shared_ref<ruis::context>& c, const treeml::forest& desc);
+	line_chart(const utki::shared_ref<ruis::context>& c, const tml::forest& desc);
 
 	void set_points(std::vector<float>&& points);
 
