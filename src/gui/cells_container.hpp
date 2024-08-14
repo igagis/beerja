@@ -21,7 +21,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <ruis/widgets/container.hpp>
+#include <ruis/widget/container.hpp>
 
 namespace beerja{
 

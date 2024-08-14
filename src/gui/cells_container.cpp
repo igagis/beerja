@@ -21,7 +21,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "cells_container.hpp"
 
-#include <ruis/layouts/layout.hpp>
+#include <ruis/layout/layout.hpp>
 
 using namespace beerja;
 

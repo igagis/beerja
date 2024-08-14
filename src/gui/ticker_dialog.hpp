@@ -23,8 +23,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "../backend/backend.hpp"
 
-#include <ruis/widgets/label/text.hpp>
-#include <ruis/widgets/label/busy.hpp>
+#include <ruis/widget/label/text.hpp>
+#include <ruis/widget/label/busy.hpp>
 
 #include "refresh_button.hpp"
 

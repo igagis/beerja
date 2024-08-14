@@ -21,9 +21,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "ticker_dialog.hpp"
 
-#include <ruis/widgets/proxy/mouse_proxy.hpp>
-#include <ruis/widgets/label/text.hpp>
-#include <ruis/widgets/button/base/push_button.hpp>
+#include <ruis/widget/proxy/mouse_proxy.hpp>
+#include <ruis/widget/label/text.hpp>
+#include <ruis/widget/button/base/push_button.hpp>
 
 using namespace beerja;
 

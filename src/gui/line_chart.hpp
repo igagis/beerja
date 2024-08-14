@@ -21,7 +21,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <ruis/widgets/base/color_widget.hpp>
+#include <ruis/widget/base/color_widget.hpp>
 #include <ruis/paint/path_vao.hpp>
 
 #include <vector>

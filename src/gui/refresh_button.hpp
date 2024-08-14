@@ -21,8 +21,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <ruis/widgets/button/nine_patch_push_button.hpp>
-#include <ruis/widgets/label/spinner.hpp>
+#include <ruis/widget/button/nine_patch_push_button.hpp>
+#include <ruis/widget/label/spinner.hpp>
 
 namespace beerja{
 

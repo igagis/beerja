@@ -26,14 +26,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <utki/unicode.hpp>
 #include <utki/string.hpp>
 
-#include <ruis/widgets/input/text_input_line.hpp>
-#include <ruis/widgets/button/base/push_button.hpp>
-#include <ruis/widgets/label/busy.hpp>
-#include <ruis/widgets/label/color.hpp>
-#include <ruis/widgets/proxy/click_proxy.hpp>
-#include <ruis/widgets/proxy/key_proxy.hpp>
-#include <ruis/widgets/group/list.hpp>
-#include <ruis/widgets/group/overlay.hpp>
+#include <ruis/widget/input/text_input_line.hpp>
+#include <ruis/widget/button/base/push_button.hpp>
+#include <ruis/widget/label/busy.hpp>
+#include <ruis/widget/label/color.hpp>
+#include <ruis/widget/proxy/click_proxy.hpp>
+#include <ruis/widget/proxy/key_proxy.hpp>
+#include <ruis/widget/group/list.hpp>
+#include <ruis/widget/group/overlay.hpp>
 #include <ruis/util/weak_widget_set.hpp>
 
 #include "ticker_dialog.hpp"

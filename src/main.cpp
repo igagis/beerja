@@ -28,7 +28,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <httpc/init_guard.hpp>
 
-#include <ruis/widgets/group/book.hpp>
+#include <ruis/widget/group/book.hpp>
 
 #include "backend_register.hpp"
 
