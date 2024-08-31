@@ -44,7 +44,7 @@ void cells_container::set_num_cells_per_row(unsigned num){
 ruis::container& cells_container::push_new_row(){
 	auto r = utki::make_shared<ruis::container>(this->context, tml::forest(), ruis::layout::row);
 	this->push_back(r);
-	this->children().back().get().get_layout_params().dims.x() = ruis::lp::max;
+	this->children().back().get().get_layout_params().dims.x() = ruis::dim::max;
 	return r.get();
 }
 
@@ -56,7 +56,7 @@ void cells_container::push(utki::shared_ref<ruis::widget> w){
 
 	auto& lp = w.get().get_layout_params();
 	lp.weight = 1;
-	lp.dims.x() = ruis::lp::fill;
+	lp.dims.x() = ruis::dim::fill;
 
 	row.push_back(w);
 }
