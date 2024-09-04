@@ -27,7 +27,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <utki/string.hpp>
 
 #include <ruis/widget/input/text_input_line.hpp>
-#include <ruis/widget/button/base/push_button.hpp>
+#include <ruis/widget/button/push_button.hpp>
 #include <ruis/widget/label/busy.hpp>
 #include <ruis/widget/label/color.hpp>
 #include <ruis/widget/proxy/click_proxy.hpp>
