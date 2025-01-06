@@ -58,7 +58,7 @@ public:
 
 		{
 			auto be = std::make_shared<tradier>();
-			papki::fs_file cfg_file(this->storage_dir + "backend/" + be->id() + ".conf");
+			papki::fs_file cfg_file(utki::cat(this->directory.config, "backend/", be->id(), ".conf"));
 			if(cfg_file.exists()){
 				be->set_config(tml::read(cfg_file));
 			}
