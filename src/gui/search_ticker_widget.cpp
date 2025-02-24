@@ -41,12 +41,16 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 using namespace beerja;
 
 namespace{
-class ticker_list_provider : public ruis::list::provider{
+class ticker_list_provider : public ruis::list_provider{
 	std::vector<beerja::ticker> tickers;
 
 	std::shared_ptr<beerja::backend> backend;
 public:
-	ticker_list_provider(std::shared_ptr<beerja::backend> backend) :
+	ticker_list_provider(
+		utki::shared_ref<ruis::context> context, //
+		std::shared_ptr<beerja::backend> backend
+	) :
+			list_provider(std::move(context)),
 			backend(std::move(backend))
 	{}
 
@@ -58,7 +62,7 @@ public:
 
 	void set_tickers(std::vector<beerja::ticker>&& tickers){
 		this->tickers = std::move(tickers);
-		this->notify_data_set_change();
+		this->notify_model_change();
 	}
 };
 }
@@ -135,7 +139,7 @@ search_ticker_widget::search_ticker_widget(
 	query_disable_widgets->add(button.to_shared_ptr());
 	query_disable_widgets->add(list.to_shared_ptr());
 
-	auto tickers_provider = std::make_shared<ticker_list_provider>(this->backend);
+	auto tickers_provider = std::make_shared<ticker_list_provider>(this->context, this->backend);
 
 	// button click handler
 	button.get().click_handler = [this, query_disable_widgets, spinner, line, tickers_provider](ruis::push_button& but){
@@ -231,7 +235,7 @@ utki::shared_ref<ruis::widget> ticker_list_provider::get_widget(size_t index){
 			t.name.c_str()
 		);
 
-	auto ret = this->get_list()->context.get().inflater.inflate(gui);
+	auto ret = this->context.get().inflater.inflate(gui);
 
 	auto& bg = ret.get().get_widget_as<ruis::color>("bg_color");
 	auto& cp = ret.get().get_widget_as<ruis::click_proxy>("click_proxy");
